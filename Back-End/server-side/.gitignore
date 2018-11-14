@@ -1,7 +1,0 @@
-.idea
-target
-*.iml
-*.log
-logs
-ro-wrseg-logging
-dependency-reduced-pom.xml
