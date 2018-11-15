@@ -14,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 import ro.info.wrseg.model.FileUpload;
 import ro.info.wrseg.service.FileStorageService;
 import ro.info.wrseg.service.ScriptRunnerService;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.util.Objects;
@@ -30,6 +31,7 @@ public class FileController {
         this.scriptRunnerService = scriptRunnerService;
     }
 
+	@CrossOrigin(origins = "*")
     @PostMapping()
     public String uploadFile(@RequestParam("file") MultipartFile multipartFile) throws IOException {
         FileUpload fileUpload = fileStorageService.save(multipartFile);
