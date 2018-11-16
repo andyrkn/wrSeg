@@ -106,26 +106,35 @@
                             <div class="section_subtitle">Advantages</div>
                         </div>
                         <div class="about_text">
-                            <p> - we are familiar with the language, since we created applications last year within the “Advanced programming” subject;</p>
+                            <p> - we are familiar with the language, since we created applications last year within the
+                                “Advanced programming” subject;</p>
                         </div>
                         <div class="about_text">
-                            <p style="display: inline;"> - cross-platform</p> - one of the most significant advantages of Java is its ability to move easily from one computer system to another. The ability to run the same program on many different systems is crucial to World Wide
-                            Web software, and Java succeeds at this by being platform-independent at both the source and binary levels;
+                            <p style="display: inline;"> - cross-platform</p> - one of the most significant advantages
+                            of Java is its ability to move easily from one computer system to another. The ability to
+                            run the same program on many different systems is crucial to World Wide
+                            Web software, and Java succeeds at this by being platform-independent at both the source
+                            and binary levels;
                         </div>
                         <div class="about_text">
-                            <p style="display: inline;"> - object-oriented </p>- allows us to create modular programs and reusable code.
+                            <p style="display: inline;"> - object-oriented </p>- allows us to create modular programs
+                            and reusable code.
                         </div>
                         <div class="section_title_container">
                             <div class="section_subtitle">Disadvantages</div>
                         </div>
                         <div class="about_text">
-                            <p> - the <b><i>Artificial Intelligence layer</i></b> will be developed using <i>Python</i> language and thus we will not be able to run the code purely on our platform and we will execute it “remotely”, using <b>Runtime</b> object;</p>
+                            <p> - the <b><i>Artificial Intelligence layer</i></b> will be developed using <i>Python</i>
+                                language and thus we will not be able to run the code purely on our platform and we
+                                will execute it “remotely”, using <b>Runtime</b> object;</p>
                         </div>
                         <div class="about_text">
-                            <p style="display: inline;"> - slow-performance:</p> significantly slower and more memory-consuming than natively compiled languages such as C or C++;
+                            <p style="display: inline;"> - slow-performance:</p> significantly slower and more
+                            memory-consuming than natively compiled languages such as C or C++;
                         </div>
                         <div class="about_text">
-                            <p> - memory management, with Java, is a little expensive, since the Garbage Collector needs to work in the background.</p>
+                            <p> - memory management, with Java, is a little expensive, since the Garbage Collector
+                                needs to work in the background.</p>
                         </div>
                     </div>
                 </div>
@@ -134,17 +143,22 @@
                         <div class="section_title_container">
                             <div class="section_title"><span>Spring</span></div>
                         </div>
-                        <div class="text_highlight">The Spring Framework is an application framework and inversion of control container for the Java platform.
+                        <div class="text_highlight">The Spring Framework is an application framework and inversion of
+                            control container for the Java platform.
                         </div>
                         <div class="about_text">
                             <p>Some advantages, offered by this framework, are represented by:</p>
                         </div>
                         <div class="about_text">
-                            <p> - the “Dependency Injection” system, through which is imposed an approach which facilitates writing of tests;</p>
+                            <p> - the “Dependency Injection” system, through which is imposed an approach which
+                                facilitates writing of tests;</p>
                         </div>
                         <div class="about_text">
-                            <p> - the fact in the latest versions of Spring, we can configure the application by using annotations instead of XML files</p>
-                            Spring can be used without XML (or very little).<br> If you dive in with Spring 3.0.5.GA or higher then you can use the dependency injection support from JDK6+. This means that you can wire up dependencies using the @Component
+                            <p> - the fact in the latest versions of Spring, we can configure the application by using
+                                annotations instead of XML files</p>
+                            Spring can be used without XML (or very little).<br> If you dive in with Spring 3.0.5.GA or
+                            higher then you can use the dependency injection support from JDK6+. This means that you
+                            can wire up dependencies using the @Component
                             and @Resourceannotations;
                         </div>
                         <div class="about_text">
@@ -152,11 +166,78 @@
                             </p>
                         </div>
                         <div class="about_text">
-                            <p> - It also provides a good way to structure your application into layers. Use it, it will save you a lot of time in the long run.</p>
+                            <p> - It also provides a good way to structure your application into layers. Use it, it
+                                will save you a lot of time in the long run.</p>
                         </div>
-                        <div class="text_highlight">Spring was used in the application to create a back-end server that expands REST services.
+                        <div class="text_highlight">Spring was used in the application to create a back-end server that
+                            expands REST services.
                         </div>
-
+                    </div>
+                    <div class="row">
+                        <div class="about_content">
+                            <div class="section_title_container">
+                                <div class="section_title"><span>Development phases</span></div>
+                            </div>
+                            <div class="about_text">
+                                <p><b>I.</b> Ability to POST an image (the image that is uploaded on a specific
+                                    end-point -
+                                    /files - is being placed in a folder and
+                                    from there, that file will be used by the Artificial Intelligence layer);</p>
+                            </div>
+                            <div class="about_text">
+                                <p><b>II.</b> Ability to upload files of different extensions;</p>
+                            </div>
+                            <div class="about_text">
+                                <p><b>III.</b> Refactoring of the code and ability to throw an exception if the image
+                                    is not valid;</p>
+                            </div>
+                            <div class="about_text">
+                                <p><b>IV.</b> Checking if the file extension is not a valid one and throwing an
+                                    exception accordingly;</p>
+                            </div>
+                            <div class="about_text">
+                                <p><b>V.</b> Ability to execute the Python script (AI layer) when the file is uploaded.</p>
+                            </div>
+                            <div class="text_highlight">Flow of the server-side:
+                            </div>
+                            <div class="about_text">
+                                <p>At PORT 8082, you can upload a file using the following end-point: 8082/upload-file</p>
+                            </div>
+                            <div class="about_text">
+                                <p>An exception is thrown when the file doesn't have an extension.</p>
+                            </div>
+                            <div class="about_text">
+                                <p>• JPEG;</p>
+                            </div>
+                            <div class="about_text">
+                                <p>• PNG;</p>
+                            </div>
+                            <div class="about_text">
+                                <p>• SVG;</p>
+                            </div>
+                            <div class="about_text">
+                                <p>• PDF;</p>
+                            </div>
+                            <div class="about_text">
+                                <p>and other extensions that describe an image...</p>
+                            </div>
+                            <div class="text_highlight" style="font-size: 1.1em"">Flow:
+                            </div>
+                            <div class="
+                                about_text">
+                                <p>⟶ a file is uploaded using the end-point indicated above;</p>
+                            </div>
+                            <div class="about_text">
+                                <p>⟶ the file is uploaded in the Back-End\assets directory (the assets directory must
+                                    exist);</p>
+                            </div>
+                            <div class="about_text">
+                                <p>⟶ the AI layer goes into execution</p>
+                            </div>
+                            <div class="about_text">
+                                <p>⟶ the same end-point returns a JSON corresponding to the processing of the AI layer</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -179,14 +260,23 @@
                                     </a>
                                 </div>
                                 <div class="copyright d-flex flex-row align-items-start justify-content-sm-end justify-content-center">
-                                    Project developed during the Artificial Intelligence course @Faculty of Computer Science, CUZA University of Iasi.
+                                    <div>
+                                        <p class="footer-contributor">Contributors</p>
+                                        <p class="footer-contributor">Diaconu Narcis</p>
+                                        <p class="footer-contributor">Mihăeș Alexandru</p>
+                                    </div>
+                                </div>
+                                <div class="copyright d-flex flex-row align-items-start justify-content-sm-end justify-content-center">
+                                    Project developed during the Artificial Intelligence course @Faculty of
+                                    Computer Science, CUZA University of Iasi.
                                 </div>
                                 <div class="copyright d-flex flex-row align-items-start justify-content-sm-end justify-content-center">
                                     <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                                     Copyright &copy;
                                     <script>
                                         document.write(new Date().getFullYear());
-                                    </script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                                    </script> All rights reserved | This template is made with <i class="fa fa-heart-o"
+                                        aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
                                     <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                                 </div>
                             </div>
