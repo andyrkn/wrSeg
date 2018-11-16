@@ -109,42 +109,52 @@
 						</div> -->
 						<div class="section_subtitle">Types of tests</div>
 						<div class="about_text">
-							<p>There are different types of test that will be done, some automatic and some manual:
+							<p>There are different types of test that will be done, some automatic and some manual:</p>
+							<div>
 								<ul>
 									<li>Usability tests (manual) -> checking the responsivness and the interface on different browsers, platforms etc.</li>
 									<li>Functionality tests (manual) -> making sure that each part of the application (buttons, links etc.) is working as intended</li>
-									<li>Correctness tests (automatic) -> checking how accurate the results are and the response for invalid inputs</li>
+									<li>Correctness tests (automatic and manual) -> checking how accurate the results are and the response for invalid inputs</li>
 									<li>Performance tests (automatic) -> measuring how much time it takes to give the result</li>
 								</ul>
-							</p>
+							</div>
 						</div>
 						<div class="section_title_container">
-							<div class="section_subtitle">Thechnologies</div>
+							<div class="section_subtitle">Technologies</div>
 						</div>
 						<div class="about_text">
-							<p>For automatic tests we will use scripts written in Python 3.x and the following libraries:
+							<p>For automatic tests we will use scripts written in Python 3.x and the following libraries:</p>
+							<div>
 								<ul>
-									<li><a href="https://matplotlib.org/">Matplotlib</a></li>
-									<li><a href="https://www.opencv.org/">OpenCV</a></li>
+									<li>requests / urllib.request</li>
+									<li>Matplotlib</li>
+									<li>OpenCV</li>
 								</ul>
-								Matplotlib will be used in automatic tests to create
+							</div>
+
+							<p></p>
+							<p>
+								Python's standard library will be used for interacting with the website.
+								Matplotlib will be used in automatic tests to create a visual representation of the application's performance and correctness.
+								OpenCV will be used to compare the visual result (eg. a portion of the image) with the expected output.
 							</p>
 						</div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="about_content">
 						<div class="section_title_container">
-							<div class="section_title"><span>Technology</span></div>
-							<div class="section_subtitle">sub title if needed</div>
-						</div>
-						<div class="text_highlight">Some important text.Some important text.Some important text.Some important text.
-							Some important text.
+							<div class="section_subtitle">Input files</div>
 						</div>
 						<div class="about_text">
-							<p>Some less important text. Some less important text. Some less important text. Some less important text.
-								Some less important text. Some less important text. Some less important text. Some less important text.
-								Some less important text. Some less important text. Some less important text. Some less important text.
+							<p>
+								We will be using image files of different formats (JPEG, PNG, PDF, TIFF etc.).
+								These files will be split in two groups: files used for automatic testing and files used for manual testing.
+							</p>
+							<p>
+								The files for manual testing will be relatively complex and there will be quite a high chance that the application will give wrong
+								results for them. These files usually contain handwritting, bad lightning etc.
+							</p>
+							<p>
+								The files used for automatic testing will initially be simple in order to test if the application works decently.
+								After a while, some files used for manual testing (which are more complex) might be moved to automatic testing if the application
+								performs well enough.
 							</p>
 						</div>
 					</div>
