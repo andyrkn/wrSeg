@@ -321,7 +321,8 @@ section {
 }
 
 .section_subtitle {
-	font-size: 12px;
+	margin-top: 10px;
+	font-size: 20px;
 	font-weight: 600;
 	text-transform: uppercase;
 	color: #ff9711;
@@ -329,7 +330,7 @@ section {
 }
 
 .section_title {
-	font-size: 72px;
+	font-size: 60px;
 	font-weight: 400;
 	color: #262626;
 	line-height: 1.1;
@@ -758,7 +759,7 @@ section {
 }
 
 .text_highlight {
-	font-size: 16px;
+	font-size: 20px;
 	font-weight: 600;
 	color: #535353;
 	line-height: 1.75;
@@ -977,6 +978,12 @@ section {
 
 .footer_nav ul li a:hover {
 	color: #ff9711;
+}
+
+.footer-contributor, .footer-contributor p{
+	margin: 0px;
+	margin-top: -5px;
+	margin-bottom: -5px;
 }
 
 .newsletter_container {

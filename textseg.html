@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-	<title>Front-End Docs</title>
+	<title>Page Segmentation Docs</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -87,7 +87,7 @@
 						<div class="col">
 							<div class="home_content">
 								<div class="home_title">Text Segmentation</div>
-								<div class="home_subtitle">Python, ocr, something</div>
+								<div class="home_subtitle">Python, Ocropy</div>
 							</div>
 						</div>
 					</div>
@@ -102,25 +102,16 @@
 				<div class="row">
 					<div class="about_content">
 						<div class="section_title_container">
-							<div class="section_title"><span>Technology</span></div>
-							<div class="section_subtitle">sub title if needed</div>
+							<div class="section_title"><span>Goal</span></div>
+							<div class="section_subtitle"></div>
 						</div>
-						<div class="text_highlight">Some important text.Some important text.Some important text.Some important text.
-							Some important text.
-						</div>
-						<div class="about_text">
-							<p>Some less important text. Some less important text. Some less important text. Some less important text.
-								Some less important text. Some less important text. Some less important text. Some less important text.
-								Some less important text. Some less important text. Some less important text. Some less important text.
-							</p>
-						</div>
-						<div class="section_title_container">
-							<div class="section_subtitle">or extra point</div>
+						<div class="text_highlight">
 						</div>
 						<div class="about_text">
-							<p>Some less important text. Some less important text. Some less important text. Some less important text.
-								Some less important text. Some less important text. Some less important text. Some less important text.
-								Some less important text. Some less important text. Some less important text. Some less important text.
+							<p>Implement a module that is going to be responsible for the segmentation of a page. Should return information
+								about the data contained in the given document, such as the title, columns, rows, annotations, page number etc.
+								Should also compute statistics about certain attributes.
+
 							</p>
 						</div>
 					</div>
@@ -128,17 +119,64 @@
 				<div class="row">
 					<div class="about_content">
 						<div class="section_title_container">
-							<div class="section_title"><span>Technology</span></div>
-							<div class="section_subtitle">sub title if needed</div>
+							<div class="section_title"><span>Technologies used</span></div>
+							<div class="section_subtitle"></div>
 						</div>
-						<div class="text_highlight">Some important text.Some important text.Some important text.Some important text.
-							Some important text.
+
+						<div class="about_text">
+							<p>The reasons behind our choice include the complexity of the documentation, the implementation language and
+								readability. Out of all the other open-source libraries that were researched, <a href="https://github.com/tmbdev/ocropy">Ocropy</a>
+								qualified as the best option at the time being.
+
+								Other candidates included <a href="https://github.com/linuxlizard/page_segmentation">page_segmentation</a> and
+								<a href="https://github.com/nik0spapp/sdalg">sdalg</a>, which were
+								excluded to the lack of documentation. We also considered <a href="https://github.com/tpopela/vips_java">vips_java</a>
+								(written in Java which
+								we considered a great plus), but the extended documentation was in Czech and we later discovered that this
+								tool is better used on web pages, rather than handwritten pages.
+
+								We also found some articles about page segmentation that looked thoroughly researched, but we couldn’t find an
+								open-source project linked to them. (TODO: maybe add links here)
+							</p>
+						</div>
+						<div class="section_title_container">
+							<div class="section_subtitle">Ocropy</div>
 						</div>
 						<div class="about_text">
-							<p>Some less important text. Some less important text. Some less important text. Some less important text.
-								Some less important text. Some less important text. Some less important text. Some less important text.
-								Some less important text. Some less important text. Some less important text. Some less important text.
+							<p>TBD</p>
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="about_content">
+						<div class="section_title_container">
+							<div class="section_title"><span>Implementation Details</span></div>
+							<div class="section_subtitle">General idea</div>
+						</div>
+						<div class="about_text">
+							<p>Given the input image, we will validate it and, if viable, we will feed it to Ocropy. We will later combine
+								the results in a desired format, and send it back to the main server program.
+								We will either need to change the source code of the project, or find a way to combine the Ocropy’s results
+								into the desired format.
 							</p>
+						</div>
+						<div class="section_title_container">
+							<div class="section_subtitle">Input</div>
+						</div>
+						<div class="about_text">
+							<p>
+								The input consists of an image, representing a page. The resolution should be… . If the client given input is
+								not an image or it does not have the required resolution, additional modification to the input should be done
+								before sending it to our module. If the input provided to the module is not a valid one, an error message will
+								be sent.
+							</p>
+						</div>
+						<div class="section_title_container">
+							<div class="section_subtitle">Output</div>
+						</div>
+						<div class="about_text">
+							<p>TBD</p>
 						</div>
 					</div>
 				</div>
@@ -162,7 +200,14 @@
 									</a>
 								</div>
 								<div class="copyright d-flex flex-row align-items-start justify-content-sm-end justify-content-center">
-									Project developed during the Artificial Intelligence course @Faculty of Computer Science, CUZA University of
+									<div>
+										<p class="footer-contributor">Contributors</p>
+										<p class="footer-contributor">Oana Bondar</p>
+									</div>
+								</div>
+								<div class="copyright d-flex flex-row align-items-start justify-content-sm-end justify-content-center">
+									Project developed during the 2018 Artificial Intelligence course @Faculty of Computer Science, CUZA University
+									of
 									Iasi.
 								</div>
 								<div class="copyright d-flex flex-row align-items-start justify-content-sm-end justify-content-center">
