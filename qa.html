@@ -96,45 +96,43 @@
 		</div>
 
 		<!-- tech -->
-
 		<div class="about">
-			<div class="container about_container">
-				<div class="row">
-					<div class="about_content">
-						<div class="section_title_container">
-							<div class="about_content">
-								<div class="section_title_container">
-									<div class="section_title"><span>Goal</span></div>
-									<div class="section_subtitle"></div>
-								</div>
-								<div class="text_highlight">
-								</div>
-								<div class="about_text">
-									<p> Guaranteeing a level of quality for the end client, and to help the software development team to identify
-										and signal problems/limitations early in the Development Process. How we do that ? We employ a combination of
-										automated testing and manual testing.
-									</p>
-								</div>
+				<div class="container about_container">
+					<div class="row">
+						<div class="about_content">
+							<div class="section_title_container">
+								<div class="section_title"><span>Goal</span></div>
+								<div class="section_subtitle"></div>
+							</div>
+							<div class="text_highlight"></div>
+							<div class="about_text">
+								<p>
+									Guaranteeing a level of quality for the end client, and to help the software development team to identify
+									and signal problems/limitations early in the Development Process. How we do that ? We employ a combination of
+									automated testing and manual testing.
+								</p>
+							</div>
+						</div>
+
+						<div class="about_content">
+							<div class="section_title_container">
 								<div class="section_title"><span>How tests are done</span></div>
 							</div>
 							<!-- <div class="text_highlight">Some important text.Some important text.Some important text.Some important text.
-							Some important text.
-						</div> -->
-							<div class="section_subtitle">Types of tests</div>
+								Some important text.
+							</div> -->
+
+							<div class="section_title_container">
+								<div class="section_subtitle">Types of tests</div>
+							</div>
 							<div class="about_text">
 								<p> <b> There are different types of test that will be done, some automatic and some manual:</b></p>
-								<div>
-									<ul>
-										<li type="circle">Usability tests (manual) -> checking the responsivness and the interface on different
-											browsers, platforms etc.</li>
-										<li type="circle">Functionality tests (manual) -> making sure that each part of the application (buttons,
-											links etc.) is working as intended</li>
-										<li type="circle">Correctness tests (automatic and manual) -> checking how accurate the results are and the
-											response for invalid inputs</li>
-										<li type="circle">Performance tests (automatic) -> measuring how much time it takes to give the result</li>
-									</ul>
-								</div>
+										<p>Usability tests (manual) -> checking the responsivness and the interface on different browsers, platforms etc. <br>
+										Functionality tests (manual) -> making sure that each part of the application (buttons, links etc.) is working as intended <br>
+										Correctness tests (automatic and manual) -> checking how accurate the results are and the response for invalid inputs <br>
+										Performance tests (automatic) -> measuring how much time it takes to give the result </p>
 							</div>
+
 							<div class="section_title_container">
 								<div class="section_subtitle">Technologies</div>
 							</div>
@@ -142,38 +140,43 @@
 								<p>For automatic tests we will use scripts written in Python 3.x and the following libraries:</p>
 								<div>
 									<ul>
-										<li type="circle"><a href="https://docs.python.org/3/library/urllib.request.html">requests / urllib.request</a></li>
+										<li type="circle"><a href="http://docs.python-requests.org/en/master/">Requests</a></li>
 										<li type="circle"><a href="https://github.com/matplotlib/matplotlib">Matplotlib</a></li>
 										<li type="circle"><a href="https://github.com/opencv/opencv">OpenCv</a></li>
 									</ul>
 								</div>
-
 								<p></p>
 								<p>
-									Python's standard library will be used for interacting with the website.
-									Matplotlib will be used in automatic tests to create a visual representation of the application's performance
-									and correctness.
-									OpenCV will be used to compare the visual result (eg. a portion of the image) with the expected output.
+									Requests library will be used for interacting with the website. We also thought of using <a href="https://docs.python.org/3/library/urllib.request.html">urllib.request</a>
+									but we decided against it because Requests supports a fully restful API, has a built in json decoder and is overall easier to use because of its short and simple syntax.
+								</p>
+								<p>
+									Matplotlib will be used in automatic tests to create a visual representation of the application's performance and correctness.
+									We choose it because is is easy to use and it is popular (therefore well documented).
+								</p>
+								<p>
+									OpenCV will be used to compare the visual result (eg. a portion of the image) with the expected output. We chose it because it is a high performance library
+									and it is popular.
 								</p>
 							</div>
+
 							<div class="section_title_container">
 								<div class="section_subtitle">Input files</div>
 							</div>
 							<div class="about_text">
 								<p>
-									We will be using image files of different formats (JPEG, PNG, PDF, TIFF etc.).
+									We will be using image files of different formats (JPEG, PNG, PDF, TIFF etc.) which will also be transformed (rotated, mirrored etc.).
 									These files will be split in two groups: files used for automatic testing and files used for manual testing.
 								</p>
 								<p>
-									The files for manual testing will be relatively complex and there will be quite a high chance that the
-									application will give wrong
-									results for them. These files usually contain handwritting, bad lightning etc.
+									<a href="https://drive.google.com/drive/folders/1glORPawUhSOOgGdUxU82lplHQvCJjILy?usp=sharing">  The files</a> used for manual testing
+									will be relatively complex and there will be quite a high chance that the application will give wrong results for them.
+									These files usually contain handwritting, bad lightning etc.
 								</p>
 								<p>
-									The files used for automatic testing will initially be simple in order to test if the application works
-									decently.
-									After a while, some files used for manual testing (which are more complex) might be moved to automatic testing
-									if the application
+									<a href="https://drive.google.com/drive/folders/1glORPawUhSOOgGdUxU82lplHQvCJjILy?usp=sharing"> The files</a> used for automatic testing
+									will initially be simple in order to test if the application works decently.
+									After a while, some files used for manual testing (which are more complex) might be moved to automatic testing if the application
 									performs well enough.
 								</p>
 							</div>
