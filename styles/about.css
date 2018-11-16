@@ -980,6 +980,12 @@ section {
 	color: #ff9711;
 }
 
+.footer-contributor, .footer-contributor p{
+	margin: 0px;
+	margin-top: -5px;
+	margin-bottom: -5px;
+}
+
 .newsletter_container {
 	margin-top: 75px;
 }
