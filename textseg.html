@@ -143,7 +143,10 @@
 							<div class="section_subtitle">Ocropy</div>
 						</div>
 						<div class="about_text">
-							<p>TBD</p>
+							<p>Ocropy is an open source project written in Python 2.7 that intends to create a page segmentation for any text page no matter if it’s hand written or digital. 
+							Ocropy needs the text page to be a .png file; if it’s a different format, we will need to convert it.
+							The program assumes that images have 300dpi (dots per inch), otherwise they need to be scaled up or down.
+							Before the process of segmentation starts, Ocropy is also doing an operation for noise removal. At the end of the process, all the lines of all the columns, including title, author, page index etc. are stored in an output folder as .png  files. These will be the files we will recombine in order to send meaningful data back to the client.</p>
 						</div>
 					</div>
 				</div>
@@ -176,7 +179,8 @@
 							<div class="section_subtitle">Output</div>
 						</div>
 						<div class="about_text">
-							<p>TBD</p>
+							<p>For each input image Ocropy is going to create a new folder with the same base name as the image and inside this folder the images of all detected lines are saved. 
+							From this moment we will have choice of reconstructing the columns from these images or stop Ocropy just after it detected the columns and other annotations.</p>
 						</div>
 					</div>
 				</div>
