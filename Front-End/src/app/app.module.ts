@@ -4,6 +4,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { FileDropModule } from 'ngx-file-drop';
 
 import { FileUploadComponent } from './file-upload/file-upload.component';
 import { FileResolvedComponent } from './file-resolved/file-resolved.component';
@@ -23,7 +24,8 @@ import { NotFoundComponent } from './shared/not-found/not-found.component';
    imports: [
       BrowserModule,
       HttpClientModule,
-      AppRoutingModule
+      AppRoutingModule,
+      FileDropModule
    ],
    providers: [],
    bootstrap: [
