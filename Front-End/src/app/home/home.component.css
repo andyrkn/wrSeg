@@ -1,0 +1,41 @@
+#background-gradient {
+  z-index: -999;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
+
+.container {
+  z-index: 0;
+  height: 100%;
+  width: 100%;
+  display: grid;
+  grid-template-areas:
+    "title title"
+    "file-upload file-resolved"
+    "history-menu history-menu";
+  grid-template-rows: 0.5fr 5fr 2.5fr;
+
+}
+
+.wrapper-title {
+  grid-area: title;
+
+}
+
+.wrapper-file-upload {
+  grid-area: file-upload;
+
+}
+
+.wrapper-file-resolved {
+  grid-area: file-resolved;
+
+}
+
+.wrapper-history-menu {
+  grid-area: history-menu;
+
+}

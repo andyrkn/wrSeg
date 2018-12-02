@@ -1,31 +1,19 @@
-.container{
-    height: 100%;
-    width:100%;
-    display:grid;
-    grid-template-areas:
-    "title title"
-    "file-upload file-resolved"
-    "history-menu history-menu";
-    grid-template-rows: 0.5fr 5fr 2.5fr;
-
+.app-container {
+  width: 85%;
+  margin: 0 auto;
 }
 
-.wrapper-title{
-  grid-area: title;
-
+.dropZoneColor {
+  border: 3px dotted rgba(0, 0, 0, 0.08);
+  background-color: rgba(0, 0, 0, 0.12)
 }
 
-.wrapper-file-upload{
-   grid-area: file-upload;
-
+.dropZoneColorDrag {
+  border: 3px dotted rgba(0, 0, 0, 0.28);
+  background-color: grey
 }
 
-.wrapper-file-resolved{
-   grid-area: file-resolved;
-    
-}
-
-.wrapper-history-menu{
-   grid-area: history-menu;
-    
+.dropZoneColorDrop {
+  border: 3px dotted rgba(0, 0, 0, 0.08);
+  background-color: rgba(0, 0, 0, 0.12)
 }
