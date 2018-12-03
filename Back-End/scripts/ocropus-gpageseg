@@ -459,21 +459,22 @@ def process1(job):
     
     coordinates_file = open("test_data.txt", "w")
     for i,l in enumerate(lines):
-        top_left, bottom_right = l.__dict__['bounds']
-        x1, x2 = top_left.start, top_left.stop
-        y1, y2 = bottom_right.start, bottom_right.stop
+        ox, oy = l.__dict__['bounds']
+        x1, x2 = ox.start, ox.stop
+        y1, y2 = oy.start, oy.stop
         # print(x1, y1, x2, y2)
-        coordinates_file.write("%s/01%04x.bin.png "%(outputdir,i+1))
-        coordinates_file.write(str(x1) + " ")
-        coordinates_file.write(str(y1) + " ")
-        coordinates_file.write(str(x2 - x1) + " ")
-        coordinates_file.write(str(y2 - y1) + "\n")
+        filename = os.path.abspath("%s/01%04d.bin.png"%(outputdir,i+1))
+        coordinates_file.write("%s "%(filename))
+        coordinates_file.write(str(x1 - args.pad) + " ")
+        coordinates_file.write(str(y1 - args.pad) + " ")
+        coordinates_file.write(str(x2 - x1 + 2 * args.pad) + " ")
+        coordinates_file.write(str(y2 - y1 + 2 * args.pad) + "\n")
         # print(l.__dict__['bounds'], "%s/01%04x.bin.png"%(outputdir,i+1))
         binline = psegutils.extract_masked(1-cleaned,l,pad=args.pad,expand=args.expand)
-        ocrolib.write_image_binary("%s/01%04x.bin.png"%(outputdir,i+1),binline) # save all found subimages
+        ocrolib.write_image_binary("%s/01%04d.bin.png"%(outputdir,i+1),binline) # save all found subimages
         if args.gray:
             grayline = psegutils.extract_masked(gray,l,pad=args.pad,expand=args.expand)
-            ocrolib.write_image_gray("%s/01%04x.nrm.png"%(outputdir,i+1),grayline)
+            ocrolib.write_image_gray("%s/01%04d.nrm.png"%(outputdir,i+1),grayline)
     print_info("%6d  %s %4.1f %d" % (i, fname,  scale,  len(lines)))
 
 if len(args.files)==1 and os.path.isdir(args.files[0]):
