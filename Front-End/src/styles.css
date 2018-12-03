@@ -1,20 +1,19 @@
-/* You can add global styles to this file, and also import other style files */
-* {
-  font-family: 'Karla', sans-serif;
-}
-
-html {
-  height: 100%;
+html{
+  height:100%;
   max-width: 100%;
 }
-
-body {
-  height: 100%;
+body{
+  height:100%;
   max-width: 100%;
-  margin: 0;
+  margin:0;
+  background-color: #eee;
 }
 
-app-root {
+app-segment{
   height: 100%;
-  max-width: 100%;
+  width: 100%;
+  display:grid;
+  grid-template-columns: 0fr 5fr 0fr;
+  grid-template-rows: 0fr 5fr 2fr;
+  transition: 0.5s;
 }

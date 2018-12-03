@@ -9,8 +9,10 @@ import { FileDropModule } from 'ngx-file-drop';
 import { FileUploadComponent } from './file-upload/file-upload.component';
 import { FileResolvedComponent } from './file-resolved/file-resolved.component';
 import { FileMenuComponent } from './file-menu/file-menu.component';
-import { HomeComponent } from './home/home.component';
-import { NotFoundComponent } from './shared/not-found/not-found.component';
+import { HomeComponent } from './pages/home/home.component';
+import { HeaderComponent } from './pages/header/header.component';
+import { ContactComponent } from './pages/contact/contact.component';
+import { SegmentComponent } from './pages/segment/segment.component';
 
 @NgModule({
    declarations: [
@@ -19,7 +21,9 @@ import { NotFoundComponent } from './shared/not-found/not-found.component';
       FileResolvedComponent,
       FileMenuComponent,
       HomeComponent,
-      NotFoundComponent
+      HeaderComponent,
+      ContactComponent,
+      SegmentComponent
    ],
    imports: [
       BrowserModule,
