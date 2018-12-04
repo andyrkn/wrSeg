@@ -344,6 +344,25 @@ def remove_hlines(binary,scale,maxsize=10):
             labels[b][labels[b]==i+1] = 0
     return np.array(labels!=0,'B')
 
+#mapping of: oY intervals AND a list of lines that belong in columns
+textboxes_col_y = {}
+#a list of coordonates for each line substracted by ocropy
+line_coordonates = []
+#mapping of: oX intervals that represent columns AND a list of the lines in those columns
+columns_mapping = {}
+#
+length_threshold = 0.15
+
+def is_in_columns(x_interval):
+	for column_interval in columns_mapping:
+		if x_interval[0] > column_interval[0] and x_interval[1] < column_interval[1]:
+			return column_interval
+	return False
+
+def sort_coordinates_by_ox():
+	global textboxes_col_y
+	for interval in textboxes_col_y:
+		textboxes_col_y[interval].sort(key = lambda x : x[0])
 
 def compute_segmentation(binary,scale):
     """Given a binary image, compute a complete segmentation into
@@ -358,22 +377,20 @@ def compute_segmentation(binary,scale):
     if not args.quiet: print_info("computing column separators")
     colseps,binary = compute_colseps(binary,scale)
 
-    # print("AICI")
-    fd = open("intervals.txt", 'w')
+
+    #computing textboxes that contain columns using callseps matrix
     non_zero_lines = np.unique(np.nonzero(colseps)[0])
-    intervals = []
+
+    global textboxes_col_y
     a = non_zero_lines[0]
     current = int(non_zero_lines[0])
     for line_index in range(1, len(non_zero_lines)):
         if non_zero_lines[line_index] - non_zero_lines[line_index - 1] > 1:
             b = non_zero_lines[line_index-1]
-            fd.write(str(a) + ' ' + str(b) + "\n")
-            # intervals.append((a,b))
+            textboxes_col_y[(a,b)] = []
             a = non_zero_lines[line_index]
     b = non_zero_lines[-1]
-    # intervals.append((a,b))
-    fd.write(str(a) + ' ' + str(b))
-    fd.close()
+    textboxes_col_y[(a,b)] = []
 
 
 
@@ -393,6 +410,34 @@ def compute_segmentation(binary,scale):
     llabels = np.where(llabels>0,llabels,spread*binary)
     segmentation = llabels*binary
     return segmentation
+
+################################################################
+###Column segmentation
+################################################################
+
+def columns_seg():
+	global columns_mapping
+
+	sort_coordinates_by_ox()
+
+	for coordinates_array in textboxes_col_y.values():
+		for coordonates_of_line in coordinates_array:
+			x_interval = (coordonates_of_line[0], coordonates_of_line[2])
+			column_interval = is_in_columns(x_interval)
+			padding =  length_threshold * (coordonates_of_line[2] - coordonates_of_line[0])
+			if column_interval == False:
+				x_interval = tuple((x_interval[0] - padding, x_interval[1] + padding))
+				columns_mapping[x_interval] = [coordonates_of_line]
+			else:
+				columns_mapping[column_interval].append(coordonates_of_line)
+
+	fd = open("column_indexes.txt", "w")
+	for line_coordonates_array in columns_mapping.values():
+		x1_max, y1_max, x2_max, y2_max = np.amax(line_coordonates_array,axis=0)
+		x1_min, y1_min, x2_min, y2_min = np.amin(line_coordonates_array,axis=0)
+		fd.write(str(x1_min) + ' ' + str(y1_min) + ' ' + str(x2_max) + ' ' + str(y2_max) + '\n')
+	fd.close()
+
 
 
 ################################################################
@@ -477,6 +522,7 @@ def process1(job):
     ocrolib.write_page_segmentation("%s.pseg.png"%outputdir,segmentation)
     cleaned = ocrolib.remove_noise(binary,args.noise)
     
+    global line_coordonates, textboxes_col_y
     coordinates_file = open("test_data.txt", "w")
     for i,l in enumerate(lines):
         ox, oy = l.__dict__['bounds']
@@ -489,12 +535,21 @@ def process1(job):
         coordinates_file.write(str(y1 - args.pad) + " ")
         coordinates_file.write(str(x2 - x1 + 2 * args.pad) + " ")
         coordinates_file.write(str(y2 - y1 + 2 * args.pad) + "\n")
+        line_coordonates.append((int(x1 - args.pad), int(y1 - args.pad), int(x2 + args.pad), int(y2 + args.pad)))
         # print(l.__dict__['bounds'], "%s/01%04x.bin.png"%(outputdir,i+1))
         binline = psegutils.extract_masked(1-cleaned,l,pad=args.pad,expand=args.expand)
         ocrolib.write_image_binary("%s/01%04d.bin.png"%(outputdir,i+1),binline) # save all found subimages
+
         if args.gray:
             grayline = psegutils.extract_masked(gray,l,pad=args.pad,expand=args.expand)
             ocrolib.write_image_gray("%s/01%04d.nrm.png"%(outputdir,i+1),grayline)
+    
+    for data in line_coordonates:
+		for interval in textboxes_col_y:
+			if  (interval[0] <= data[0] and interval[1] >= data[0] ) or  (interval[0] <= data[2] and interval[1] >= data[2] ):
+				textboxes_col_y[interval].append((data[1], data[0], data[3], data[2] ))
+    
+    columns_seg()
     print_info("%6d  %s %4.1f %d" % (i, fname,  scale,  len(lines)))
 
 if len(args.files)==1 and os.path.isdir(args.files[0]):
