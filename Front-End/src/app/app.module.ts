@@ -1,3 +1,4 @@
+import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
@@ -21,7 +22,8 @@ import { FileResolvedComponent } from './pages/file-resolved/file-resolved.compo
       HomeComponent,
       HeaderComponent,
       ContactComponent,
-      SegmentComponent
+      SegmentComponent,
+      NotFoundComponent
    ],
    imports: [
       BrowserModule,
