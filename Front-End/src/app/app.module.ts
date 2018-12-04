@@ -13,6 +13,8 @@ import { HomeComponent } from './pages/home/home.component';
 import { HeaderComponent } from './pages/header/header.component';
 import { ContactComponent } from './pages/contact/contact.component';
 import { SegmentComponent } from './pages/segment/segment.component';
+import { MapComponent } from './pages/map/map.component';
+import { AgmCoreModule } from '@agm/core';
 
 @NgModule({
    declarations: [
@@ -23,13 +25,17 @@ import { SegmentComponent } from './pages/segment/segment.component';
       HomeComponent,
       HeaderComponent,
       ContactComponent,
-      SegmentComponent
+      SegmentComponent,
+      MapComponent
    ],
    imports: [
       BrowserModule,
       HttpClientModule,
       AppRoutingModule,
-      FileDropModule
+      FileDropModule,
+      AgmCoreModule.forRoot({
+         apiKey: 'AIzaSyCRFb9Oetbz8bo3enqv7Dnxskop_cYyrNQ '
+       })
    ],
    providers: [],
    bootstrap: [
