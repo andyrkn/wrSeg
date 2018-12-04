@@ -6,22 +6,23 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FileDropModule } from 'ngx-file-drop';
 
-import { FileUploadComponent } from './file-upload/file-upload.component';
-import { FileResolvedComponent } from './file-resolved/file-resolved.component';
-import { FileMenuComponent } from './file-menu/file-menu.component';
 import { HomeComponent } from './pages/home/home.component';
 import { HeaderComponent } from './pages/header/header.component';
 import { ContactComponent } from './pages/contact/contact.component';
 import { SegmentComponent } from './pages/segment/segment.component';
+
 import { MapComponent } from './pages/map/map.component';
 import { AgmCoreModule } from '@agm/core';
+
+import { FileUploadComponent } from './pages/file-upload/file-upload.component';
+import { FileResolvedComponent } from './pages/file-resolved/file-resolved.component';
+
 
 @NgModule({
    declarations: [
       AppComponent,
       FileUploadComponent,
       FileResolvedComponent,
-      FileMenuComponent,
       HomeComponent,
       HeaderComponent,
       ContactComponent,
