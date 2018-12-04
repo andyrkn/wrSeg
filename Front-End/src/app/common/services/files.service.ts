@@ -12,7 +12,7 @@ export class FilesService {
     const httpOptions = {
       headers: new HttpHeaders({
         'Allow-Origin': '*',
-        'Access-Control-Allow-Origin': '*'
+        'Access-Control-Allow-Origin': '*',
       })
     };
 
