@@ -358,6 +358,26 @@ def compute_segmentation(binary,scale):
     if not args.quiet: print_info("computing column separators")
     colseps,binary = compute_colseps(binary,scale)
 
+    # print("AICI")
+    fd = open("intervals.txt", 'w')
+    non_zero_lines = np.unique(np.nonzero(colseps)[0])
+    intervals = []
+    a = non_zero_lines[0]
+    current = int(non_zero_lines[0])
+    for line_index in range(1, len(non_zero_lines)):
+        if non_zero_lines[line_index] - non_zero_lines[line_index - 1] > 1:
+            b = non_zero_lines[line_index-1]
+            fd.write(str(a) + ' ' + str(b) + "\n")
+            # intervals.append((a,b))
+            a = non_zero_lines[line_index]
+    b = non_zero_lines[-1]
+    # intervals.append((a,b))
+    fd.write(str(a) + ' ' + str(b))
+    fd.close()
+
+
+
+
     # now compute the text line seeds
     if not args.quiet: print_info("computing lines")
     bottom,top,boxmap = compute_gradmaps(binary,scale)
