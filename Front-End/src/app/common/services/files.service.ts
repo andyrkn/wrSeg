@@ -4,7 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 @Injectable({
   providedIn: 'root'
 })
-export class FilesService {
+export class FileService {
 
   constructor(private httpClient: HttpClient) { }
 

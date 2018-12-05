@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UploadEvent, UploadFile, FileSystemFileEntry, FileSystemDirectoryEntry } from 'ngx-file-drop';
-import { FilesService } from 'src/app/common/services/files.service';
+import { FileService } from 'src/app/common/services/files.service';
 
 @Component({
   selector: 'app-file-upload',
@@ -11,7 +11,7 @@ export class FileUploadComponent implements OnInit {
 
   public files: UploadFile[] = [];
 
-  constructor(private fileService: FilesService) { }
+  constructor(private fileService: FileService) { }
 
   ngOnInit() {
   }
@@ -24,21 +24,21 @@ export class FileUploadComponent implements OnInit {
         fileEntry.file((file: File) => {
 
           this.fileService.upload(file)
-            .subscribe(data => { alert('File successfully uploaded !'); },
-                      err => { alert('Something is wrong... '); });
+            .subscribe(data => { console.log(data); },
+              err => { console.log(err); });
         });
       } else {
         const fileEntry = droppedFile.fileEntry as FileSystemDirectoryEntry;
-        console.log(droppedFile.relativePath, fileEntry);
+        // console.log(droppedFile.relativePath, fileEntry);
       }
     }
   }
 
   public fileOver(event) {
-    console.log(event);
+    // console.log(event);
   }
 
   public fileLeave(event) {
-    console.log(event);
+    // console.log(event);
   }
 }
