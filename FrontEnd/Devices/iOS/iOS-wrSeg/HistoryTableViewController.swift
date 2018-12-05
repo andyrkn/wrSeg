@@ -29,25 +29,35 @@ class HistoryTableViewController: UITableViewController {
     
     private func loadSampleResults() {
         
-        let image1 = UIImage(named: "Script")
-        let image2 = UIImage(named: "Script")
-        let image3 = UIImage(named: "Script")
+        let image = UIImage(named: "Script")
         
-        guard let result1 = Result(title: "title1", image: image1) else {
+        guard let result1 = Result(title: "title1", image: image) else {
             fatalError("Unable to instantiate result1")
         }
         
-        guard let result2 = Result(title: "title2", image: image2) else {
+        guard let result2 = Result(title: "title2", image: image) else {
             fatalError("Unable to instantiate result2")
         }
         
-        guard let result3 = Result(title: "title3", image: image3) else {
+        guard let result3 = Result(title: "title3", image: image) else {
             fatalError("Unable to instantiate result3")
         }
         
-        results += [result1, result2, result3]
+        results += [result1, result2, result3, result1, result1, result1]
         
         
+    }
+    
+    // To change the title of the edit button in delete.
+    override func setEditing (_ editing:Bool, animated:Bool)
+    {
+        super.setEditing(editing,animated:animated)
+        if(self.isEditing)
+        {
+            self.editButtonItem.title = "Done"
+        } else {
+            self.editButtonItem.title = "Delete"
+        }
     }
     
     override func viewDidLoad() {
@@ -57,7 +67,8 @@ class HistoryTableViewController: UITableViewController {
         
         // Use the edit button item provided by the table view controller.
         navigationItem.rightBarButtonItem = editButtonItem
-        
+        navigationItem.rightBarButtonItem?.title = "Delete"
+                
         // Load any saved results, otherwise load sample data.
         if let savedResults = loadResults() {
             results += savedResults
