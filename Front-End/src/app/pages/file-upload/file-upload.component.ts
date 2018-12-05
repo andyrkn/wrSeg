@@ -41,11 +41,11 @@ export class FileUploadComponent implements OnInit {
 
 
                     this.fileService.upload(file)
-                        .subscribe(data => { console.log(data); },
+                        .subscribe(data => { this.fileSharingService.setxyinfo(data); this.fileSharingService.setImage(file); },
                             err => { console.log(err); });
 
                     // this.fileSharingService.setxyinfo(this.data); //call with coordinates from backend
-                    this.fileSharingService.setImage(file);
+                    // this.fileSharingService.setImage(file);
                 });
             } else {
                 const fileEntry = droppedFile.fileEntry as FileSystemDirectoryEntry;
