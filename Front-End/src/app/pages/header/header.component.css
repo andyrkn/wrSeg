@@ -80,3 +80,13 @@ button:active {
     color: #eee;
     transition: none;
 }
+@media (max-width:450px){
+h1{
+    font-size: 25px;
+    padding-top: 5px;
+}
+button{
+    font-size: 15px;
+    padding-top: 15px;
+}
+}
