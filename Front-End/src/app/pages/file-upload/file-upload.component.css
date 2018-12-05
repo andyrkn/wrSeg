@@ -5,6 +5,10 @@
     grid: 15px / 3ch;
     width: 100%;
     height: 100%;
+
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
 :host ::ng-deep .drop-zone {
@@ -17,4 +21,9 @@
 
 p {
     color: black;
+}
+
+.tdimg{
+    width: 100px;
+    height: 100px;
 }
