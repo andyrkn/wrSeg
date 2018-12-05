@@ -1,5 +1,8 @@
 package ro.info.wrseg.controller;
-
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.Resource;
@@ -36,6 +39,9 @@ public class FileController {
     public String uploadFile(@RequestParam("file") MultipartFile multipartFile) throws IOException {
         FileUpload fileUpload = fileStorageService.save(multipartFile);
         scriptRunnerService.run(fileUpload.getName());
-        return "{\"info\":\"data about image\"}";
+        Path path = Paths.get("./../processed-images/" + fileUpload.getName() + ".json");
+        byte[] encoded = Files.readAllBytes(path);
+
+        return new String(encoded, StandardCharsets.UTF_8);
     }
 }
