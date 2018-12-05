@@ -1,0 +1,15 @@
+<div class="drag-n-drop">
+    <file-drop (onFileDrop)="dropped($event)" 
+    (onFileOver)="fileOver($event)" (onFileLeave)="fileLeave($event)">
+        <p *ngIf="files.length == 0">Drop files here</p>
+    <div class="upload-table">
+        <table class="table">
+            <tbody class="upload-name-style">
+                <tr *ngFor="let item of files; let i=index">
+                    <td><strong>{{ item.relativePath }}</strong></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    </file-drop>
+</div>

@@ -1,0 +1,82 @@
+/* refactor everyhting */
+
+h1 {
+    grid-area: title;
+    font-size: 30px;
+    font-weight: 300;
+    margin: 0;
+    padding-top: 0px;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 40px;
+    background-color: #313854;
+    color: #eee;
+    padding-left: 30px;
+}
+
+.wrapper-header {
+    font-weight: 300;
+    margin: 0;
+    padding-top: 10px;
+    padding-bottom: 15px;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 40px;
+    background-color: #313854;
+    color: #eee;
+    display: grid;
+    grid-template-columns: 9fr 1fr 1fr 1fr;
+    grid-template-rows: 50px;
+    grid-template-areas: "title home segment contact";
+}
+
+.homeBtn {
+    grid-area: home;
+}
+
+a {
+    text-decoration: none;
+}
+
+.segmentBtn {
+    grid-area: segment;
+}
+
+.contactBtn {
+    grid-area: contact;
+}
+
+button {
+    background: transparent;
+    border: none;
+    color: #eee;
+    margin: 0 auto 0;
+    display: block;
+    font-size: 20px;
+    outline: none;
+    position: relative;
+    transition: 0.3s;
+    padding: 10px;
+}
+
+button::before {
+    content: '';
+    border-bottom: 1px solid #eee;
+    padding: 0 10px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    width: 0;
+    transition: 0.3s;
+}
+
+button:hover::before {
+    width: 100%;
+    padding: 0;
+}
+
+button:active {
+    background: #495172;
+    color: #eee;
+    transition: none;
+}
