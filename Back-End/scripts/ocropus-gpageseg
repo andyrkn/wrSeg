@@ -383,6 +383,18 @@ def compute_segmentation(binary,scale):
     #computing textboxes that contain columns using callseps matrix
     non_zero_lines = np.unique(np.nonzero(colseps)[0])
 
+    # print("nonzero")
+    # print(non_zero_lines)
+    
+    np.set_printoptions(threshold=np.nan)
+    
+    f = open("colseps", "w")
+    for i in colseps:
+        for j in i:
+            f.write(str(j))
+        f.write("\n")
+    f.close()
+
     global textboxes_col_y
     a = non_zero_lines[0]
     current = int(non_zero_lines[0])
@@ -395,7 +407,8 @@ def compute_segmentation(binary,scale):
     textboxes_col_y[(a,b)] = []
 
 
-
+    # print("keys")
+    # print(textboxes_col_y.keys())
 
     # now compute the text line seeds
     if not args.quiet: print_info("computing lines")
@@ -433,15 +446,15 @@ def columns_seg():
             else:
                 columns_mapping[column_interval].append(coordonates_of_line)
 
-    fd = open("column_indexes.txt", "w")
-    for line_coordonates_array in columns_mapping.values():
-        x1_max, y1_max, x2_max, y2_max = np.amax(line_coordonates_array,axis=0)
-        x1_min, y1_min, x2_min, y2_min = np.amin(line_coordonates_array,axis=0)
-        fd.write(str(x1_min) + ' ' + str(y1_min) + ' ' + str(x2_max) + ' ' + str(y2_max) + '\n')
-    fd.close()
+    # fd = open("column_indexes.txt", "w")
+    # for line_coordonates_array in columns_mapping.values():
+    #     x1_max, y1_max, x2_max, y2_max = np.amax(line_coordonates_array,axis=0)
+    #     x1_min, y1_min, x2_min, y2_min = np.amin(line_coordonates_array,axis=0)
+    #     fd.write(str(x1_min) + ' ' + str(y1_min) + ' ' + str(x2_max) + ' ' + str(y2_max) + '\n')
+    # fd.close()
 
 # def view_image(coordinates):
-#     img = Image.open("/home/cristi/ocropy/tests/aim916.tiff")
+#     img = Image.open("/home/cristi/ocropy/tests/test-layout.png")
 #     index = 1
 #     for coordinate in coordinates:
 #         img2 = img.crop(coordinate)
@@ -449,40 +462,85 @@ def columns_seg():
 #         index = index +1
 #         img2.save(name)
 
+def getBounds(group):
+    xmin, xmax, ymin, ymax = 1e9, -1e9, 1e9, -1e9
+    for img in group:
+        xmin = min(xmin, img[0])
+        xmax = max(xmax, img[2])
+        ymin = min(ymin, img[1])
+        ymax = max(ymax, img[3])
+    return (xmin, ymin, xmax, ymax)
+
+def included(small, big):
+    if small[0] >= big[0] and small[1] >= big[1] and small[2] <= big[2] and small[3] <= big[3]:
+        return True
+    
+    x1 = max(small[0], big[0])
+    x2 = min(small[2], big[2])
+    y1 = max(small[1], big[1])
+    y2 = min(small[3], big[3])
+    if x1 > x2 or y1 > y2:
+        return False
+    
+    interArea = (x2 - x1) * (y2 - y1)
+    smallArea = (small[2] - small[0]) * (small[3] - small[1])
+    return 1.0 * interArea / smallArea > 0.5
+
 def group_other_lines(other_lines):
     groups = []
     
-    height_threshold = 0.2
+    height_threshold = 0.75
     distance_threshold = 1
     ox_threshold = 0.15
     ox_threshold_with_padding = 0.05
     
     other_lines.sort(key = lambda x: x[1])
     for line in other_lines:
-        if len(groups) == 0:
+        ok = True
+        for group in groups:
+            prev_line = group[-1]
+            put_in_new_group = False
+            
+            if prev_line[2] < line[0] or prev_line[0] > line[2]:
+                put_in_new_group = True
+            elif abs(1 - 1.0 * (prev_line[3] - prev_line[1]) / (line[3] - line[1])) > height_threshold:
+                put_in_new_group = True
+            elif (1.0 * abs(prev_line[3] - line[1]) / (line[3] - line[1])) > distance_threshold:
+                put_in_new_group = True
+            elif (1.0 * abs(prev_line[0] - line[0]) / (prev_line[2] - prev_line[0])) > ox_threshold_with_padding and (abs((prev_line[0] + prev_line[2]) - (line[0] + line[2])) / (prev_line[2] - prev_line[0])) > ox_threshold:
+                put_in_new_group = True
+            
+            if not put_in_new_group:
+                group.append(line)
+                ok = False
+                break
+        
+        if ok:
             groups.append([line])
-        
-        prev_line = groups[-1][-1]
-        put_in_new_group = False
-        
-        if prev_line[2] < line[0] or prev_line[0] > line[2]:
-            put_in_new_group = True
-        elif abs(1 - 1.0 * (prev_line[3] - prev_line[1]) / (line[3] - line[1])) > height_threshold:
-            put_in_new_group = True
-        elif (1.0 * abs(prev_line[3] - line[1]) / (line[3] - line[1])) > distance_threshold:
-            put_in_new_group = True
-        elif (1.0 * abs(prev_line[0] - line[0]) / (prev_line[2] - prev_line[0])) > ox_threshold_with_padding and (abs((prev_line[0] + prev_line[2]) - (line[0] + line[2])) / (prev_line[2] - prev_line[0])) > ox_threshold:
-            put_in_new_group = True
-        
-        if put_in_new_group:
-            groups.append([line])
-        else:
-            groups[-1].append(line)
     
+    bounds = []
+    for group in groups:
+        bounds.append(getBounds(group))
     
-    fd = open("column_indexes.txt", "a")
+    for i in range(len(bounds)):
+        for j in range(len(bounds)):
+            if i != j and included(bounds[i], bounds[j]):
+                groups[i] = []
+                break
+    
+    groups = list(filter(lambda x: len(x) > 0, groups))
+    
+    for group in groups:
+        print(getBounds(group))
+    
+    # for group in groups:
+    #     for img in group:
+    #         print(img)
+    #     print("\n")
+    
+    fd = open("column_indexes.txt", "w")
 
-    fd.write("\n\n")
+    # fd.write("\n\n")
     rects = []
     for group in groups:
         # print(group)
@@ -494,7 +552,7 @@ def group_other_lines(other_lines):
             ymax = max(ymax, img[3])
         
         fd.write(str(xmin) +  ' ' + str(ymin) + ' ' + str(xmax) + ' ' + str(ymax) + '\n')
-        # rects.append((xmin, ymin, xmax, ymax))
+        rects.append((xmin, ymin, xmax, ymax))
     
     fd.close()
     # view_image(rects)
@@ -614,10 +672,14 @@ def process1(job):
                 ok = False
         if ok:
             other_lines.append((data[1], data[0], data[3], data[2]))
-                
+    
+    correct_line_coordinates = []
+    for data in line_coordonates:
+        correct_line_coordinates.append((data[1], data[0], data[3], data[2]))
+    
     # print(other_lines)
     columns_seg()
-    print(group_other_lines(other_lines))
+    print(group_other_lines(correct_line_coordinates))
     print_info("%6d  %s %4.1f %d" % (i, fname,  scale,  len(lines)))
 
 if len(args.files)==1 and os.path.isdir(args.files[0]):
