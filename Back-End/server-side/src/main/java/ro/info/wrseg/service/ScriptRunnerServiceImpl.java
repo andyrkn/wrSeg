@@ -32,12 +32,12 @@ public class ScriptRunnerServiceImpl implements ScriptRunnerService {
             while ((s = stdInput.readLine()) != null) {
                 content.append(s);
             }
-            if(content.toString()==fileName) {
-                System.out.println(content.toString());
-            }
-            else {
-                // throw exception to front
-            }
+            // if(content.toString()==fileName) {
+            //     System.out.println(content.toString());
+            // }
+            // else {
+            //     // throw exception to front
+            // }
         } catch (IOException e) {
             e.printStackTrace();
         }
