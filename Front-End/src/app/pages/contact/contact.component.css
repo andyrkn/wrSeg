@@ -94,3 +94,14 @@
 .cos_send_button:hover {
   background-color: #394263;
 }
+
+@media (max-width:800px){
+  .container1{
+    display:block;
+  }
+  .card{
+    width:80%;
+    margin-left: 5%;
+    margin-right: 15%;
+  }
+}
