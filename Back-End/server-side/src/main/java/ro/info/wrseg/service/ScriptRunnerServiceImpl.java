@@ -16,6 +16,7 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.nio.file.Paths;
 import java.nio.file.Path;
+import java.io.File;
 
 @Service
 public class ScriptRunnerServiceImpl implements ScriptRunnerService {
@@ -24,7 +25,19 @@ public class ScriptRunnerServiceImpl implements ScriptRunnerService {
         String pathToScript = path.resolve("script.py").toString();
         System.out.println("Attempting to run " + pathToScript + " " +  fileName);
         try {
-            Process p = Runtime.getRuntime().exec("python " + pathToScript + " " + fileName);
+            System.out.println("**************************");
+            System.out.println(pathToScript);
+            System.out.println(Paths.get(".").toAbsolutePath().normalize().toString());
+            System.out.println("**************************");
+            String[] cmd = {
+                "python",
+                pathToScript,
+                fileName + ".jpg"
+            };
+            File f = new File("./../scripts");
+            Process p = Runtime.getRuntime().exec(cmd, null, f);
+            // System.out.println(p);
+            p.waitFor();
             BufferedReader stdInput = new BufferedReader(new InputStreamReader(p.getInputStream()));
             String s;
             System.out.println("Here is the standard output of the command:\n");
@@ -33,12 +46,15 @@ public class ScriptRunnerServiceImpl implements ScriptRunnerService {
                 content.append(s);
             }
             // if(content.toString()==fileName) {
-            //     System.out.println(content.toString());
+            System.out.println("fbewuyfuoioewbfyewufiuhoeijqfnbrewye");
+                System.out.println(content.toString());
             // }
             // else {
-            //     // throw exception to front
+                // throw exception to front
             // }
         } catch (IOException e) {
+            e.printStackTrace();
+        } catch(Exception e) {
             e.printStackTrace();
         }
     }

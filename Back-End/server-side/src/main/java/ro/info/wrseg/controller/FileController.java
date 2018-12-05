@@ -39,6 +39,7 @@ public class FileController {
     public String uploadFile(@RequestParam("file") MultipartFile multipartFile) throws IOException {
         FileUpload fileUpload = fileStorageService.save(multipartFile);
         scriptRunnerService.run(fileUpload.getName());
+        System.out.println("**********************--------------------********************SCRIPT RUN");
         Path path = Paths.get("./../processed-images/" + fileUpload.getName() + ".json");
         byte[] encoded = Files.readAllBytes(path);
 
