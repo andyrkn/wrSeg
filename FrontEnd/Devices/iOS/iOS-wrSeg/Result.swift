@@ -16,7 +16,6 @@ class Result: NSObject, NSCoding {
 
     var title: String
     var image: UIImage?
-    var resultedImages = [[UIImage?]]()
     
     //MARK: Archiving Paths
     
@@ -24,8 +23,6 @@ class Result: NSObject, NSCoding {
     static let ArchiveURL = DocumentsDirectory.appendingPathComponent("results")
     
     //MARK: Types
-    
-    static let sections = ["Titles", "Lines", "Columns", "Others"]
     
     struct PropertyKey {
         static let title = "title"
