@@ -1,8 +1,12 @@
 package com.florinvelesca.myapplication;
 
+import android.content.Intent;
+import android.media.Image;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
+import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -17,6 +21,9 @@ public class TextActivity extends AppCompatActivity {
     private SeekBar noiseSeekBar;
     private TextView tesholdTextView;
     private TextView noiseTextView;
+    private ImageView textImageView;
+    private Uri photoExtra;
+    private TextView noPhotoSelected;
     private android.support.v7.widget.Toolbar toolbar;
 
     @Override
@@ -25,17 +32,30 @@ public class TextActivity extends AppCompatActivity {
         setContentView(R.layout.activity_text);
         linkUi();
         setSeekBarListners();
+      if (getIntent().hasExtra("picture")) {
+        photoExtra = (Uri)getIntent().getParcelableExtra("picture");
+        textImageView.setImageURI(photoExtra);
+      }
 
+        if(textImageView.getDrawable() != null){
+          noPhotoSelected.setVisibility(TextView.GONE);
+        }
 
     }
 
+  @Override
+  protected void onDestroy() {
+    super.onDestroy();
+    noPhotoSelected.setVisibility(TextView.VISIBLE);
+  }
 
-    private void linkUi() {
+  private void linkUi() {
         floatSeekBar = (FloatSeekBar) findViewById(R.id.seekBar);
         tesholdTextView = findViewById(R.id.threshold_text_view);
         noiseTextView = findViewById(R.id.noise_text_view);
         noiseSeekBar = findViewById(R.id.noiseSeekBar);
-
+        textImageView = findViewById(R.id.text_image_view);
+        noPhotoSelected = findViewById(R.id.no_photo_selected);
         setSupportActionBar(toolbar);
     }
 

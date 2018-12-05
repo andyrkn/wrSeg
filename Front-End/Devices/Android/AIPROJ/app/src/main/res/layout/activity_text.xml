@@ -1,149 +1,151 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:orientation="vertical"
+  tools:context=".TextActivity">
+
+  <LinearLayout
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".TextActivity">
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:background="#c1bfbf"
-        android:padding="16dp">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="#007aff"
-            android:layout_gravity="center"
-            android:text="@string/history" />
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:textStyle="bold|italic"
-
-            android:text="@string/app_name" />
-
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:textColor="#007aff"
-            android:text="@string/result" />
-
-
-    </LinearLayout>
-
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"
-        android:layout_weight="6">
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/no_photo"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:textSize="22dp"
-            android:text="No photo selected"
-            />
-
-    </FrameLayout>
+    android:layout_height="60dp"
+    android:background="#c1bfbf"
+    android:padding="16dp">
 
     <TextView
-        android:id="@+id/threshold_text_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:text="Threshold 0.0"
-        android:textStyle="bold" />
-
-    <com.florinvelesca.myapplication.model.FloatSeekBar
-        android:id="@+id/seekBar"
-        style="@style/Widget.AppCompat.SeekBar.Discrete"
-        android:layout_width="match_parent"
-        android:layout_height="10dp"
-        android:layout_gravity="center"
-        android:layout_margin="10dp"
-        android:layout_weight="1"
-        tools:layout_editor_absoluteX="63dp"
-        tools:layout_editor_absoluteY="148dp" />
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center"
+      android:text="@string/history"
+      android:textColor="#007aff" />
 
     <TextView
-        android:id="@+id/noise_text_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:text="Noise: 0"
-        android:textStyle="bold" />
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center"
+      android:layout_weight="1"
+      android:gravity="center"
+      android:text="@string/app_name"
 
-    <SeekBar
-        android:id="@+id/noiseSeekBar"
-        style="@style/Widget.AppCompat.SeekBar.Discrete"
-        android:layout_width="match_parent"
-        android:layout_height="10dp"
-        android:layout_gravity="center"
-        android:layout_margin="10dp"
-        android:layout_weight="1"
-        android:max="10"
-        tools:layout_editor_absoluteX="63dp"
-        tools:layout_editor_absoluteY="148dp" />
+      android:textStyle="bold|italic" />
 
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginBottom="10dp"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Use gauss"
-            android:textStyle="bold" />
-
-        <Switch
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp" />
-
-        <View
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-
-            android:text="Advanced settings"
-
-            />
-
-    </LinearLayout>
+    <TextView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center"
+      android:text="@string/result"
+      android:textColor="#007aff" />
 
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="Submit" />
+  </LinearLayout>
+
+  <FrameLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="20dp"
+    android:layout_marginTop="16dp"
+    android:layout_marginRight="20dp"
+    android:layout_marginBottom="16dp"
+    android:layout_weight="6">
+
+    <ImageView
+      android:id="@+id/text_image_view"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:background="@drawable/no_photo" />
+
+    <TextView
+      android:id="@+id/no_photo_selected"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center"
+      android:text="No photo selected"
+      android:textSize="22dp" />
+
+  </FrameLayout>
+
+  <TextView
+    android:id="@+id/threshold_text_view"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="10dp"
+    android:text="Threshold 0.0"
+    android:textStyle="bold" />
+
+  <com.florinvelesca.myapplication.model.FloatSeekBar
+    android:id="@+id/seekBar"
+    style="@style/Widget.AppCompat.SeekBar.Discrete"
+    android:layout_width="match_parent"
+    android:layout_height="10dp"
+    android:layout_gravity="center"
+    android:layout_margin="10dp"
+    android:layout_weight="1"
+    tools:layout_editor_absoluteX="63dp"
+    tools:layout_editor_absoluteY="148dp" />
+
+  <TextView
+    android:id="@+id/noise_text_view"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="10dp"
+    android:text="Noise: 0"
+    android:textStyle="bold" />
+
+  <SeekBar
+    android:id="@+id/noiseSeekBar"
+    style="@style/Widget.AppCompat.SeekBar.Discrete"
+    android:layout_width="match_parent"
+    android:layout_height="10dp"
+    android:layout_gravity="center"
+    android:layout_margin="10dp"
+    android:layout_weight="1"
+    android:max="10"
+    tools:layout_editor_absoluteX="63dp"
+    tools:layout_editor_absoluteY="148dp" />
+
+
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="10dp"
+    android:layout_marginBottom="10dp"
+    android:orientation="horizontal">
+
+    <TextView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="Use gauss"
+      android:textStyle="bold" />
+
+    <Switch
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="10dp" />
+
+    <View
+      android:layout_width="0dp"
+      android:layout_height="0dp"
+      android:layout_weight="1" />
+
+    <TextView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+
+      android:text="Advanced settings"
+
+      />
+
+  </LinearLayout>
+
+
+  <Button
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:text="Submit" />
 
 
 </LinearLayout>
