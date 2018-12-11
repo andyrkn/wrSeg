@@ -10,6 +10,6 @@ public class UploadException extends RuntimeException {
     }
 
     public UploadException(String fileName) {
-        super("Could not upload file with name " +  fileName);
+        super("Could not upload file with name " + fileName);
     }
 }

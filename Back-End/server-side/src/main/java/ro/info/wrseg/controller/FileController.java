@@ -17,10 +17,10 @@ import ro.info.wrseg.service.ScriptRunnerService;
 @RestController
 @RequestMapping("/upload-file")
 public class FileController {
+    private Logger logger = LoggerFactory.getLogger(FileController.class);
     private FileStorageService fileStorageService;
     private ScriptRunnerService scriptRunnerService;
     private ProcessedImagesReader processedImagesReader;
-    private Logger logger = LoggerFactory.getLogger(FileController.class);
 
     @Autowired
     FileController(FileStorageService fileStorageService,
@@ -35,9 +35,8 @@ public class FileController {
     @PostMapping()
     public String uploadFile(@RequestParam("file") MultipartFile multipartFile) {
         FileUpload fileUpload = fileStorageService.save(multipartFile);
-        logger.debug("Attempting to run the Python script");
-        scriptRunnerService.run(fileUpload.getName());
-        logger.debug("Python script has been executed");
+        scriptRunnerService.run(fileUpload);
+        logger.debug("AI Layer (Python script) has been executed");
         return processedImagesReader.getContent(fileUpload.getName());
     }
 }

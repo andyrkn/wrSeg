@@ -1,5 +1,7 @@
 package ro.info.wrseg.service;
 
+import ro.info.wrseg.model.FileUpload;
+
 public interface ScriptRunnerService {
-    void run(String fileName);
+    void run(FileUpload fileUpload);
 }
