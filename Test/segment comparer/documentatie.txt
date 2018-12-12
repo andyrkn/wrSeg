@@ -1,0 +1,25 @@
+Obiectiv:
+- Dezvoltarea unui program pentru compararea output-ului algoritmului de segmentare cu un set de teste
+- Se va folosi in automarea testarii
+- Pentru fiecare versiune a algoritmului de segmentare se vor construi rapoarte cu rezultatele testelor
+
+Limbajul de programare ales:
+- Python 3.x
+
+Biblioteci:
+
+1. openCV - https://www.opencv.org/
+motivatie:
+- o multitudine de functii pentru procesare de imagini
+- scris si optimizat in C/C++
+- poate utiliza hardware acceleration
+- open source
+
+2. numpy - http://www.numpy.org/
+motivatie:
+- este folosit de openCV pentru structurile sale de date 
+- contine functii pentru algebra liniara, dar si pentru multe alte domenii stiintifice
+- are functii optimizate pentru lucrul cu containere mari (imagini in acest caz)
+
+3. matplotlib - https://matplotlib.org/
+- pentru creare de rapoarte a acuratetei algoritmului de segmentare
