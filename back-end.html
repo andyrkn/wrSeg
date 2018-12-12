@@ -99,6 +99,7 @@
 
         <div class="about">
             <div class="container about_container">
+
                 <div class="row">
                     <div class="about_content">
                         <div class="section_title_container">
@@ -138,6 +139,7 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="row">
                     <div class="about_content">
                         <div class="section_title_container">
@@ -173,31 +175,9 @@
                             expands REST services.
                         </div>
                     </div>
+
                     <div class="row">
                         <div class="about_content">
-                            <div class="section_title_container">
-                                <div class="section_title"><span>Development phases</span></div>
-                            </div>
-                            <div class="about_text">
-                                <p><b>I.</b> Ability to POST an image (the image that is uploaded on a specific
-                                    end-point -
-                                    /files - is being placed in a folder and
-                                    from there, that file will be used by the Artificial Intelligence layer);</p>
-                            </div>
-                            <div class="about_text">
-                                <p><b>II.</b> Ability to upload files of different extensions;</p>
-                            </div>
-                            <div class="about_text">
-                                <p><b>III.</b> Refactoring of the code and ability to throw an exception if the image
-                                    is not valid;</p>
-                            </div>
-                            <div class="about_text">
-                                <p><b>IV.</b> Checking if the file extension is not a valid one and throwing an
-                                    exception accordingly;</p>
-                            </div>
-                            <div class="about_text">
-                                <p><b>V.</b> Ability to execute the Python script (AI layer) when the file is uploaded.</p>
-                            </div>
                             <div class="text_highlight">Flow of the server-side:
                             </div>
                             <div class="about_text">
@@ -239,6 +219,42 @@
                             </div>
                         </div>
                     </div>
+
+                    <div class="row">
+                        <div class="about_content">
+                            <div class="section_title_container">
+                                <div class="section_title"><span>Development phases</span></div>
+                            </div>
+                            <div class="about_text">
+                                <p><b>I.</b> Ability to POST an image (the image that is uploaded on a specific
+                                    end-point -
+                                    /files - is being placed in a folder and
+                                    from there, that file will be used by the Artificial Intelligence layer);</p>
+                            </div>
+                            <div class="about_text">
+                                <p><b>II.</b> Ability to upload files of different extensions;</p>
+                            </div>
+                            <div class="about_text">
+                                <p><b>III.</b> Refactoring of the code and ability to throw an exception if the image
+                                    is not valid;</p>
+                            </div>
+                            <div class="about_text">
+                                <p><b>IV.</b> Checking if the file extension is not a valid one and throwing an
+                                    exception accordingly;</p>
+                            </div>
+                            <div class="about_text">
+                                <p><b>V.</b> Ability to execute the Python script (AI layer) when the file is uploaded.</p>
+                            </div>
+                            <div class="about_text">
+                                <p><b>VI.</b> The API throws exceptions according to unusual situation like ProcessedImagesReader, ProcessingException etc.</p>
+                                <p><b>VII.</b> Ability to log the execution of the Application. The logger logs info about the execution of the application by days (files that begin with ro-wrseg-logging from the server-side directory).</p>
+                                <p><b>VIII.</b> Reestablished the communication with AI Layer and refactored the code in ScriptRunner service. Ability to print the STANDARD OUTPUT of the execution of the Python Script (AI Layer).</p>
+                                <p><b>IX.</b> All three layers (CONTROLLER, SERVICE, REPOSITORY) of the server-side make use of the logging technology.</p>
+                                <p><b>X.</b> The response to request, that is being made by the Front-End, is created by using the JSON file which is created when the execution of the Python script has ended. The JSON is read and parsed accordingly and the request to the API is fulfilled.</p>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
