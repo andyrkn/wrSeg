@@ -30,7 +30,7 @@ class SegmentInfo:
     def area(self):
         return self.width * self.height
 
-""" Each field will be a list with the scores (numbers in [0, 1]) """
+"""  Each field will be a number in [0, 1] """
 class SegmentComparerResult:
     def __init__(self, common_area_scores, missing_area_scores, extra_area_scores, total_score):
         self.common_area_scores = common_area_scores
@@ -39,7 +39,7 @@ class SegmentComparerResult:
         self.total_score = total_score
 
 """ 
-    This class has 3 fields, each a list of function with 2 arguments
+    This class has 3 fields for tests, each a list of function with 2 arguments
     and returning a score in interval [0, 1] (0 - bad score, 1 - good score)
 
     common_area_tests - tests for the intersection of the output and the target
@@ -55,6 +55,9 @@ class SegmentComparerResult:
         param1: a list of 4 SegmentInfos [top, bot, left, right]
                 for the segments in output, but not in target
         param2: SegmentInfo of output segment
+
+    Each category of tests has a weight associated used in computing the total score
+    The weights for each test will be normalized automatically
 """
 class SegmentComparer:
     def __init__(self):
@@ -142,6 +145,10 @@ class SegmentComparer:
         self.common_score_weight = common_score_weight
         self.missing_score_weight = missing_score_weight
         self.extra_score_weight = extra_score_weight
+        weights_sum = common_score_weight + missing_score_weight + extra_score_weight 
+        self.common_score_weight /= weights_sum
+        self.missing_score_weight /= weights_sum
+        self.extra_score_weight /= weights_sum
 
 """ Return a SegmentInfo created from an image """
 def get_segment_info_from_images(original_image, segment_image):

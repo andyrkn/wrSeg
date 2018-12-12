@@ -12,10 +12,13 @@ def score(output, target):
 
     comparer.set_category_weights(common_score_weight, missing_score_weight, extra_score_weight)
 
+    # test for how much area the target and output have in common
     comparer.add_common_area_test(areatests.common_area_percentage, 0.5)
+    # tests for the percentage of the difference area between target and output
     comparer.add_missing_area_test(areatests.uncommon_area_percentage_segments, 0.3)
     comparer.add_extra_area_test(areatests.uncommon_area_percentage_segments, 0.3)
 
+    # tests for uniformity (0 - if it is only background, 1 - if it might contain info)
     comparer.add_missing_area_test(deviationtests.uniformity_segments, 0.7)
     comparer.add_extra_area_test(deviationtests.uniformity_segments, 0.7)
 
