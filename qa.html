@@ -181,6 +181,53 @@
 								</p>
 							</div>
 						</div>
+					
+						<div class="about_content">
+							<div class="section_title_container">
+								<div class="section_title"><span>Implementation details</span></div>
+							</div>
+
+							<div class="section_title_container">
+								<div class="section_subtitle">Segment comparer</div>
+							</div>
+							<div class="about_text">
+								<p> <b> Utility </b> </p>
+								<p> 
+									This program is a component of the automated tests for the back-end algorithm.
+									It computes a score for the similarty between two segments,
+									this is useful in comparing the ouput segments, of the page segmentation algorithm,
+									with target segments from a set of tests.
+								</p>
+
+								<p> <b> How it works </b> </p>
+								<p>
+									The output and target segment will be split in 3 other segments:
+								</p>
+								<div>
+									<ul>
+										<li type="circle">Common area segment (intersection between output and target)</li>
+										<li type="circle">Missing area segment (target minus output)</li>
+										<li type="circle">Extra area segment (output minus target)</li>
+									</ul>
+								</div>
+								<p>
+									For each of the above segments a set of tests will be run, each returning a score.
+									After all the scores are computed a weighted sum of all of them will be returned, 
+									this final score in the [0, 1] interval represents a grade for each segment created 
+									by the segmentation algorithm. A threshold needs to be chosen on what is a acceptable
+									output.
+								</p>
+								
+								<p><b> Known problems </b></p>
+								<p>
+									The segment comparer returns false positives when the difference between 
+									the output and the target is another small segment, the page number or a 
+									small logo for example.
+									The weights will have to be adjusted and more tests will have to be added to 
+									account for this and other extreme cases.
+								</p>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
