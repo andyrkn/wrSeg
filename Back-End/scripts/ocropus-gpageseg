@@ -453,14 +453,16 @@ def columns_seg():
     #     fd.write(str(x1_min) + ' ' + str(y1_min) + ' ' + str(x2_max) + ' ' + str(y2_max) + '\n')
     # fd.close()
 
-# def view_image(coordinates):
-#     img = Image.open("/home/cristi/ocropy/tests/test-layout.png")
-#     index = 1
-#     for coordinate in coordinates:
-#         img2 = img.crop(coordinate)
-#         name = "img" + str(index) + ".jpg"
-#         index = index +1
-#         img2.save(name)
+def view_image(coordinates):
+    if not os.path.exists("{}/colum_separation".format(os.path.splitext(args.files[0])[0])):
+        os.makedirs("{}/colum_separation".format(os.path.splitext(args.files[0])[0]))
+    img = Image.open(args.files[0])
+    index = 1
+    for coordinate in coordinates:
+        img2 = img.crop(coordinate)
+        name = "{}/colum_separation/img".format(os.path.splitext(args.files[0])[0]) + str(index) + ".jpg"
+        index = index +1
+        img2.save(name)
 
 def getBounds(group):
     xmin, xmax, ymin, ymax = 1e9, -1e9, 1e9, -1e9
