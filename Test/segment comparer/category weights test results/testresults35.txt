@@ -1,0 +1,48 @@
+(0.3, 0.4, 0.3)
+positive: 
+(('meaning  page+underline - page', 0.7720549501238064), ('techletter  header - header', 0.9976724137931035))
+negative: 
+(('techletter  date - title', 0.1315679728816771), ('meaning  text - text+page', 0.9788187424631789))
+
+(0.33333333333333337, 0.33333333333333337, 0.33333333333333337)
+positive: 
+(('meaning  page+underline - page', 0.7775457917698387), ('techletter  header - header', 0.9974137931034484))
+negative: 
+(('techletter  date - title', 0.15996125164845307), ('meaning  text - text+page', 0.9764652694035323))
+
+(0.2727272727272727, 0.36363636363636365, 0.36363636363636365)
+positive: 
+(('meaning  page+underline - page', 0.7909590455670967), ('techletter  header - header', 0.99717868338558))
+negative: 
+(('techletter  date - title', 0.08359409270740331), ('meaning  text - text+page', 0.9743257484402168))
+
+(0.3, 0.3, 0.4)
+positive: 
+(('meaning  page+underline - page', 0.7977912125928548), ('techletter  header - header', 0.9968965517241379))
+negative: 
+(('techletter  date - title', 0.10435065558007431), ('meaning  text - text+page', 0.9717583232842386))
+
+(0.4, 0.3, 0.3)
+positive: 
+(('meaning  page+underline - page', 0.7627912125928549), ('techletter  header - header', 0.9976724137931035))
+negative: 
+(('techletter  date - title', 0.24396512648360774), ('meaning  text - text+page', 0.9788187424631789))
+
+(0.36363636363636365, 0.2727272727272727, 0.36363636363636365)
+positive: 
+(('meaning  page+underline - page', 0.7825374659935045), ('techletter  header - header', 0.99717868338558))
+negative: 
+(('techletter  date - title', 0.18577332325461304), ('meaning  text - text+page', 0.9743257484402168))
+
+(0.36363636363636365, 0.36363636363636365, 0.2727272727272727)
+positive: 
+(('meaning  page+underline - page', 0.759140863748915), ('techletter  header - header', 0.997884012539185))
+negative: 
+(('techletter  date - title', 0.21051633898334282), ('meaning  text - text+page', 0.9807443113301626))
+
+(0.3333333333333333, 0.3333333333333333, 0.3333333333333333)
+positive: 
+(('meaning  page+underline - page', 0.7775457917698387), ('techletter  header - header', 0.9974137931034482))
+negative: 
+(('techletter  date - title', 0.15996125164845304), ('meaning  text - text+page', 0.9764652694035321))
+

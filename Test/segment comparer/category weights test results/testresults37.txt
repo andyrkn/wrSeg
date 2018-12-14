@@ -1,0 +1,372 @@
+(0.3333333333333333, 0.3333333333333333, 0.3333333333333333)
+positive: 
+(('meaning  page+underline - page', 0.7775457917698387), ('techletter  header - header', 0.9974137931034482))
+negative: 
+(('techletter  date - title', 0.15996125164845304), ('meaning  text - text+page', 0.9764652694035321))
+
+(0.3333333333333333, 0.26666666666666666, 0.39999999999999997)
+positive: 
+(('meaning  page+underline - page', 0.7947033000825376), ('techletter  header - header', 0.9968965517241379))
+negative: 
+(('techletter  date - title', 0.14181637344738451), ('meaning  text - text+page', 0.9717583232842385))
+
+(0.37499999999999994, 0.37499999999999994, 0.25)
+positive: 
+(('meaning  page+underline - page', 0.7522390157410686), ('techletter  header - header', 0.9980603448275862))
+negative: 
+(('techletter  date - title', 0.2294744967339265), ('meaning  text - text+page', 0.9823489520526492))
+
+(0.41666666666666663, 0.24999999999999994, 0.3333333333333333)
+positive: 
+(('meaning  page+underline - page', 0.7698260104940458), ('techletter  header - header', 0.9974137931034484))
+negative: 
+(('techletter  date - title', 0.2536255463167286), ('meaning  text - text+page', 0.9764652694035323))
+
+(0.28571428571428575, 0.35714285714285715, 0.35714285714285715)
+positive: 
+(('meaning  page+underline - page', 0.7880847768962558), ('techletter  header - header', 0.9972290640394089))
+negative: 
+(('techletter  date - title', 0.09995848390905687), ('meaning  text - text+page', 0.9747842172180702))
+
+(0.19999999999999998, 0.39999999999999997, 0.39999999999999997)
+positive: 
+(('meaning  page+underline - page', 0.8070549501238065), ('techletter  header - header', 0.9968965517241379))
+negative: 
+(('techletter  date - title', -0.008046498021856335), ('meaning  text - text+page', 0.9717583232842385))
+
+(0.23076923076923075, 0.3846153846153846, 0.3846153846153846)
+positive: 
+(('meaning  page+underline - page', 0.800245144349814), ('techletter  header - header', 0.9970159151193634))
+negative: 
+(('techletter  date - title', 0.030724521132830446), ('meaning  text - text+page', 0.9728445416194602))
+
+(0.3076923076923077, 0.4615384615384615, 0.23076923076923075)
+positive: 
+(('meaning  page+underline - page', 0.7535249424505459), ('techletter  header - header', 0.9982095490716182))
+negative: 
+(('techletter  date - title', 0.15905666590601222), ('meaning  text - text+page', 0.9837067249716762))
+
+(0.23076923076923078, 0.46153846153846156, 0.30769230769230776)
+positive: 
+(('meaning  page+underline - page', 0.780448019373623), ('techletter  header - header', 0.9976127320954908))
+negative: 
+(('techletter  date - title', 0.05166091905714028), ('meaning  text - text+page', 0.9782756332955682))
+
+(0.4, 0.3, 0.3)
+positive: 
+(('meaning  page+underline - page', 0.7627912125928549), ('techletter  header - header', 0.9976724137931035))
+negative: 
+(('techletter  date - title', 0.24396512648360774), ('meaning  text - text+page', 0.9788187424631789))
+
+(0.3846153846153846, 0.23076923076923075, 0.3846153846153846)
+positive: 
+(('meaning  page+underline - page', 0.7859932404560422), ('techletter  header - header', 0.9970159151193634))
+negative: 
+(('techletter  date - title', 0.20364321898195453), ('meaning  text - text+page', 0.9728445416194602))
+
+(0.3846153846153846, 0.3846153846153846, 0.23076923076923075)
+positive: 
+(('meaning  page+underline - page', 0.7463989905036601), ('techletter  header - header', 0.9982095490716181))
+negative: 
+(('techletter  date - title', 0.24551601483057425), ('meaning  text - text+page', 0.9837067249716762))
+
+(0.25, 0.33333333333333337, 0.4166666666666667)
+positive: 
+(('meaning  page+underline - page', 0.8067124584365054), ('techletter  header - header', 0.9967672413793104))
+negative: 
+(('techletter  date - title', 0.04361585922884184), ('meaning  text - text+page', 0.9705815867544152))
+
+(0.3571428571428571, 0.4285714285714285, 0.21428571428571425)
+positive: 
+(('meaning  page+underline - page', 0.744701732275507), ('techletter  header - header', 0.9983374384236454))
+negative: 
+(('techletter  date - title', 0.2191240469127256), ('meaning  text - text+page', 0.9848705303308423))
+
+(0.39999999999999997, 0.19999999999999998, 0.39999999999999997)
+positive: 
+(('meaning  page+underline - page', 0.7885274750619031), ('techletter  header - header', 0.9968965517241379))
+negative: 
+(('techletter  date - title', 0.21674780918200492), ('meaning  text - text+page', 0.9717583232842385))
+
+(0.4285714285714285, 0.3571428571428571, 0.21428571428571425)
+positive: 
+(('meaning  page+underline - page', 0.7380847768962557), ('techletter  header - header', 0.9983374384236454))
+negative: 
+(('techletter  date - title', 0.2994077280569618), ('meaning  text - text+page', 0.9848705303308423))
+
+(0.39999999999999997, 0.39999999999999997, 0.19999999999999998)
+positive: 
+(('meaning  page+underline - page', 0.7370549501238064), ('techletter  header - header', 0.998448275862069))
+negative: 
+(('techletter  date - title', 0.27118244378521056), ('meaning  text - text+page', 0.9858791616421193))
+
+(0.26666666666666666, 0.3333333333333333, 0.39999999999999997)
+positive: 
+(('meaning  page+underline - page', 0.8008791251031719), ('techletter  header - header', 0.9968965517241379))
+negative: 
+(('techletter  date - title', 0.0668849377127641), ('meaning  text - text+page', 0.9717583232842385))
+
+(0.37499999999999994, 0.3125, 0.3125)
+positive: 
+(('meaning  page+underline - page', 0.7683241797842237), ('techletter  header - header', 0.9975754310344828))
+negative: 
+(('techletter  date - title', 0.21246367342042471), ('meaning  text - text+page', 0.9779361900658115))
+
+(0.46153846153846156, 0.23076923076923078, 0.30769230769230776)
+positive: 
+(('meaning  page+underline - page', 0.7590701635329653), ('techletter  header - header', 0.9976127320954908))
+negative: 
+(('techletter  date - title', 0.3110389658308264), ('meaning  text - text+page', 0.9782756332955682))
+
+(0.35714285714285715, 0.2142857142857143, 0.4285714285714286)
+positive: 
+(('meaning  page+underline - page', 0.7998508661377535), ('techletter  header - header', 0.9966748768472906))
+negative: 
+(('techletter  date - title', 0.16080122412357672), ('meaning  text - text+page', 0.9697410606616842))
+
+(0.4166666666666667, 0.33333333333333337, 0.25)
+positive: 
+(('meaning  page+underline - page', 0.7483791251031721), ('techletter  header - header', 0.9980603448275862))
+negative: 
+(('techletter  date - title', 0.27630664406806427), ('meaning  text - text+page', 0.9823489520526492))
+
+(0.28571428571428575, 0.28571428571428575, 0.4285714285714286)
+positive: 
+(('meaning  page+underline - page', 0.8064678215170047), ('techletter  header - header', 0.9966748768472908))
+negative: 
+(('techletter  date - title', 0.0805175429793406), ('meaning  text - text+page', 0.9697410606616843))
+
+(0.2941176470588235, 0.3529411764705882, 0.3529411764705882)
+positive: 
+(('meaning  page+underline - page', 0.7862249559915939), ('techletter  header - header', 0.9972616632860041))
+negative: 
+(('techletter  date - title', 0.11054720762777384), ('meaning  text - text+page', 0.975080873486093))
+
+(0.3076923076923077, 0.3076923076923077, 0.3846153846153846)
+positive: 
+(('meaning  page+underline - page', 0.7931191924029279), ('techletter  header - header', 0.9970159151193634))
+negative: 
+(('techletter  date - title', 0.11718387005739253), ('meaning  text - text+page', 0.9728445416194602))
+
+(0.3076923076923077, 0.3846153846153846, 0.3076923076923077)
+positive: 
+(('meaning  page+underline - page', 0.7733220674267369), ('techletter  header - header', 0.9976127320954907))
+negative: 
+(('techletter  date - title', 0.13812026798170235), ('meaning  text - text+page', 0.9782756332955681))
+
+(0.3125, 0.37499999999999994, 0.3125)
+positive: 
+(('meaning  page+underline - page', 0.7741140157410685), ('techletter  header - header', 0.9975754310344828))
+negative: 
+(('techletter  date - title', 0.14221545241921812), ('meaning  text - text+page', 0.9779361900658115))
+
+(0.4285714285714286, 0.28571428571428575, 0.28571428571428575)
+positive: 
+(('meaning  page+underline - page', 0.7564678215170045), ('techletter  header - header', 0.997783251231527))
+negative: 
+(('techletter  date - title', 0.27996678712724543), ('meaning  text - text+page', 0.9798273737744561))
+
+(0.26666666666666666, 0.39999999999999997, 0.3333333333333333)
+positive: 
+(('meaning  page+underline - page', 0.7837216167904731), ('techletter  header - header', 0.9974137931034482))
+negative: 
+(('techletter  date - title', 0.08502981591383263), ('meaning  text - text+page', 0.9764652694035321))
+
+(0.3125, 0.3125, 0.37499999999999994)
+positive: 
+(('meaning  page+underline - page', 0.7901991797842237), ('techletter  header - header', 0.9970905172413793))
+negative: 
+(('techletter  date - title', 0.1252046291057164), ('meaning  text - text+page', 0.9735234280789736))
+
+(0.3333333333333333, 0.39999999999999997, 0.26666666666666666)
+positive: 
+(('meaning  page+underline - page', 0.7603882834571397), ('techletter  header - header', 0.9979310344827585))
+negative: 
+(('techletter  date - title', 0.17810612984952157), ('meaning  text - text+page', 0.9811722155228256))
+
+(0.39999999999999997, 0.26666666666666666, 0.3333333333333333)
+positive: 
+(('meaning  page+underline - page', 0.7713699667492043), ('techletter  header - header', 0.9974137931034482))
+negative: 
+(('techletter  date - title', 0.23489268738307345), ('meaning  text - text+page', 0.9764652694035321))
+
+(0.28571428571428575, 0.4285714285714286, 0.28571428571428575)
+positive: 
+(('meaning  page+underline - page', 0.7697017322755069), ('techletter  header - header', 0.997783251231527))
+negative: 
+(('techletter  date - title', 0.11939942483877314), ('meaning  text - text+page', 0.9798273737744561))
+
+(0.45454545454545453, 0.2727272727272727, 0.2727272727272727)
+positive: 
+(('meaning  page+underline - page', 0.7507192841753225), ('techletter  header - header', 0.997884012539185))
+negative: 
+(('techletter  date - title', 0.3126955695305525), ('meaning  text - text+page', 0.9807443113301626))
+
+(0.35714285714285715, 0.28571428571428575, 0.35714285714285715)
+positive: 
+(('meaning  page+underline - page', 0.7814678215170046), ('techletter  header - header', 0.9972290640394089))
+negative: 
+(('techletter  date - title', 0.18024216505329305), ('meaning  text - text+page', 0.9747842172180702))
+
+(0.25, 0.37499999999999994, 0.37499999999999994)
+positive: 
+(('meaning  page+underline - page', 0.7959890157410684), ('techletter  header - header', 0.9970905172413793))
+negative: 
+(('techletter  date - title', 0.054956408104509746), ('meaning  text - text+page', 0.9735234280789736))
+
+(0.2727272727272727, 0.45454545454545453, 0.2727272727272727)
+positive: 
+(('meaning  page+underline - page', 0.7675624433225072), ('techletter  header - header', 0.997884012539185))
+negative: 
+(('techletter  date - title', 0.10833710843613316), ('meaning  text - text+page', 0.9807443113301626))
+
+(0.30769230769230776, 0.23076923076923078, 0.46153846153846156)
+positive: 
+(('meaning  page+underline - page', 0.8129163173791192), ('techletter  header - header', 0.9964190981432361))
+negative: 
+(('techletter  date - title', 0.09624747213308271), ('meaning  text - text+page', 0.9674134499433523))
+
+(0.2142857142857143, 0.35714285714285715, 0.4285714285714286)
+positive: 
+(('meaning  page+underline - page', 0.8130847768962558), ('techletter  header - header', 0.9966748768472906))
+negative: 
+(('techletter  date - title', 0.00023386183510437641), ('meaning  text - text+page', 0.9697410606616842))
+
+(0.36363636363636365, 0.36363636363636365, 0.2727272727272727)
+positive: 
+(('meaning  page+underline - page', 0.759140863748915), ('techletter  header - header', 0.997884012539185))
+negative: 
+(('techletter  date - title', 0.21051633898334282), ('meaning  text - text+page', 0.9807443113301626))
+
+(0.2142857142857143, 0.4285714285714286, 0.35714285714285715)
+positive: 
+(('meaning  page+underline - page', 0.7947017322755069), ('techletter  header - header', 0.9972290640394089))
+negative: 
+(('techletter  date - title', 0.019674802764820698), ('meaning  text - text+page', 0.9747842172180702))
+
+(0.36363636363636365, 0.2727272727272727, 0.36363636363636365)
+positive: 
+(('meaning  page+underline - page', 0.7825374659935045), ('techletter  header - header', 0.99717868338558))
+negative: 
+(('techletter  date - title', 0.18577332325461304), ('meaning  text - text+page', 0.9743257484402168))
+
+(0.33333333333333337, 0.25, 0.4166666666666667)
+positive: 
+(('meaning  page+underline - page', 0.7989926771607123), ('techletter  header - header', 0.9967672413793104))
+negative: 
+(('techletter  date - title', 0.13728015389711742), ('meaning  text - text+page', 0.9705815867544152))
+
+(0.3, 0.4, 0.3)
+positive: 
+(('meaning  page+underline - page', 0.7720549501238064), ('techletter  header - header', 0.9976724137931035))
+negative: 
+(('techletter  date - title', 0.1315679728816771), ('meaning  text - text+page', 0.9788187424631789))
+
+(0.2727272727272727, 0.2727272727272727, 0.45454545454545453)
+positive: 
+(('meaning  page+underline - page', 0.8143556478116862), ('techletter  header - header', 0.9964733542319748))
+negative: 
+(('techletter  date - title', 0.05885107697867348), ('meaning  text - text+page', 0.967907185550271))
+
+(0.33333333333333337, 0.33333333333333337, 0.33333333333333337)
+positive: 
+(('meaning  page+underline - page', 0.7775457917698387), ('techletter  header - header', 0.9974137931034484))
+negative: 
+(('techletter  date - title', 0.15996125164845307), ('meaning  text - text+page', 0.9764652694035323))
+
+(0.25, 0.25, 0.5)
+positive: 
+(('techletter  date - date extra_bg', 0.8207155611461214), ('techletter  header - header', 0.9961206896551724))
+negative: 
+(('techletter  date - title', 0.020934761477506197), ('meaning  text - text+page', 0.9646979041052982))
+
+(0.4285714285714286, 0.2142857142857143, 0.35714285714285715)
+positive: 
+(('meaning  page+underline - page', 0.7748508661377534), ('techletter  header - header', 0.9972290640394089))
+negative: 
+(('techletter  date - title', 0.2605258461975292), ('meaning  text - text+page', 0.9747842172180702))
+
+(0.25, 0.5, 0.25)
+positive: 
+(('meaning  page+underline - page', 0.763818687654758), ('techletter  header - header', 0.9980603448275862))
+negative: 
+(('techletter  date - title', 0.0889780547315132), ('meaning  text - text+page', 0.9823489520526492))
+
+(0.5, 0.25, 0.25)
+positive: 
+(('meaning  page+underline - page', 0.740659343827379), ('techletter  header - header', 0.9980603448275862))
+negative: 
+(('techletter  date - title', 0.3699709387363398), ('meaning  text - text+page', 0.9823489520526492))
+
+(0.39999999999999997, 0.3333333333333333, 0.26666666666666666)
+positive: 
+(('meaning  page+underline - page', 0.7542124584365053), ('techletter  header - header', 0.9979310344827585))
+negative: 
+(('techletter  date - title', 0.253037565584142), ('meaning  text - text+page', 0.9811722155228256))
+
+(0.23076923076923078, 0.30769230769230776, 0.46153846153846156)
+positive: 
+(('meaning  page+underline - page', 0.820042269326005), ('techletter  header - header', 0.9964190981432361))
+negative: 
+(('techletter  date - title', 0.0097881232085206), ('meaning  text - text+page', 0.9674134499433523))
+
+(0.24999999999999994, 0.41666666666666663, 0.3333333333333333)
+positive: 
+(('meaning  page+underline - page', 0.7852655730456317), ('techletter  header - header', 0.9974137931034484))
+negative: 
+(('techletter  date - title', 0.06629695698017748), ('meaning  text - text+page', 0.9764652694035323))
+
+(0.33333333333333337, 0.4166666666666667, 0.25)
+positive: 
+(('meaning  page+underline - page', 0.756098906378965), ('techletter  header - header', 0.9980603448275862))
+negative: 
+(('techletter  date - title', 0.18264234939978874), ('meaning  text - text+page', 0.9823489520526492))
+
+(0.35714285714285715, 0.35714285714285715, 0.28571428571428575)
+positive: 
+(('meaning  page+underline - page', 0.7630847768962558), ('techletter  header - header', 0.9977832512315272))
+negative: 
+(('techletter  date - title', 0.19968310598300928), ('meaning  text - text+page', 0.9798273737744562))
+
+(0.35294117647058826, 0.35294117647058826, 0.29411764705882354)
+positive: 
+(('meaning  page+underline - page', 0.7656367206974763), ('techletter  header - header', 0.9977180527383367))
+negative: 
+(('techletter  date - title', 0.19267336698279353), ('meaning  text - text+page', 0.9792340612384107))
+
+(0.3, 0.3, 0.4)
+positive: 
+(('meaning  page+underline - page', 0.7977912125928548), ('techletter  header - header', 0.9968965517241379))
+negative: 
+(('techletter  date - title', 0.10435065558007431), ('meaning  text - text+page', 0.9717583232842386))
+
+(0.37499999999999994, 0.25, 0.37499999999999994)
+positive: 
+(('meaning  page+underline - page', 0.7844093438273789), ('techletter  header - header', 0.9970905172413793))
+negative: 
+(('techletter  date - title', 0.19545285010692298), ('meaning  text - text+page', 0.9735234280789736))
+
+(0.3529411764705882, 0.2941176470588235, 0.3529411764705882)
+positive: 
+(('meaning  page+underline - page', 0.7807756986204459), ('techletter  header - header', 0.9972616632860041))
+negative: 
+(('techletter  date - title', 0.17666318033479186), ('meaning  text - text+page', 0.975080873486093))
+
+(0.3846153846153846, 0.3076923076923077, 0.3076923076923077)
+positive: 
+(('meaning  page+underline - page', 0.7661961154798511), ('techletter  header - header', 0.9976127320954907))
+negative: 
+(('techletter  date - title', 0.22457961690626432), ('meaning  text - text+page', 0.9782756332955681))
+
+(0.4615384615384615, 0.3076923076923077, 0.23076923076923075)
+positive: 
+(('meaning  page+underline - page', 0.7392730385567743), ('techletter  header - header', 0.9982095490716182))
+negative: 
+(('techletter  date - title', 0.33197536375513625), ('meaning  text - text+page', 0.9837067249716762))
+
+(0.2727272727272727, 0.36363636363636365, 0.36363636363636365)
+positive: 
+(('meaning  page+underline - page', 0.7909590455670967), ('techletter  header - header', 0.99717868338558))
+negative: 
+(('techletter  date - title', 0.08359409270740331), ('meaning  text - text+page', 0.9743257484402168))
+
