@@ -15,8 +15,8 @@ def test_folder(folder_path):
             scores[test_name] = score
     sorted_scores = list(sorted(scores.items(), key=lambda x : x[1]))
     for key, value in sorted_scores:
-        #print("{}:  {}".format(key, value))
-        return sorted_scores[0][1], sorted_scores[-1][1]
+        print("{}:  {}".format(key, value))
+    return sorted_scores[0][1], sorted_scores[-1][1]
 
 def test_category_weights(folder_path, left, right, output_file=None):
     weights_combinations =  set()
@@ -45,4 +45,9 @@ def test_category_weights(folder_path, left, right, output_file=None):
         fd.close()
 
 if __name__ == "__main__":
-    test_category_weights(tests_path, 3, 4, "testresults38.txt")
+    #test_category_weights(tests_path, 3, 4, "testresults38.txt")
+
+    print("positive:")
+    test_folder(os.path.join(tests_path, "positive"))
+    print("\nnegative:")
+    test_folder(os.path.join(tests_path, "negative"))
