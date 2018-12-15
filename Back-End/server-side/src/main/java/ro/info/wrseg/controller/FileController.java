@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
+import ro.info.wrseg.model.FileParameters;
 import ro.info.wrseg.model.FileUpload;
 import ro.info.wrseg.service.FileStorageService;
 import ro.info.wrseg.service.ProcessedImagesReader;
@@ -33,8 +34,24 @@ public class FileController {
 
     @CrossOrigin(origins = "*")
     @PostMapping()
-    public String uploadFile(@RequestParam("file") MultipartFile multipartFile) {
+    public String uploadFile(@RequestParam("file") MultipartFile multipartFile,
+                             @RequestParam("threshold") float threshold,
+                             @RequestParam("noise") int noise,
+                             @RequestParam("usegauss") boolean useGauss,
+                             @RequestParam("maxcolseps") int maxColumnSeparators,
+                             @RequestParam("maxseps") int maxSeparators,
+                             @RequestParam("minscale") float minScale,
+                             @RequestParam("maxlines") int maxLines) {
         FileUpload fileUpload = fileStorageService.save(multipartFile);
+        FileParameters fileParameters = new FileParameters(
+                threshold,
+                noise,
+                useGauss,
+                maxColumnSeparators,
+                maxSeparators,
+                minScale,
+                maxLines);
+        logger.debug("Received the following parameters:\n" + fileParameters);
         scriptRunnerService.run(fileUpload);
         logger.debug("AI Layer (Python script) has been executed");
         return processedImagesReader.getContent(fileUpload.getName());
