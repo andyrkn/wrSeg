@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import ro.info.wrseg.controller.FileController;
+import ro.info.wrseg.model.FileParameters;
 import ro.info.wrseg.model.FileUpload;
 
 import java.io.BufferedReader;
@@ -18,7 +19,7 @@ public class ScriptRunnerServiceImpl implements ScriptRunnerService {
     private final String SCRIPT_NAME = "script.py";
     private Logger logger = LoggerFactory.getLogger(FileController.class);
 
-    public void run(FileUpload fileUpload) {
+    public void run(FileUpload fileUpload, FileParameters fileParameters) {
         Path path = Paths.get(PATH_TO_SCRIPTS);
         String pathToScript = path.resolve(SCRIPT_NAME).toString();
         logger.debug("Attempting to run AI Layer (Python script) - pathToScript: " + pathToScript);
@@ -26,7 +27,14 @@ public class ScriptRunnerServiceImpl implements ScriptRunnerService {
             String[] cmd = {
                     "python",
                     pathToScript,
-                    fileUpload.getName() + "." + fileUpload.getExtension()
+                    fileUpload.getName() + "." + fileUpload.getExtension(),
+                    String.valueOf(fileParameters.getThreshold()),
+                    String.valueOf(fileParameters.getNoise()),
+                    String.valueOf(fileParameters.getUseGauss()),
+                    String.valueOf(fileParameters.getMaxColumnSeparators()),
+                    String.valueOf(fileParameters.getMaxSeparators()),
+                    String.valueOf(fileParameters.getMinScale()),
+                    String.valueOf(fileParameters.getMaxLines())
             };
             File file = new File("./../scripts");
             Process scriptPyProcess = Runtime.getRuntime().exec(cmd, null, file);

@@ -1,21 +1,21 @@
 package ro.info.wrseg.model;
 
 public class FileParameters {
-    private float threshold;
-    private int noise;
-    private boolean useGauss;
-    private int maxColumnSeparators;
-    private int maxSeparators;
-    private float minScale;
-    private int maxLines;
+    private Float threshold;
+    private Integer noise;
+    private Boolean useGauss;
+    private Integer maxColumnSeparators;
+    private Integer maxSeparators;
+    private Float minScale;
+    private Integer maxLines;
 
-    public FileParameters(float threshold,
-                          int noise,
-                          boolean useGauss,
-                          int maxColumnSeparators,
-                          int maxSeparators,
-                          float minScale,
-                          int maxLines) {
+    public FileParameters(Float threshold,
+                          Integer noise,
+                          Boolean useGauss,
+                          Integer maxColumnSeparators,
+                          Integer maxSeparators,
+                          Float minScale,
+                          Integer maxLines) {
         this.threshold = threshold;
         this.noise = noise;
         this.useGauss = useGauss;
@@ -25,59 +25,59 @@ public class FileParameters {
         this.maxLines = maxLines;
     }
 
-    public void setThreshold(float threshold) {
+    public void setThreshold(Float threshold) {
         this.threshold = threshold;
     }
 
-    public void setNoise(int noise) {
+    public void setNoise(Integer noise) {
         this.noise = noise;
     }
 
-    public void setUseGauss(boolean useGauss) {
+    public void setUseGauss(Boolean useGauss) {
         this.useGauss = useGauss;
     }
 
-    public void setMaxColumnSeparators(int maxColumnSeparators) {
+    public void setMaxColumnSeparators(Integer maxColumnSeparators) {
         this.maxColumnSeparators = maxColumnSeparators;
     }
 
-    public void setMaxSeparators(int maxSeparators) {
+    public void setMaxSeparators(Integer maxSeparators) {
         this.maxSeparators = maxSeparators;
     }
 
-    public void setMinScale(float minScale) {
+    public void setMinScale(Float minScale) {
         this.minScale = minScale;
     }
 
-    public void setMaxLines(int maxLines) {
+    public void setMaxLines(Integer maxLines) {
         this.maxLines = maxLines;
     }
 
-    public float getThreshold() {
+    public Float getThreshold() {
         return threshold;
     }
 
-    public int getNoise() {
+    public Integer getNoise() {
         return noise;
     }
 
-    public boolean isUseGauss() {
+    public Boolean getUseGauss() {
         return useGauss;
     }
 
-    public int getMaxColumnSeparators() {
+    public Integer getMaxColumnSeparators() {
         return maxColumnSeparators;
     }
 
-    public int getMaxSeparators() {
+    public Integer getMaxSeparators() {
         return maxSeparators;
     }
 
-    public float getMinScale() {
+    public Float getMinScale() {
         return minScale;
     }
 
-    public int getMaxLines() {
+    public Integer getMaxLines() {
         return maxLines;
     }
 

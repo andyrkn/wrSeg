@@ -38,3 +38,21 @@ For the AI layer to work, the following should be installed:
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`cd wrSeg\Back-End\server-side`
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`mvn package && java -jar target/wrseg-1.0-SNAPSHOT.jar`
+
+## API Documentation
+
+Server is running on PORT 8082.
+
+**POST** /upload-file
+
+The following parameters are supported on this end-point:
+* `file` - this parameter is REQUIRED
+* `threshold` (`float`)
+* `noise` (`int`)
+* `usegauss` (`boolean`) - supported values: true, false, 0, 1
+* `maxcolseps` (`int`)
+* `maxseps` (`int`)
+* `minscale` (`float`)
+* `maxlines` (`int`)
+
+*If some parameters are not transmitted, they will have null value on the AI Layer.*

@@ -3,6 +3,7 @@ package ro.info.wrseg.controller;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,13 +36,13 @@ public class FileController {
     @CrossOrigin(origins = "*")
     @PostMapping()
     public String uploadFile(@RequestParam("file") MultipartFile multipartFile,
-                             @RequestParam("threshold") float threshold,
-                             @RequestParam("noise") int noise,
-                             @RequestParam("usegauss") boolean useGauss,
-                             @RequestParam("maxcolseps") int maxColumnSeparators,
-                             @RequestParam("maxseps") int maxSeparators,
-                             @RequestParam("minscale") float minScale,
-                             @RequestParam("maxlines") int maxLines) {
+                             @RequestParam(value = "threshold", required = false) Float threshold,
+                             @RequestParam(value = "noise", required = false) Integer noise,
+                             @RequestParam(value = "usegauss", required = false) Boolean useGauss,
+                             @RequestParam(value = "maxcolseps", required = false) Integer maxColumnSeparators,
+                             @RequestParam(value = "maxseps", required = false) Integer maxSeparators,
+                             @RequestParam(value = "minscale", required = false) Float minScale,
+                             @RequestParam(value = "maxlines", required = false) Integer maxLines) {
         FileUpload fileUpload = fileStorageService.save(multipartFile);
         FileParameters fileParameters = new FileParameters(
                 threshold,
@@ -52,7 +53,7 @@ public class FileController {
                 minScale,
                 maxLines);
         logger.debug("Received the following parameters:\n" + fileParameters);
-        scriptRunnerService.run(fileUpload);
+        scriptRunnerService.run(fileUpload, fileParameters);
         logger.debug("AI Layer (Python script) has been executed");
         return processedImagesReader.getContent(fileUpload.getName());
     }
