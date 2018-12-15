@@ -61,14 +61,13 @@ def read_training_data():
             label.append(list(map(float , data[4:]))[0])
     return (np.array(input) , keras.utils.to_categorical(label, num_classes = 5))
 
-
 if __name__ == "__main__":
     train_data_input = []
     train_data_label = []
     model  = build_model()
     # model = load_model(build_model())
     train_data_input , train_data_label = read_training_data()
-    model.fit(train_data_input, train_data_label, epochs = 300 ,  batch_size = 20)
+    model.fit(train_data_input, train_data_label, epochs = 300 ,  batch_size = 20 , verbose = False)
     # save_model(model)
     test_data = read_test_data()
     predict_and_write(model , test_data)

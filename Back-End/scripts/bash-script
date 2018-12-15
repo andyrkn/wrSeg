@@ -3,5 +3,6 @@
 rm img*
 rm -r temp/*
 rm column_indexes.txt
-./ocropus-nlbin $1 -o temp && ./ocropus-gpageseg -n temp/0001.bin.png
+rm test_data.txt
+./ocropus-nlbin $1 -n -o temp && ./ocropus-gpageseg -n --minscale 0 --maxcolseps 100 --maxseps 100 --maxlines 1000 temp/0001.bin.png && python3 ./write_data.py $1 column_indexes.txt && python3 ./neural_network.py
 
