@@ -9,10 +9,13 @@ def test_folder(folder_path):
         test_path = os.path.join(folder_path, test_name)
         if os.path.isdir(test_path):
             original_path = os.path.join(test_path, "original.png")
-            output_path = os.path.join(test_path, "output.png")
-            target_path = os.path.join(test_path, "target.png")
-            score = segment_compare_score.score_from_paths(original_path, output_path, target_path)
-            scores[test_name] = score
+            for subtest_name in os.listdir(test_path):
+                subtest_path = os.path.join(test_path, subtest_name)
+                if os.path.isdir(subtest_path):
+                    output_path = os.path.join(subtest_path, "output.png")
+                    target_path = os.path.join(subtest_path, "target.png")
+                    score = segment_compare_score.score_from_paths(original_path, output_path, target_path)
+                    scores[test_name + "  " + subtest_name] = score
     sorted_scores = list(sorted(scores.items(), key=lambda x : x[1]))
     for key, value in sorted_scores:
         print("{}:  {}".format(key, value))
