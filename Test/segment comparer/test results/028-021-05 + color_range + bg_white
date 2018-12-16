@@ -1,0 +1,21 @@
+positive:
+techletter  date - date extra_bg:  0.7009783472690352
+meaning  page+underline - page:  0.701538247332949
+yellowpages  title - title:  0.7762662540584782
+meaning  page - page+underline:  0.7863033163430166
+yellowpages  form - form:  0.8999733490888607
+techletter  header - header:  0.9038254310344827
+yellowpages  logo - logo crop:  0.9287989172811852
+meaning  text - text:  0.9449440855690856
+
+negative:
+techletter  date - title:  0.15874184121993196
+techletter  signature - signature+field:  0.6211745354208302
+yellowpages  title - title+logo:  0.6243273397306545
+meaning  title - title+preface:  0.645054288388234
+meaning  text - text+title:  0.6732210039796301
+yellowpages  title - logo:  0.6911281068100006
+techletter  text - text+bot:  0.7209078454994887
+yellowpages  form - form+top:  0.7411034417223847
+meaning  title - title+pad:  0.7919685085187478
+meaning  text - text+page:  0.8133233956394801

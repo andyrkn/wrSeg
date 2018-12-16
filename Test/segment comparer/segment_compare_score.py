@@ -2,6 +2,7 @@ import segment
 import areatests
 import deviationtests
 import color_range_tests
+import background_color_tests
 import cv2
 
 common_score_weight = 0.28571428571428575
@@ -25,6 +26,9 @@ def score(output, target):
 
     comparer.add_missing_area_test(color_range_tests.tightness_segments, 0.3)
     comparer.add_extra_area_test(color_range_tests.tightness_segments, 0.3)
+
+    comparer.add_missing_area_test(background_color_tests.whiteness_segments, 0.3)
+    comparer.add_extra_area_test(background_color_tests.whiteness_segments, 0.3)
 
     result = comparer.compare(output, target)
 
