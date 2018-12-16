@@ -1,35 +1,17 @@
 import segment
-import areatests
-import deviationtests
-import color_range_tests
-import background_color_tests
+import segment_comparer_tests
 import cv2
 
-common_score_weight = 0.28571428571428575
-missing_score_weight = 0.2142857142857143
-extra_score_weight = 0.5
+comparer = segment.SegmentComparer()
 
-def score(output, target):
-    comparer = segment.SegmentComparer()
+for test in segment_comparer_tests.common_area_tests:
+    comparer.add_common_area_test(test)
+for test in segment_comparer_tests.missing_area_tests:
+    comparer.add_missing_area_test(test)
+for test in segment_comparer_tests.extra_area_tests:
+    comparer.add_extra_area_test(test)
 
-    comparer.set_category_weights(common_score_weight, missing_score_weight, extra_score_weight)
-
-    # test for how much area the target and output have in common
-    comparer.add_common_area_test(areatests.common_area_percentage)
-    # tests for the percentage of the difference area between target and output
-    comparer.add_missing_area_test(areatests.uncommon_area_percentage_segments, 0.3)
-    comparer.add_extra_area_test(areatests.uncommon_area_percentage_segments, 0.3)
-
-    # tests for uniformity (0 - if it is only background, 1 - if it might contain info)
-    comparer.add_missing_area_test(deviationtests.uniformity_segments, 0.7)
-    comparer.add_extra_area_test(deviationtests.uniformity_segments, 0.7)
-
-    comparer.add_missing_area_test(color_range_tests.tightness_segments, 0.3)
-    comparer.add_extra_area_test(color_range_tests.tightness_segments, 0.3)
-
-    comparer.add_missing_area_test(background_color_tests.whiteness_segments, 0.3)
-    comparer.add_extra_area_test(background_color_tests.whiteness_segments, 0.3)
-
+def score(output, target, all_scores=False):
     result = comparer.compare(output, target)
 
     # print(result.common_area_scores)

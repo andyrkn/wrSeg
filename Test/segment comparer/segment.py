@@ -69,14 +69,6 @@ class SegmentComparer:
         self.missing_weights = []
         self.extra_weights = []
 
-        self.common_weights_sum = 0
-        self.missing_weights_sum = 0
-        self.extra_weights_sum = 0
-
-        self.common_score_weight = 0.34
-        self.missing_score_weight = 0.33
-        self.extra_score_weight = 0.33
-
     """
         param1: SegmentInfo of output segment
         param2: SegemntInfo of target segment
@@ -87,68 +79,45 @@ class SegmentComparer:
         missing_area_score = self.missing_area_score(output, target)
         extra_area_score = self.extra_area_score(output, target)
 
-        total_score = (common_area_score * self.common_score_weight +
-                       missing_area_score * self.missing_score_weight +
-                       extra_area_score * self.extra_score_weight)
+        total_score = (common_area_score  +  missing_area_score + extra_area_score)
 
         return SegmentComparerResult(common_area_score, missing_area_score, extra_area_score, total_score)
 
     def add_common_area_test(self, test, weight=1):
         self.common_area_tests.append(test)
         self.common_weights.append(weight)
-        self.common_weights_sum += weight
 
     def add_missing_area_test(self, test, weight=1):
         self.missing_area_tests.append(test)
         self.missing_weights.append(weight)
-        self.missing_weights_sum += weight
 
     def add_extra_area_test(self, test, weight=1):
         self.extra_area_tests.append(test)
         self.extra_weights.append(weight)
-        self.extra_weights_sum += weight
 
     def common_area_score(self, output, target):
         common = get_intersection_segment_info(output, target)
-        if common:
-            total_score = 0
-            common_area_scores = [test(common, target) for test in self.common_area_tests]
-            for i, score in enumerate(common_area_scores):
-                total_score += score * self.common_weights[i] / self.common_weights_sum
-            return total_score
-        else:
-            return 1
+        total_score = 0
+        common_area_scores = [test(common, target) if common else 0 for test in self.common_area_tests]
+        for i, score in enumerate(common_area_scores):
+            total_score += score * self.common_weights[i]
+        return total_score
 
     def missing_area_score(self, output, target):
         missing = get_minus_segments_info(target, output)
-        if any(missing):
-            total_score = 0
-            missing_area_scores = [test(missing, target) for test in self.missing_area_tests]
-            for i, score in enumerate(missing_area_scores):
-                total_score += score * self.missing_weights[i] / self.missing_weights_sum
-            return total_score
-        else:
-            return 1
+        total_score = 0
+        missing_area_scores = [test(missing, target) if any(missing) else 1 for test in self.missing_area_tests]
+        for i, score in enumerate(missing_area_scores):
+            total_score += score * self.missing_weights[i]
+        return total_score
 
     def extra_area_score(self, output, target):
         extra = get_minus_segments_info(output, target)
-        if any(extra):
-            total_score = 0
-            extra_area_scores = [test(extra, output) for test in self.extra_area_tests]
-            for i, score in enumerate(extra_area_scores):
-                total_score += score * self.extra_weights[i] / self.extra_weights_sum
-            return total_score
-        else:
-            return 1
-
-    def set_category_weights(self, common_score_weight, missing_score_weight, extra_score_weight):
-        self.common_score_weight = common_score_weight
-        self.missing_score_weight = missing_score_weight
-        self.extra_score_weight = extra_score_weight
-        weights_sum = common_score_weight + missing_score_weight + extra_score_weight 
-        self.common_score_weight /= weights_sum
-        self.missing_score_weight /= weights_sum
-        self.extra_score_weight /= weights_sum
+        total_score = 0
+        extra_area_scores = [test(extra, output) if any(extra) else 1 for test in self.extra_area_tests]
+        for i, score in enumerate(extra_area_scores):
+            total_score += score * self.extra_weights[i]
+        return total_score
 
 """ Return a SegmentInfo created from an image """
 def get_segment_info_from_images(original_image, segment_image):
