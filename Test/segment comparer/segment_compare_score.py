@@ -4,12 +4,12 @@ import cv2
 
 comparer = segment.SegmentComparer()
 
-for test in segment_comparer_tests.common_area_tests:
-    comparer.add_common_area_test(test)
-for test in segment_comparer_tests.missing_area_tests:
-    comparer.add_missing_area_test(test)
-for test in segment_comparer_tests.extra_area_tests:
-    comparer.add_extra_area_test(test)
+for i, test in enumerate(segment_comparer_tests.common_area_tests):
+    comparer.add_common_area_test(test, segment_comparer_tests.common_weights[i])
+for i, test in enumerate(segment_comparer_tests.missing_area_tests):
+    comparer.add_missing_area_test(test, segment_comparer_tests.missing_weights[i])
+for i, test in enumerate(segment_comparer_tests.extra_area_tests):
+    comparer.add_extra_area_test(test, segment_comparer_tests.extra_weights[i])
 
 def score(output, target, all_scores=False):
     result = comparer.compare(output, target)

@@ -36,7 +36,7 @@ def get_inputs_from_folder(folder_path):
 
                     subtest_inputs = common_scores + missing_scores + extra_scores
                     all_inputs += [subtest_inputs]
-    print(all_inputs)
+    #print(all_inputs)
     return all_inputs
 
 tests_path = "./tests"
@@ -52,20 +52,18 @@ if __name__ == "__main__":
     nncomparer.add(keras.layers.Dense(1, activation=keras.activations.linear))
     nncomparer.compile(
         loss=keras.losses.mean_squared_error,
-        optimizer=keras.optimizers.SGD(lr=0.2),
+        optimizer=keras.optimizers.SGD(lr=0.1),
         metrics=['accuracy']
         )
 
-    # nncomparer.fit(np.array(all_inputs), all_outputs, verbose=True, batch_size=6)
-    # #print(all_inputs.shape)
-    # #print(all_outputs.shape)
 
-    ws = nncomparer.layers[0].get_weights()
-    print(ws[0].shape)
-    ws[0] = np.ones((9,1))
-    print(nncomparer.layers[0].set_weights(ws))
-    print(nncomparer.layers[0].get_weights())
+    # ws = nncomparer.layers[0].get_weights()
+    # ws[0] = np.array([1 / 9] * 9)
 
-    for input_set in all_inputs:
-       print(nncomparer.predict(input_set.reshape(-1, 9), batch_size=1))
+    nncomparer.fit(np.array(all_inputs), all_outputs, verbose=True, epochs=100)
+
+    print(nncomparer.layers[0].get_weights()[0])
+
+    # for input_set in all_inputs:
+    #    print(nncomparer.predict(input_set.reshape(-1, 9), batch_size=1))
 
