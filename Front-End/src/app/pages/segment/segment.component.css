@@ -1,91 +1,99 @@
-app-header {
-    grid-row: 1/2;
-    grid-column: 2/3;
+.wrapper-segmentation {
+  padding: 35px 0;
+  background-color: #eee;
 }
 
-.wrapper-segmentation {
-    grid-row: 2/3;
-    grid-column: 2/3;
-    background-color: #eee;
-    display: grid;
-    padding: 10pt 200pt;
+.container {
+  padding: 0 30px;
+  max-width: 1080px;
+  margin: 0 auto;
 }
 
 .wrapper-io {
-    border: dashed 2px #000;
-    border-image: url("../../../assets/Images/dashed-grayedout.png") 1 round;
-    display: grid;
-    grid-row: 1/3;
-    grid-column: 1/4;
-    grid-template-rows: 100%;
-    grid-template-columns: 50% 50%;
+  border: dashed 2px #000;
+  border-image: url("../../../assets/Images/dashed-grayedout.png") 1 round;
+  display: grid;
+  height:550px;
+  grid-template-rows: 100%;
+  grid-template-columns: 50% 50%;
 }
 
 .wrapper-io:hover {
-    transition: 0.5s;
-    border-image: url("../../../assets/Images/dashed.png") 1 round;
+  transition: 0.5s;
+  border-image: url("../../../assets/Images/dashed.png") 1 round;
 }
 
 .wrapper-io:hover .segmentation-input {
-    border-image: url("../../../assets/Images/dashed.png") 1 round;
-    transition: 0.5s;
+  border-image: url("../../../assets/Images/dashed.png") 1 round;
+  transition: 0.5s;
 }
 
 .segmentation-input {
-    position: relative;
-    background-color: #eee;
-    border-right: dashed 1px #000;
-    border-image: url("../../../assets/Images/dashed-grayedout.png") 1 round;
+  position: relative;
+  background-color: #eee;
+  border-right: dashed 1px #000;
+  border-image: url("../../../assets/Images/dashed-grayedout.png") 1 round;
 }
 
 .segmentation-input-icon {
-    margin: 0 auto;
-    display: block;
-    margin-top: 150px;
+  margin: 0 auto;
+  display: block;
+  margin-top: 150px;
 }
 
 .segmentation-output-icon {
-    height: 256px;
-    width: 256px;
-    margin: 0 auto;
-    display: block;
-    margin-top: 150px;
+  height: 256px;
+  width: 256px;
+  margin: 0 auto;
+  display: block;
+  margin-top: 150px;
 }
 
 .segmentation-output {
-    background-color: #eee;
+  background-color: #eee;
 }
 
 .wrapper-historyMenu {
-    grid-row: 3/4;
-    grid-column: 2/3;
-    background-color: #eee;
-    display: grid;
-    grid-template-rows: 25% 75%;
-    grid-template-columns: 100%;
+  height:200px;
+  background-color: #eee;
+  display: grid;
+  grid-template-rows: 25% 75%;
+  grid-template-columns: 100%;
 }
 
 .historyMenu-Title {
-    grid-row: 1/2;
-    grid-column: 1/2;
-    background-color: #313854;
-    text-align: center;
+  grid-row: 1/2;
+  grid-column: 1/2;
+  background-color: #313854;
+  text-align: center;
 }
 
 .historyMenu-Title h1 {
-    color: #eee;
-    font-family: 'Open Sans', sans-serif;
-    font-weight: 300;
-    margin: 0;
-    margin-top: 7px;
+  color: #eee;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 300;
+  margin: 0;
+  margin-top: 7px;
 }
 
 .historyMenu-List {
-    grid-row: 2/3;
-    grid-column: 1/2;
-    background-color: #495172;
+  grid-row: 2/3;
+  grid-column: 1/2;
+  background-color: #495172;
 }
 
 .historyMenu-Title button {
-    height: 100%
+  height: 100%
+}
+
+@media screen and (max-width: 800px) {
+  .wrapper-io {
+    grid-template-rows: 50% 50%;
+    grid-template-columns: 100%;
+    height: 450px;
+  }
+  .segmentation-input {
+    border-right: none;
+    border-bottom: dashed 1px #000;
+  }
 }

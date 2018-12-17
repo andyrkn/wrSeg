@@ -16,6 +16,7 @@ import { AgmCoreModule } from '@agm/core';
 
 import { FileUploadComponent } from './pages/file-upload/file-upload.component';
 import { FileResolvedComponent } from './pages/file-resolved/file-resolved.component';
+import { FooterComponent } from './pages/footer/footer.component';
 
 
 @NgModule({
@@ -28,7 +29,8 @@ import { FileResolvedComponent } from './pages/file-resolved/file-resolved.compo
       ContactComponent,
       SegmentComponent,
       MapComponent,
-      NotFoundComponent
+      NotFoundComponent,
+      FooterComponent
    ],
    imports: [
       BrowserModule,
