@@ -1,0 +1,39 @@
+.container {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    margin: 0 30px
+}
+
+.container--left,
+.container--rigth {
+    flex: 1;
+    max-width: 45%
+}
+
+.description--paragraph{
+    text-indent: 25px
+}
+
+.buttons {
+    display:  flex;
+    justify-content: center;
+}
+
+.button {
+    cursor: pointer;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 50px;
+    margin: 25px;
+}
+
+.button--ios {
+    background-image: url('./ios-button-icon.svg');
+    width: 150px;
+}
+
+.button--android {
+    background-image: url('./android-button-icon.svg');
+    width: 170px;
+}
