@@ -163,23 +163,25 @@ def get_minus_segments_info(segment_info_1, segment_info_2):
         bot_segment = SegmentInfo(segment_info_1.original_image, top_left, width, height)
     
     if common:
-        is_common_top_inside = segment_info_1.top_left[1] <= common.top_left[1] <= segment_info_1.bot_right[1]
-        is_common_bot_inside = segment_info_1.top_left[1] <= common.bot_right[1] <= segment_info_1.bot_right[1]
+        is_top_left_2_below_1 = segment_info_1.top_left[1] <= common.top_left[1] <= segment_info_1.bot_right[1]
+        is_bot_right_2_above_1 = segment_info_1.top_left[1] <= common.bot_right[1] <= segment_info_1.bot_right[1]
+        is_top_left_2_rightof_1 = segment_info_1.top_left[0] <= common.top_left[0] <= segment_info_1.bot_right[0]
+        is_bot_right_2_leftof_1 = segment_info_1.top_left[0] <= common.bot_right[0] <= segment_info_1.bot_right[0]
     else:
-        is_common_top_inside = False
-        is_common_bot_inside = False
+        is_top_left_2_below_1 = False
+        is_bot_right_2_above_1 = False
 
     # left segment
     left_segment = None
-    if is_common_top_inside and segment_info_1.top_left[0] < segment_info_2.top_left[0]:
+    if is_top_left_2_below_1 and is_top_left_2_rightof_1 and segment_info_1.top_left[0] < segment_info_2.top_left[0]:
         top_left = (segment_info_1.top_left[0], common.top_left[1])
         width = segment_info_2.top_left[0] - segment_info_1.top_left[0]
-        height = common.width
+        height = common.height
         left_segment = SegmentInfo(segment_info_1.original_image, top_left, width, height)
 
     # right segment
     right_segment = None
-    if is_common_bot_inside and segment_info_1.bot_right[0] > segment_info_2.bot_right[0]:
+    if is_bot_right_2_above_1 and is_bot_right_2_leftof_1 and segment_info_1.bot_right[0] > segment_info_2.bot_right[0]:
         top_left = (segment_info_2.bot_right[0], common.top_left[1])
         width = segment_info_1.bot_right[0] - segment_info_2.bot_right[0]
         height = common.height

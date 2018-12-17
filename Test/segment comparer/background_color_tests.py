@@ -16,7 +16,7 @@ def whiteness_segments(small_image_segments, big_image_info):
             if len(segment.image.shape) == 3 and segment.image.shape[2] == 3:
                 gray_images += [cv2.cvtColor(segment.image, cv2.COLOR_BGR2GRAY)]
             else:
-                gray_image += [segment.image]
+                gray_images += [segment.image]
 
     pixels = np.array([0])
     for gray_image in gray_images:

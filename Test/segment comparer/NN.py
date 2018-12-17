@@ -38,6 +38,7 @@ def get_inputs_from_folder(folder_path):
                     subtest_inputs = common_scores + missing_scores + extra_scores
                     all_inputs += [subtest_inputs]
                     paths += [subtest_path]
+
     return all_inputs, paths
 
 tests_path = "./tests"
