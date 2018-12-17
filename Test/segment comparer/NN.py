@@ -9,6 +9,7 @@ import numpy as np
 
 def get_inputs_from_folder(folder_path):
     all_inputs = []
+    paths = []
 
     for test_name in os.listdir(folder_path):
         test_path = os.path.join(folder_path, test_name)
@@ -36,19 +37,25 @@ def get_inputs_from_folder(folder_path):
 
                     subtest_inputs = common_scores + missing_scores + extra_scores
                     all_inputs += [subtest_inputs]
-    #print(all_inputs)
-    return all_inputs
+                    paths += [subtest_path]
+    return all_inputs, paths
 
 tests_path = "./tests"
 
 if __name__ == "__main__":
     positive_inputs = get_inputs_from_folder(os.path.join(tests_path, "positive"))
     negative_inputs = get_inputs_from_folder(os.path.join(tests_path, "negative"))
-    all_inputs = np.array(positive_inputs + negative_inputs)
-    all_outputs = np.array([1 if i < len(positive_inputs) else 0 for i in range(len(all_inputs))])
+
+    
+    all_inputs = np.array(positive_inputs[0] + negative_inputs[0])
+    all_inputs_names = positive_inputs[1] + negative_inputs[1]
+    all_outputs = [1 if "positive" in name else 0 for name in all_inputs_names]
+
+    print(all_outputs)
 
     nncomparer = keras.Sequential()
     nncomparer.add(keras.layers.InputLayer((9,)))
+    nncomparer.add(keras.layers.Dropout(0.3))
     nncomparer.add(keras.layers.Dense(1, activation=keras.activations.linear))
     nncomparer.compile(
         loss=keras.losses.mean_squared_error,
@@ -56,14 +63,14 @@ if __name__ == "__main__":
         metrics=['accuracy']
         )
 
+    history = nncomparer.fit(all_inputs, all_outputs, epochs=60, verbose=False)
+    loss, acc = nncomparer.evaluate(all_inputs, all_outputs, verbose=False)
+    print(acc)
 
-    # ws = nncomparer.layers[0].get_weights()
-    # ws[0] = np.array([1 / 9] * 9)
+    # #print(nncomparer.layers[0].get_weights()[0])
+    # #print(nncomparer.layers[0].get_weights()[1])
 
-    nncomparer.fit(np.array(all_inputs), all_outputs, verbose=True, epochs=100)
-
-    print(nncomparer.layers[0].get_weights()[0])
-
-    # for input_set in all_inputs:
-    #    print(nncomparer.predict(input_set.reshape(-1, 9), batch_size=1))
+    for input_set, name in zip(all_inputs, all_inputs_names):
+        print(name)
+        print(nncomparer.predict(input_set.reshape(-1, 9), batch_size=1))
 

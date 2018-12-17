@@ -17,19 +17,19 @@ missing_area_tests = [
 extra_area_tests = missing_area_tests
 
 common_weights = [
-    0.04936015
+    0.5
 ]
 
 missing_weights = [
-    -0.13090575,
-    -0.45466852,
-    0.47876844,
-    0.10216002,
+    0.2,
+    0.125,
+    0.1,
+    0.075
 ]
 
 extra_weights = [
-    -0.00802379,
-    -0.11083271,
-    0.91855747,
-    0.03785585
+    0.05,
+    0.15,
+    0.15,
+    0.05
 ]
