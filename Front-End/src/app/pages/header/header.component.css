@@ -1,18 +1,5 @@
 /* refactor everyhting */
 
-h1 {
-  display: inline-block;
-  grid-area: title;
-  font-size: 30px;
-  font-weight: 300;
-  margin: 0;
-  padding-top: 0px;
-  font-family: 'Open Sans', sans-serif;
-  font-size: 40px;
-  background-color: #313854;
-  color: #eee;
-}
-
 .wrapper-header {
   font-weight: 300;
   margin: 0;
@@ -28,23 +15,24 @@ h1 {
   grid-template-areas: "title home segment contact";
 }
 
-.homeBtn {
-  grid-area: home;
+h1 {
+  display: inline-block;
+  grid-area: title;
+  font-size: 30px;
+  font-weight: 300;
+  margin: 0;
+  padding-top: 0px;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 40px;
+  background-color: #313854;
+  color: #eee;
 }
 
 a {
   text-decoration: none;
 }
 
-.segmentBtn {
-  grid-area: segment;
-}
-
-.contactBtn {
-  grid-area: contact;
-}
-
-button {
+.btn {
   background: transparent;
   border: none;
   color: #eee;
@@ -57,7 +45,7 @@ button {
   padding: 10px;
 }
 
-button::before {
+.btn::before {
   content: '';
   border-bottom: 1px solid #eee;
   padding: 0 10px;
@@ -70,15 +58,27 @@ button::before {
   transition: 0.3s;
 }
 
-button:hover::before {
+.btn:hover::before {
   width: 100%;
   padding: 0;
 }
 
-button:active {
+.btn:active {
   background: #495172;
   color: #eee;
   transition: none;
+}
+
+.homeBtn {
+  grid-area: home;
+}
+
+.segmentBtn {
+  grid-area: segment;
+}
+
+.contactBtn {
+  grid-area: contact;
 }
 
 @media (max-width:450px) {
@@ -86,7 +86,8 @@ button:active {
     font-size: 25px;
     padding-top: 5px;
   }
-  button {
+
+  .btn {
     font-size: 15px;
     padding-top: 15px;
   }
