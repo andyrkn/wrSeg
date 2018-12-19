@@ -3,6 +3,17 @@ import image_tools
 import server_request
 
 def create_segments_folder(folder_path, folder_name, segments_dict):
+    """Create a folder and fill it with the images in a dictionary, 
+    each image will be named in this format "<label> <i>.png",
+    where <label> will be the key in the dictionary
+    and <i> an incremented number.
+    
+    Arguments:
+        folder_path {string} -- The path in where the root folder will be created
+        folder_name {string} -- The name of the root folder
+        segments_dict {string} -- A dictionary of lists of images
+    """
+
     segments_folder_path = os.path.join(folder_path, folder_name)
     if not os.path.exists(segments_folder_path):
         os.makedirs(segments_folder_path)

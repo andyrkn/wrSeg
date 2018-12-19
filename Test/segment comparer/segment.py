@@ -3,6 +3,15 @@ import numpy as np
 
 class SegmentInfo:
     def __init__(self, original_image, position, width, height):
+        """A class containing information about an image segment
+        
+        Arguments:
+            original_image {numpy.ndarray} -- The image from which the segment originates
+            position {[type]} -- The coordinates of the top-left corner
+            width {[type]} -- The width of the segment
+            height {[type]} -- The height of the segment
+        """
+
         self.original_image = original_image
         self.position = position
         self.width = width
@@ -30,7 +39,6 @@ class SegmentInfo:
     def area(self):
         return self.width * self.height
 
-"""  Each field will be a number in [0, 1] """
 class SegmentComparerResult:
     def __init__(self, common_area_scores, missing_area_scores, extra_area_scores, total_score):
         self.common_area_scores = common_area_scores
@@ -55,9 +63,6 @@ class SegmentComparerResult:
         param1: a list of 4 SegmentInfos [top, bot, left, right]
                 for the segments in output, but not in target
         param2: SegmentInfo of output segment
-
-    Each category of tests has a weight associated used in computing the total score
-    The weights for each test will be normalized automatically
 """
 class SegmentComparer:
     def __init__(self):
