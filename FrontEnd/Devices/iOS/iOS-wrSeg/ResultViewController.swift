@@ -13,6 +13,9 @@ class ResultViewController: UIViewController, UITextFieldDelegate {
     // MARK: Properties
     
     @IBOutlet weak var titleTextField: UITextField!
+    @IBOutlet weak var resultImage: UIImageView!
+    
+    @IBOutlet weak var resultImageView: UIView!
     
     @IBOutlet weak var labelThreshold: UILabel!
     @IBOutlet weak var labelNoise: UILabel!
@@ -24,38 +27,37 @@ class ResultViewController: UIViewController, UITextFieldDelegate {
     
     var saveButton: UIBarButtonItem = UIBarButtonItem()
     
-    // Parameters.
-    var threshold: Double = Result.DEFAULT_THRESHOLD
-    var noise: Double = Result.DEFAULT_NOISE
-    var useGauss: Bool = Result.DEFAULT_USE_GAUSS
-    // Advanced settings.
-    var maxColumnSep: Double = Result.DEFAULT_MAX_COLUMN_SEP
-    var maxSep: Double = Result.DEFAULT_MAX_SEP
-    var minScale: Double = Result.DEFAULT_MIN_SCALE
-    var maxLines: Double = Result.DEFAULT_MAX_LINES
-    // Result coordonates.
-    var results: [[Int]] = []
-    
+    var result: Result = Result()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let backgroundImage = UIImageView(frame: resultImageView.bounds)
+//        backgroundImage.image = UIImage(named: "No photo selected")
+        backgroundImage.image = result.originalImage
+        backgroundImage.contentMode = UIViewContentMode.scaleAspectFill
+        resultImageView.insertSubview(backgroundImage, at: 0)
+                
+        resultImage.image = result.originalImage
+        
         titleTextField.delegate = self
         
-        labelThreshold.text = String(threshold)
-        labelNoise.text = String(noise)
-        labelUseGauss.text = String(useGauss)
-        labelMaxColumnSep.text = String(maxColumnSep)
-        labelMaxSep.text = String(maxSep)
-        labelMinScale.text = String(minScale)
-        labelMaxLines.text = String(maxLines)
+        labelThreshold.text = String(result.threshold)
+        labelNoise.text = String(result.noise)
+        labelUseGauss.text = String(result.useGauss)
+        labelMaxColumnSep.text = String(result.maxColumnSep)
+        labelMaxSep.text = String(result.maxSep)
+        labelMinScale.text = String(result.minScale)
+        labelMaxLines.text = String(result.maxLines)
 
         // Do any additional setup after loading the view.
         saveButton.title = "Save"
         navigationItem.rightBarButtonItem = saveButton
         navigationItem.title = "Result"
         print("From result view controller!")
-        print(results)
+        print(result.results)
+        
+        resultImage.image = drawRectangleOnImage(image: result.originalImage!)
     }
 
     override func didReceiveMemoryWarning() {
@@ -85,5 +87,33 @@ class ResultViewController: UIViewController, UITextFieldDelegate {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
     }
+    
+    func drawRectangleOnImage(image: UIImage) -> UIImage {
+        let imageSize = image.size
+        let scale: CGFloat = 0
+        UIGraphicsBeginImageContextWithOptions(imageSize, false, scale)
+        
+        image.draw(at: CGPoint.zero)
+        
+        for rectangle in result.results {
+            let x1 = rectangle[0]
+            let y1 = rectangle[1]
+            let x2 = rectangle[2]
+            let y2 = rectangle[3]
+            print(x1, y1, x2, y2)
+            
+            let width = x2 - x1
+            let height = y2 - y1
+            
+            let toDrawRect = CGRect(x: x1, y: y1, width: width, height: height)
+            
+            UIColor.blue.withAlphaComponent(0.5).setFill()
 
+            UIRectFill(toDrawRect)
+        }
+        
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return newImage!
+    }
 }

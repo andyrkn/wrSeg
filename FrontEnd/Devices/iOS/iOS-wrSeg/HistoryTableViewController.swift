@@ -34,15 +34,16 @@ class HistoryTableViewController: UITableViewController {
         guard let result1 = Result(title: "title1",
                                    originalImage: image,
                                    threshold: Result.DEFAULT_THRESHOLD,
-                                   noise: Double(Result.DEFAULT_NOISE),
+                                   noise: Result.DEFAULT_NOISE,
                                    useGauss: Result.DEFAULT_USE_GAUSS,
                                    maxColumnSep: Result.DEFAULT_MAX_COLUMN_SEP,
                                    maxSep: Result.DEFAULT_MAX_SEP,
                                    minScale: Result.DEFAULT_MIN_SCALE,
-                                   maxLines: Result.DEFAULT_MAX_LINES) else {
+                                   maxLines: Result.DEFAULT_MAX_LINES,
+                                   results: [[12,12,12,12],[12,12,12,12],[12,12,12,12],[12,12,12,12]]) else {
             fatalError("Unable to instantiate result1")
         }
-        
+                
         results += [result1, result1, result1, result1]
         
         

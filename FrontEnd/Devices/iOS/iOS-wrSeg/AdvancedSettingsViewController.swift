@@ -56,16 +56,16 @@ class AdvancedSettingsViewController: UIViewController, UITextFieldDelegate {
         let mainViewController = segue.destination as! ViewController
         
         if self.maxColumnSep.text != "" {
-            mainViewController.maxColumnSep = Double(self.maxColumnSep.text!)!
+            mainViewController.maxColumnSep = Int(self.maxColumnSep.text!)!
         }
         if self.maxSep.text != "" {
-            mainViewController.maxSep = Double(self.maxSep.text!)!
+            mainViewController.maxSep = Int(self.maxSep.text!)!
         }
         if self.minScale.text != "" {
-            mainViewController.minScale = Double(self.minScale.text!)!
+            mainViewController.minScale = Float(self.minScale.text!)!
         }
         if self.maxLines.text != "" {
-            mainViewController.maxLines = Double(self.maxLines.text!)!
+            mainViewController.maxLines = Int(self.maxLines.text!)!
         }
     }
     

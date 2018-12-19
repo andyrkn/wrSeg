@@ -24,16 +24,14 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
     @IBOutlet weak var historyButton: UIBarButtonItem!
     @IBOutlet weak var resultButton: UIBarButtonItem!
     
-    var maxColumnSep = Result.DEFAULT_MAX_COLUMN_SEP
-    var maxSep = Result.DEFAULT_MAX_SEP
-    var minScale = Result.DEFAULT_MIN_SCALE
-    var maxLines = Result.DEFAULT_MAX_LINES
+    var maxColumnSep: Int = Result.DEFAULT_MAX_COLUMN_SEP
+    var maxSep: Int = Result.DEFAULT_MAX_SEP
+    var minScale: Float = Result.DEFAULT_MIN_SCALE
+    var maxLines: Int = Result.DEFAULT_MAX_LINES
     var results: [[Int]] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-
         
         print("Max col sep: " + String(maxColumnSep))
         print("Max sep: " + String(maxSep))
@@ -84,14 +82,14 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
         if segue.identifier == "segueShowResult" {
             let resultViewController = segue.destination as! ResultViewController
             if !results.isEmpty {
-                resultViewController.results = results
-                resultViewController.threshold = Double(treshholdSlider.value)
-                resultViewController.noise = Double(noiseSlider.value)
-                resultViewController.useGauss = useGaussSwitch.isOn
-                resultViewController.maxColumnSep = maxColumnSep
-                resultViewController.maxSep = maxSep
-                resultViewController.minScale = minScale
-                resultViewController.maxLines = maxLines
+                
+                let treshhold = Float(treshholdSlider.value)
+                let noise = Int(noiseSlider.value)
+                let useGauss = useGaussSwitch.isOn
+                
+                let result = Result(title: "noTitle", originalImage: photoImageView.image, threshold: treshhold, noise: noise, useGauss: useGauss, maxColumnSep: maxColumnSep, maxSep: maxSep, minScale: minScale, maxLines: maxLines, results: results)
+                
+                resultViewController.result = result!
                 print("Results sent to ResultsViewContorller")
             }
         }
@@ -145,12 +143,12 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
         present(image, animated: true, completion: nil)
     }
     
-    @IBAction func selectValueForTrashold(_ sender: UISlider) {
-        self.treshholdLabel.text = String(sender.value)
+    @IBAction func selectValueForThreshold(_ sender: UISlider) {
+        self.treshholdLabel.text = NSString(format:"%.2f",Float(sender.value)) as String
     }
     
     @IBAction func selectValueForNoise(_ sender: UISlider) {
-        self.noiseLabel.text = String(sender.value)
+        self.noiseLabel.text = String(Int(sender.value))
     }
     
     @IBAction func displayResults(_ sender: Any) {
@@ -168,9 +166,14 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
         
         //declare parameter as a dictionary which contains string as key and value combination. considering inputs are valid
         
-        let parameters = ["treshold": String(treshholdSlider.value),
-                          "noise": String(noiseSlider.value),
-                          "gauss": String(useGaussSwitch.isOn)] as [String : String]
+        let parameters: [String: String] = ["threshold": String(Float(treshholdSlider.value)),
+                                         "noise": String(Int(noiseSlider.value)),
+                                         "usegauss": String(Bool(useGaussSwitch.isOn)),
+                                         "maxcolseps": String(Int(maxColumnSep)),
+                                         "maxseps": String(Int(maxSep)),
+                                         "minscale": String(Float(minScale)),
+                                         "maxLines": String(Int(maxLines))]
+        
         
         //create the url with URL
         let url = URL(string: "http://localhost:8082/upload-file")! //change the url
@@ -209,8 +212,8 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
             do {
                 //create json object from data
                 if let json: Dictionary = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: Any] {
-                    self.extractJsonData(json: json)
                     self.stopIndicatorView()
+                    self.extractJsonData(json: json)
                     self.resultButton.isEnabled = true
                 }
             } catch let error {

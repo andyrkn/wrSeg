@@ -56,7 +56,7 @@
                                     <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="2nf-mS-Jed" userLabel="Horizontal Slider1">
                                         <rect key="frame" x="-2" y="351.5" width="319" height="31"/>
                                         <connections>
-                                            <action selector="selectValueForTrashold:" destination="BYZ-38-t0r" eventType="valueChanged" id="rdz-UH-WBY"/>
+                                            <action selector="selectValueForThreshold:" destination="BYZ-38-t0r" eventType="valueChanged" id="aNh-iR-L3j"/>
                                         </connections>
                                     </slider>
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="K1N-Sf-pMV">
@@ -377,7 +377,7 @@
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="14" translatesAutoresizingMaskIntoConstraints="NO" id="Db0-91-3aZ">
-                                        <rect key="frame" x="16" y="21" width="343" height="786.5"/>
+                                        <rect key="frame" x="16.5" y="21" width="343" height="786.5"/>
                                         <subviews>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Insert title here ..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ct7-QL-LeV">
                                                 <rect key="frame" x="0.0" y="0.0" width="343" height="30"/>
@@ -385,14 +385,24 @@
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Script" translatesAutoresizingMaskIntoConstraints="NO" id="jlK-GV-aH5">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="giZ-HL-yVO">
                                                 <rect key="frame" x="0.0" y="44" width="343" height="450"/>
+                                                <subviews>
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="No photo selected" translatesAutoresizingMaskIntoConstraints="NO" id="jlK-GV-aH5">
+                                                        <rect key="frame" x="0.0" y="0.0" width="343" height="450"/>
+                                                    </imageView>
+                                                </subviews>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="343" id="6rl-ba-JRI"/>
-                                                    <constraint firstAttribute="width" secondItem="jlK-GV-aH5" secondAttribute="height" multiplier="343:450" id="YO5-UR-V83"/>
-                                                    <constraint firstAttribute="height" constant="450" id="sVS-U3-a0B"/>
+                                                    <constraint firstAttribute="width" secondItem="giZ-HL-yVO" secondAttribute="height" multiplier="343:450" id="1KF-0A-2ml"/>
+                                                    <constraint firstAttribute="width" constant="343" id="DuX-mm-xWm"/>
+                                                    <constraint firstAttribute="trailing" secondItem="jlK-GV-aH5" secondAttribute="trailing" id="LQA-7j-7G1"/>
+                                                    <constraint firstAttribute="height" constant="450" id="Mge-sk-xef"/>
+                                                    <constraint firstItem="jlK-GV-aH5" firstAttribute="leading" secondItem="giZ-HL-yVO" secondAttribute="leading" id="eVa-O2-f4F"/>
+                                                    <constraint firstItem="jlK-GV-aH5" firstAttribute="top" secondItem="giZ-HL-yVO" secondAttribute="top" id="eYu-hG-Oe8"/>
+                                                    <constraint firstAttribute="bottom" secondItem="jlK-GV-aH5" secondAttribute="bottom" id="ea1-bj-rNN"/>
                                                 </constraints>
-                                            </imageView>
+                                            </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Parameters" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ufE-U8-QPH">
                                                 <rect key="frame" x="0.0" y="508" width="160" height="26.5"/>
                                                 <constraints>
@@ -580,6 +590,8 @@
                         <outlet property="labelNoise" destination="gS6-Ix-aeA" id="nHF-rn-1py"/>
                         <outlet property="labelThreshold" destination="q2X-gb-yNH" id="KYx-gg-hlj"/>
                         <outlet property="labelUseGauss" destination="aVg-nV-rmo" id="fVd-7J-026"/>
+                        <outlet property="resultImage" destination="jlK-GV-aH5" id="3rF-mP-92n"/>
+                        <outlet property="resultImageView" destination="giZ-HL-yVO" id="yE9-R0-i9m"/>
                         <outlet property="titleTextField" destination="Ct7-QL-LeV" id="sl4-Ry-IHM"/>
                     </connections>
                 </viewController>
@@ -653,6 +665,5 @@
     </scenes>
     <resources>
         <image name="No photo selected" width="540" height="540"/>
-        <image name="Script" width="600" height="770"/>
     </resources>
 </document>

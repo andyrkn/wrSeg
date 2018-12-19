@@ -17,26 +17,26 @@ class Result: NSObject, NSCoding {
     var title: String
     var originalImage: UIImage?
     // Parameters.
-    var threshold: Double
-    var noise: Double
+    var threshold: Float
+    var noise: Int
     var useGauss: Bool
     // Advanced settings.
-    var maxColumnSep: Double
-    var maxSep: Double
-    var minScale: Double
-    var maxLines: Double
+    var maxColumnSep: Int
+    var maxSep: Int
+    var minScale: Float
+    var maxLines: Int
     // Result coordonates.
     var results: [[Int]] = []
     
     //MARK: Constants
     
-    static let DEFAULT_THRESHOLD: Double = 0.2
-    static let DEFAULT_NOISE: Double = 8.0
+    static let DEFAULT_THRESHOLD: Float = 0.2
+    static let DEFAULT_NOISE: Int = 8
     static let DEFAULT_USE_GAUSS: Bool = false
-    static let DEFAULT_MAX_COLUMN_SEP: Double = 3
-    static let DEFAULT_MAX_SEP: Double = 0
-    static let DEFAULT_MIN_SCALE: Double = 12
-    static let DEFAULT_MAX_LINES: Double = 300
+    static let DEFAULT_MAX_COLUMN_SEP: Int = 3
+    static let DEFAULT_MAX_SEP: Int = 0
+    static let DEFAULT_MIN_SCALE: Float = 12
+    static let DEFAULT_MAX_LINES: Int = 300
     
     //MARK: Archiving Paths
     
@@ -55,9 +55,26 @@ class Result: NSObject, NSCoding {
         static let maxSep = "maxSep"
         static let minScale = "minScale"
         static let maxLines = "maxLines"
+        static let results = "results"
     }
     
-    init?(title: String, originalImage: UIImage?, threshold: Double, noise: Double, useGauss: Bool, maxColumnSep: Double, maxSep: Double, minScale: Double, maxLines: Double) {
+    override init() {
+        self.title = "No title yet."
+        self.originalImage = UIImage(named: "No photo selected")
+        
+        self.threshold = Result.DEFAULT_THRESHOLD
+        self.noise = Result.DEFAULT_NOISE
+        self.useGauss = Result.DEFAULT_USE_GAUSS
+        
+        self.maxColumnSep = Result.DEFAULT_MAX_COLUMN_SEP
+        self.maxSep = Result.DEFAULT_MAX_SEP
+        self.minScale = Result.DEFAULT_MIN_SCALE
+        self.maxLines = Result.DEFAULT_MAX_LINES
+        
+        self.results = []
+    }
+    
+    init?(title: String, originalImage: UIImage?, threshold: Float, noise: Int, useGauss: Bool, maxColumnSep: Int, maxSep: Int, minScale: Float, maxLines: Int, results:[[Int]]) {
         
         // Fail if we don't have title.
         guard !title.isEmpty else {
@@ -66,6 +83,11 @@ class Result: NSObject, NSCoding {
         
         // Fail if we don't have image.
         guard originalImage != nil else {
+            return nil
+        }
+        
+        // Fail if we don't have results.
+        guard !results.isEmpty else {
             return nil
         }
         
@@ -78,6 +100,8 @@ class Result: NSObject, NSCoding {
         self.maxSep = maxSep
         self.minScale = minScale
         self.maxLines = maxLines
+    
+        self.results = results
         
     }
     
@@ -93,7 +117,7 @@ class Result: NSObject, NSCoding {
         aCoder.encode(maxSep, forKey: PropertyKey.maxSep)
         aCoder.encode(minScale, forKey: PropertyKey.minScale)
         aCoder.encode(maxLines, forKey: PropertyKey.maxLines)
-        
+        aCoder.encode(results, forKey: PropertyKey.results)
     }
     
     required convenience init?(coder aDecoder: NSCoder) {
@@ -108,12 +132,12 @@ class Result: NSObject, NSCoding {
             return nil
         }
         
-        guard let threshold = aDecoder.decodeObject(forKey: PropertyKey.threshold) as? Double! else {
+        guard let threshold = aDecoder.decodeObject(forKey: PropertyKey.threshold) as? Float! else {
             os_log("Unable to decode the threshold for a Result object.", log: OSLog.default, type: .debug)
             return nil
         }
         
-        guard let noise = aDecoder.decodeObject(forKey: PropertyKey.noise) as? Double! else {
+        guard let noise = aDecoder.decodeObject(forKey: PropertyKey.noise) as? Int! else {
             os_log("Unable to decode the noise for a Result object.", log: OSLog.default, type: .debug)
             return nil
         }
@@ -123,27 +147,32 @@ class Result: NSObject, NSCoding {
             return nil
         }
         
-        guard let maxColumnSep = aDecoder.decodeObject(forKey: PropertyKey.maxColumnSep) as? Double! else {
+        guard let maxColumnSep = aDecoder.decodeObject(forKey: PropertyKey.maxColumnSep) as? Int! else {
             os_log("Unable to decode the maxColumnSep for a Result object.", log: OSLog.default, type: .debug)
             return nil
         }
         
-        guard let maxSep = aDecoder.decodeObject(forKey: PropertyKey.maxSep) as? Double! else {
+        guard let maxSep = aDecoder.decodeObject(forKey: PropertyKey.maxSep) as? Int! else {
             os_log("Unable to decode the maxSep for a Result object.", log: OSLog.default, type: .debug)
             return nil
         }
         
-        guard let minScale = aDecoder.decodeObject(forKey: PropertyKey.minScale) as? Double! else {
+        guard let minScale = aDecoder.decodeObject(forKey: PropertyKey.minScale) as? Float! else {
             os_log("Unable to decode the minScale for a Result object.", log: OSLog.default, type: .debug)
             return nil
         }
         
-        guard let maxLines = aDecoder.decodeObject(forKey: PropertyKey.maxLines) as? Double! else {
+        guard let maxLines = aDecoder.decodeObject(forKey: PropertyKey.maxLines) as? Int! else {
             os_log("Unable to decode the maxLines for a Result object.", log: OSLog.default, type: .debug)
             return nil
         }
         
-        self.init(title: title, originalImage: originalImage, threshold: threshold, noise: noise, useGauss: useGauss, maxColumnSep: maxColumnSep, maxSep: maxSep, minScale: minScale, maxLines: maxLines)
+        guard let results = aDecoder.decodeObject(forKey: PropertyKey.results) as? [[Int]]! else {
+            os_log("Unable to decode the maxLines for a Result object.", log: OSLog.default, type: .debug)
+            return nil
+        }
+                
+        self.init(title: title, originalImage: originalImage, threshold: threshold, noise: noise, useGauss: useGauss, maxColumnSep: maxColumnSep, maxSep: maxSep, minScale: minScale, maxLines: maxLines, results: results)
         
     }
     
