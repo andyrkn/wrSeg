@@ -19,12 +19,12 @@
   height: 300px;
 }
 
-#message_row {
+#message-row {
   width: 100%;
   height: 200px;
 }
 
-#message_row input {
+#message-row input {
   height: 200px;
 }
 
@@ -45,7 +45,7 @@
   color: #313854;
 }
 
-.cos_form {
+.cos-form {
   margin-top: 20px;
   background-color: white;
   padding: 50px;
@@ -54,14 +54,14 @@
   width: 600px;
 }
 
-.cos_form_row {
+.cos-form-row {
   margin-top: 16px;
   margin-bottom: 16px;
   width: 50%;
   margin: 10px;
 }
 
-.cos_input {
+.cos-input {
   font-family: "Open Sans", sans-serif;
   outline: 0;
   background: #f2f2f2;
@@ -77,11 +77,11 @@
   left: 20px;
 }
 
-.cos_label {
+.cos-label {
   display: block;
 }
 
-.cos_send_button {
+.cos-send-button {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 16px;
@@ -91,7 +91,7 @@
   border: none;
 }
 
-.cos_send_button:hover {
+.cos-send-button:hover {
   background-color: #394263;
 }
 

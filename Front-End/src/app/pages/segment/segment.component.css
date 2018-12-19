@@ -53,7 +53,7 @@
   background-color: #eee;
 }
 
-.wrapper-historyMenu {
+.wrapper-history-menu {
   height:200px;
   background-color: #eee;
   display: grid;
@@ -61,14 +61,14 @@
   grid-template-columns: 100%;
 }
 
-.historyMenu-Title {
+.history-menu-title {
   grid-row: 1/2;
   grid-column: 1/2;
   background-color: #313854;
   text-align: center;
 }
 
-.historyMenu-Title h1 {
+.history-menu-title h1 {
   color: #eee;
   font-family: 'Open Sans', sans-serif;
   font-weight: 300;
@@ -76,13 +76,13 @@
   margin-top: 7px;
 }
 
-.historyMenu-List {
+.history-menu-list {
   grid-row: 2/3;
   grid-column: 1/2;
   background-color: #495172;
 }
 
-.historyMenu-Title button {
+.history-menu-title button {
   height: 100%
 }
 

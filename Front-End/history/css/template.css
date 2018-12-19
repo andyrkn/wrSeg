@@ -42,7 +42,7 @@ body{
     background-color: antiquewhite;
     
 }
-.wrapper-historyMenu{
+.wrapper-history-menu{
     grid-row: 3/4;
     grid-column: 2/3;
     background-color: brown;
@@ -51,20 +51,20 @@ body{
     grid-template-columns: 100%;
     
 }
-.historyMenu-Buttons{
+.history-menu-buttons{
     grid-row: 1/2;
     grid-column: 1/2;
     background-color: yellow;
 }
-.historyMenu-List{
+.history-menu-list{
     grid-row: 2/3   ;
     grid-column: 1/2;
     background-color: yellowgreen;
 }
-.historyMenu-Buttons button{
+.history-menu-buttons button{
     height:100%
 }
-.historyMenu-search{
+.history-menu-search{
     width:100px;
     height:80%;
     color:black;
@@ -73,7 +73,7 @@ body{
     background-color:whitesmoke;
     outline: none;
 }
-.historyMenu-search:focus{
+.history-menu-search:focus{
 width:200px;
 }
 ::placeholder{

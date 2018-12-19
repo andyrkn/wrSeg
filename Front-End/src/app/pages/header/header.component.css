@@ -80,15 +80,15 @@ a {
   transition: none;
 }
 
-.homeBtn {
+.home-button {
   grid-area: home;
 }
 
-.segmentBtn {
+.segment-button {
   grid-area: segment;
 }
 
-.contactBtn {
+.contact-button {
   grid-area: contact;
 }
 
