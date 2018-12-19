@@ -1,6 +1,7 @@
 <resources>
-    <string name="app_name">AI PROJ</string>
-    <string name="uploaded_image">Uploaded Image</string>
-    <string name="history">History</string>
-    <string name="result">Result</string>
+  <string name="app_name">AI PROJ</string>
+  <string name="uploaded_image">Uploaded Image</string>
+  <string name="history">History</string>
+  <string name="result">Result</string>
+  <string name="upload_url">http://192.168.65.130:8082/upload-file</string>
 </resources>
