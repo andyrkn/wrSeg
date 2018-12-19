@@ -10,7 +10,7 @@ def build_model():
     """
     Builds neural network
     
-    Returns
+    Returns Footer Footer
     -------
     object
         Built neural network
