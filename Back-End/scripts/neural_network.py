@@ -48,7 +48,7 @@ def load_model(model):
     
     Returns
     -------
-    TYPE
+    object
         Model with updated weights from the file
     """
     model.load_weights("weights.h5")
@@ -80,7 +80,7 @@ def predict_and_write(model , test_data_input):
     model : object
         Trained NN model
     test_data_input : list
-        List of data we want to label
+        List of data passed for the model to label
     """
     lines = []
     switcher = {
@@ -122,7 +122,7 @@ if __name__ == "__main__":
     model  = build_model()
     # model = load_model(build_model())
     train_data_input , train_data_label = read_training_data()
-    model.fit(train_data_input, train_data_label, epochs = 500 ,  batch_size = 20 , verbose = False)
+    model.fit(train_data_input, train_data_label, epochs = 300 ,  batch_size = 20 , verbose = False)
     # save_model(model)
     test_data = read_test_data()
     predict_and_write(model , test_data)
