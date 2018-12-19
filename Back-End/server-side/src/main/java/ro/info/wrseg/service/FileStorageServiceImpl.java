@@ -1,5 +1,7 @@
 package ro.info.wrseg.service;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -13,6 +15,7 @@ import static java.util.UUID.randomUUID;
 
 @Service
 public class FileStorageServiceImpl implements FileStorageService {
+    private Logger logger = LoggerFactory.getLogger(FileStorageServiceImpl.class);
     private FileRepository fileRepository;
 
     @Autowired
@@ -28,6 +31,7 @@ public class FileStorageServiceImpl implements FileStorageService {
             FileUpload fileUpload = new FileUpload(multipartFile, fileName, fileExtension);
             return fileRepository.save(fileUpload);
         } catch (Exception ex) {
+            logger.debug("Throwing invalid file extension exception - filename: " + fileName);
             throw new InvalidFileExtensionException(fileName);
         }
     }

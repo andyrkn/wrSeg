@@ -1,0 +1,5 @@
+<div id="dragdrop" class="drag-n-drop">
+    <file-drop (onFileDrop)="dropped($event)" (onFileOver)="fileOver($event)" (onFileLeave)="fileLeave($event)">
+        <p *ngIf="files.length == 0">Drop files here</p>
+    </file-drop>
+</div>

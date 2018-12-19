@@ -1,2 +1,4 @@
 assets/*
 processed-images/*
+!assets/.keep
+!processed-images/.keep

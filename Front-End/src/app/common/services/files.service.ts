@@ -4,7 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 @Injectable({
   providedIn: 'root'
 })
-export class FilesService {
+export class FileService {
 
   constructor(private httpClient: HttpClient) { }
 
@@ -12,7 +12,7 @@ export class FilesService {
     const httpOptions = {
       headers: new HttpHeaders({
         'Allow-Origin': '*',
-        'Access-Control-Allow-Origin': '*'
+        'Access-Control-Allow-Origin': '*',
       })
     };
 

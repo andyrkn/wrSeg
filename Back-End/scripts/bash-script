@@ -1,0 +1,7 @@
+#/bin/bash
+
+rm img*
+rm -r temp/*
+rm column_indexes.txt
+./ocropus-nlbin $1 -o temp && ./ocropus-gpageseg -n temp/0001.bin.png
+
