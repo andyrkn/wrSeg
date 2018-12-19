@@ -1,7 +1,7 @@
-import areatests
-import deviationtests
-import color_range_tests
-import background_color_tests
+from segment_score_functions import areatests
+from segment_score_functions import deviationtests
+from segment_score_functions import color_range_tests
+from segment_score_functions import background_color_tests
 
 common_area_tests = [
     areatests.common_area_percentage
