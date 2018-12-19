@@ -28,7 +28,7 @@ public class FileStorageServiceImpl implements FileStorageService {
         String fileName = randomUUID().toString();
         String fileExtension;
         try {
-        fileExtension = Objects.requireNonNull(multipartFile.getOriginalFilename()).split("\\.")[1];
+            fileExtension = Objects.requireNonNull(multipartFile.getOriginalFilename()).split("\\.")[1];
         } catch (Exception ex) {
             logger.debug("Throwing invalid file extension exception - filename: " + fileName);
             throw new InvalidFileExtensionException(fileName);
