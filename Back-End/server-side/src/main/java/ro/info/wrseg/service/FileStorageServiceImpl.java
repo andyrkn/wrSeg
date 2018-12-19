@@ -26,13 +26,14 @@ public class FileStorageServiceImpl implements FileStorageService {
     @Override
     public FileUpload save(MultipartFile multipartFile) {
         String fileName = randomUUID().toString();
+        String fileExtension;
         try {
-            String fileExtension = Objects.requireNonNull(multipartFile.getOriginalFilename()).split("\\.")[1];
-            FileUpload fileUpload = new FileUpload(multipartFile, fileName, fileExtension);
-            return fileRepository.save(fileUpload);
+        fileExtension = Objects.requireNonNull(multipartFile.getOriginalFilename()).split("\\.")[1];
         } catch (Exception ex) {
             logger.debug("Throwing invalid file extension exception - filename: " + fileName);
             throw new InvalidFileExtensionException(fileName);
         }
+        FileUpload fileUpload = new FileUpload(multipartFile, fileName, fileExtension);
+        return fileRepository.save(fileUpload);
     }
 }
