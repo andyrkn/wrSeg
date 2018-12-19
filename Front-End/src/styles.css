@@ -1,5 +1,5 @@
 html {
-  height: 100%;
+  min-height: 100%;
   max-width: 100%;
 }
 
@@ -12,10 +12,7 @@ body {
 }
 
 app-segment {
-  height: 100%;
+  min-height: 100%;
   width: 100%;
-  display: grid;
-  grid-template-columns: 0fr 5fr 0fr;
-  grid-template-rows: 0fr 5fr 2fr;
   transition: 0.5s;
 }

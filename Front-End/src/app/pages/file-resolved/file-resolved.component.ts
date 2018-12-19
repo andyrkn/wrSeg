@@ -43,14 +43,28 @@ export class FileResolvedComponent implements OnInit {
             ctx.drawImage(newimg, 0, 0, newimg.width, newimg.height, 0, 0, canvas.width, canvas.height);
 
             // console.log(coords);
-
-            // tslint:disable-next-line:forin
-            ctx.fillStyle = 'rgba(66,244,241,0.3)';
-            for (const area of coords.columns) {
+            ctx.fillStyle = 'rgba(66, 244, 241, 0.3)';
+            for (const area of coords.Content) {
                 ctx.fillRect(area[0], area[1], area[2] - area[0], area[3] - area[1]);
             }
-            ctx.fillStyle = 'rgba(25,66,241,0.3)';
-            for (const area of coords.others) {
+
+            ctx.fillStyle = 'rgba(212, 0, 255, 0.3)';
+            for (const area of coords.Footer) {
+                ctx.fillRect(area[0], area[1], area[2] - area[0], area[3] - area[1]);
+            }
+
+            ctx.fillStyle = 'rgba(0, 255, 106, 0.3)';
+            for (const area of coords.Title) {
+                ctx.fillRect(area[0], area[1], area[2] - area[0], area[3] - area[1]);
+            }
+
+            ctx.fillStyle = 'rgba(0, 255, 233, 0.3)';
+            for (const area of coords.PageNumber) {
+                ctx.fillRect(area[0], area[1], area[2] - area[0], area[3] - area[1]);
+            }
+
+            ctx.fillStyle = 'rgba(0, 255, 233, 0.3)';
+            for (const area of coords.Adnotation) {
                 ctx.fillRect(area[0], area[1], area[2] - area[0], area[3] - area[1]);
             }
         };

@@ -1,92 +1,112 @@
 /* refactor everyhting */
 
-h1 {
-    grid-area: title;
-    font-size: 30px;
-    font-weight: 300;
-    margin: 0;
-    padding-top: 0px;
-    font-family: 'Open Sans', sans-serif;
-    font-size: 40px;
-    background-color: #313854;
-    color: #eee;
-    padding-left: 30px;
-}
-
 .wrapper-header {
-    font-weight: 300;
-    margin: 0;
-    padding-top: 10px;
-    padding-bottom: 15px;
-    font-family: 'Open Sans', sans-serif;
-    font-size: 40px;
-    background-color: #313854;
-    color: #eee;
-    display: grid;
-    grid-template-columns: 9fr 1fr 1fr 1fr;
-    grid-template-rows: 50px;
-    grid-template-areas: "title home segment contact";
+  background-color: #313854;
+  padding: 10px 0 15px;
 }
 
-.homeBtn {
-    grid-area: home;
+.container {
+  padding: 0 30px;
+  margin: 0 auto;
+  max-width: 1080px;
+}
+
+header {
+  font-weight: 300;
+  margin: 0;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 40px;
+  color: #eee;
+  display: grid;
+  grid-template-columns: 9fr 1fr 1fr 1fr;
+  grid-template-rows: 50px;
+  grid-template-areas: "title home segment contact";
+}
+
+.header-title {
+  grid-area: title;
+}
+
+h1 {
+  display: inline-block;
+  font-size: 30px;
+  font-weight: 300;
+  margin: 0;
+  padding-top: 0px;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 40px;
+  background-color: #313854;
+  color: #eee;
 }
 
 a {
-    text-decoration: none;
+  text-decoration: none;
 }
 
-.segmentBtn {
-    grid-area: segment;
+.btn {
+  background: transparent;
+  border: none;
+  color: #eee;
+  margin: 0 auto 0;
+  display: block;
+  font-size: 20px;
+  outline: none;
+  position: relative;
+  transition: 0.3s;
+  padding: 10px;
 }
 
-.contactBtn {
-    grid-area: contact;
+.btn::before {
+  content: '';
+  border-bottom: 1px solid #eee;
+  padding: 0 10px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  width: 0;
+  transition: 0.3s;
 }
 
-button {
-    background: transparent;
-    border: none;
-    color: #eee;
-    margin: 0 auto 0;
-    display: block;
-    font-size: 20px;
-    outline: none;
-    position: relative;
-    transition: 0.3s;
-    padding: 10px;
+.btn:hover::before {
+  width: 100%;
+  padding: 0;
 }
 
-button::before {
-    content: '';
-    border-bottom: 1px solid #eee;
-    padding: 0 10px;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    margin: 0 auto;
-    width: 0;
-    transition: 0.3s;
+.btn:active {
+  background: #495172;
+  color: #eee;
+  transition: none;
 }
 
-button:hover::before {
-    width: 100%;
-    padding: 0;
+.home-button {
+  grid-area: home;
 }
 
-button:active {
-    background: #495172;
-    color: #eee;
-    transition: none;
+.segment-button {
+  grid-area: segment;
 }
-@media (max-width:450px){
-h1{
-    font-size: 25px;
-    padding-top: 5px;
+
+.contact-button {
+  grid-area: contact;
 }
-button{
+
+@media (max-width: 480px) {
+  header {
+    grid-template-columns: 4fr 4fr 4fr;
+    grid-template-rows: 60px 50px;
+    grid-template-areas:
+      "title title title"
+      "home segment contact";
+  }
+
+  .header-title {
+    text-align: center;
+  }
+
+  .btn {
     font-size: 15px;
     padding-top: 15px;
-}
+  }
 }
