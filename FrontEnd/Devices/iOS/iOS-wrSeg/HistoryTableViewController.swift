@@ -31,19 +31,19 @@ class HistoryTableViewController: UITableViewController {
         
         let image = UIImage(named: "Script")
         
-        guard let result1 = Result(title: "title1", image: image) else {
+        guard let result1 = Result(title: "title1",
+                                   originalImage: image,
+                                   threshold: Result.DEFAULT_THRESHOLD,
+                                   noise: Double(Result.DEFAULT_NOISE),
+                                   useGauss: Result.DEFAULT_USE_GAUSS,
+                                   maxColumnSep: Result.DEFAULT_MAX_COLUMN_SEP,
+                                   maxSep: Result.DEFAULT_MAX_SEP,
+                                   minScale: Result.DEFAULT_MIN_SCALE,
+                                   maxLines: Result.DEFAULT_MAX_LINES) else {
             fatalError("Unable to instantiate result1")
         }
         
-        guard let result2 = Result(title: "title2", image: image) else {
-            fatalError("Unable to instantiate result2")
-        }
-        
-        guard let result3 = Result(title: "title3", image: image) else {
-            fatalError("Unable to instantiate result3")
-        }
-        
-        results += [result1, result2, result3, result1, result1, result1]
+        results += [result1, result1, result1, result1]
         
         
     }
@@ -68,6 +68,7 @@ class HistoryTableViewController: UITableViewController {
         // Use the edit button item provided by the table view controller.
         navigationItem.rightBarButtonItem = editButtonItem
         navigationItem.rightBarButtonItem?.title = "Delete"
+        navigationItem.title = "History"
                 
         // Load any saved results, otherwise load sample data.
         if let savedResults = loadResults() {
@@ -106,7 +107,7 @@ class HistoryTableViewController: UITableViewController {
         let result = results[indexPath.row]
         
         cell.titleLabel.text = result.title
-        cell.imgView.image = result.image
+        cell.imgView.image = result.originalImage
         
         return cell
     }
