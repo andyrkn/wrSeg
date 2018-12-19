@@ -9,7 +9,12 @@
 
 For the AI layer to work, the following should be installed:
 
-1. Install [ocropy](https://github.com/tmbdev/ocropy)
+
+1. Install [Python 2](https://www.python.org/)
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`sudo apt install python2.7 python-pip`
+
+2. Install [ocropy](https://github.com/tmbdev/ocropy)
 
 &nbsp;&nbsp;&nbsp;&nbsp;Commands in order to install Ocropy:
 
@@ -29,14 +34,31 @@ For the AI layer to work, the following should be installed:
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`sudo python setup.py install`
 
-2. Install [Python 2](https://www.python.org/)
+   
+3.  Install python3 and python3 pip
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`sudo apt install python2.7 python-pip`
+    get https://bootstrap.pypa.io/get-pip.py
+    python3 get-pip.py
 
-3. Install [Keras + Tensorflow] (this will prob help: http://students.info.uaic.ro/~andrei.timcu/data/teaching/rn/week9/Keras.pdf)
+    !pip has to point towards your python3 installation, but your default has to be python2
+
+
+4.  sudo python2 -m pip install Pillow
+    sudo python2 -m pip install python-tk
+
+
+5. Install [Keras + Tensorflow] (this will prob help: http://students.info.uaic.ro/~andrei.timcu/data/teaching/rn/week9/Keras.pdf)
     - Tensorflow uses Python3 (3.5 or 3.6) so you need this as well
 
-4. Pillow, OpenCV
+    use python3 pip to install:
+    
+    sudo python3 -m pip install --upgrade tensorflow
+    sudo python3 -m pip install numpy scipy
+    sudo python3 -m pip install scikit-learn
+    sudo python3 -m pip install pillow
+    sudo python3 -m pip install h5py
+    sudo python3 -m pip install keras
+    sudo python3 -m pip install opencv-python
 
 ## Build and run
 
