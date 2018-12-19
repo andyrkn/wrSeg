@@ -1,13 +1,21 @@
 /* refactor everyhting */
 
 .wrapper-header {
+  background-color: #313854;
+  padding: 10px 0 15px;
+}
+
+.container {
+  padding: 0 30px;
+  margin: 0 auto;
+  max-width: 1080px;
+}
+
+header {
   font-weight: 300;
   margin: 0;
-  padding-top: 10px;
-  padding-bottom: 15px;
   font-family: 'Open Sans', sans-serif;
   font-size: 40px;
-  background-color: #313854;
   color: #eee;
   display: grid;
   grid-template-columns: 9fr 1fr 1fr 1fr;
@@ -15,9 +23,11 @@
   grid-template-areas: "title home segment contact";
 }
 
-h1 {
-  display: inline-block;
+.header-title {
   grid-area: title;
+}
+
+h1 {
   font-size: 30px;
   font-weight: 300;
   margin: 0;
@@ -81,9 +91,17 @@ a {
   grid-area: contact;
 }
 
-@media (max-width:450px) {
+@media (max-width: 480px) {
+  header {
+    grid-template-columns: 4fr 4fr 4fr;
+    grid-template-rows: 60px 50px;
+    grid-template-areas:
+      "title title title"
+      "home segment contact";
+  }
+  
   h1 {
-    font-size: 25px;
+    text-align: center;
     padding-top: 5px;
   }
 
