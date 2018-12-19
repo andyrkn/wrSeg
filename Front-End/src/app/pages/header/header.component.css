@@ -28,6 +28,7 @@ header {
 }
 
 h1 {
+  display: inline-block;
   font-size: 30px;
   font-weight: 300;
   margin: 0;
@@ -99,10 +100,9 @@ a {
       "title title title"
       "home segment contact";
   }
-  
-  h1 {
+
+  .header-title {
     text-align: center;
-    padding-top: 5px;
   }
 
   .btn {
