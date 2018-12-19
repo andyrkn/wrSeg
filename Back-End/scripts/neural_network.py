@@ -1,12 +1,22 @@
+"""
+Neural Network
+"""
 import keras
 import numpy as np
 from keras.models import Sequential
 from keras.layers import InputLayer, Dense , Dropout
 
-
 def build_model():
+    """
+    Builds neural network
+    
+    Returns
+    -------
+    object
+        Built neural network
+    """
     model = keras.models.Sequential()
-    model.add(InputLayer((4,))) # tuple(x,y,height,width , nearest neighbour distance)
+    model.add(InputLayer((4,))) # tuple(x,y,height,width)
     model.add(Dense(50 , activation="tanh"))
     model.add(Dense(100 , activation="tanh"))
     model.add(Dropout(0.50))
@@ -15,18 +25,45 @@ def build_model():
     model.compile(optimizer = keras.optimizers.Adam(), loss = "categorical_crossentropy", metrics = ["accuracy"])
     return model;
 
-
 def save_model(model):
-	model.save_weights("weights.h5")
+    """
+    Saves the models weights
+    
+    Parameters
+    ----------
+    model : object
+        Passing the NN model
+    """
+    model.save_weights("weights.h5")
 
 
 def load_model(model):
-	model.load_weights("weights.h5")
-	model.compile(keras.optimizers.Adam(), loss = "categorical_crossentropy", metrics = ["accuracy"])
-	return model
-
+    """
+    Loads the model weights
+    
+    Parameters
+    ----------
+    model : object
+        Untrained model
+    
+    Returns
+    -------
+    TYPE
+        Model with updated weights from the file
+    """
+    model.load_weights("weights.h5")
+    model.compile(keras.optimizers.Adam(), loss = "categorical_crossentropy", metrics = ["accuracy"])
+    return model
 
 def read_test_data():
+    """
+    Reading and formatting test data
+    
+    Returns
+    -------
+    list
+        Test data
+    """
     input = []
     with open("test_data.txt" , "r") as fd:
         for line in fd:
@@ -35,6 +72,16 @@ def read_test_data():
     return input
 
 def predict_and_write(model , test_data_input):
+    """
+    Assigns labels and writes the results
+    
+    Parameters
+    ----------
+    model : object
+        Trained NN model
+    test_data_input : list
+        List of data we want to label
+    """
     lines = []
     switcher = {
                 0: "Adnotation",
@@ -51,6 +98,14 @@ def predict_and_write(model , test_data_input):
             fd.write(lines[i] + " " + switcher[test_data_label[i]] + "\n")
 
 def read_training_data():
+    """
+    Reads and formats training data
+    
+    Returns
+    -------
+    list
+        Training Data
+    """
     data = []
     input = []
     label = []
@@ -67,7 +122,7 @@ if __name__ == "__main__":
     model  = build_model()
     # model = load_model(build_model())
     train_data_input , train_data_label = read_training_data()
-    model.fit(train_data_input, train_data_label, epochs = 300 ,  batch_size = 20 , verbose = False)
+    model.fit(train_data_input, train_data_label, epochs = 500 ,  batch_size = 20 , verbose = False)
     # save_model(model)
     test_data = read_test_data()
     predict_and_write(model , test_data)
