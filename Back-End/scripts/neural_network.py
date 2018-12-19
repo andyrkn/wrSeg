@@ -88,7 +88,7 @@ def predict_and_write(model , test_data_input):
                 1: "Title",
                 2: "Content",
                 3: "Footer",
-                4: "Page Number",
+                4: "PageNumber",
     }
     test_data_label = model.predict_classes(np.array(test_data_input))
     with open("column_indexes.txt", 'r') as fd:     # load file

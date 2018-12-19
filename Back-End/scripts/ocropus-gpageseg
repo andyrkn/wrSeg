@@ -13,7 +13,7 @@
 
 from __future__ import print_function
 
-from PIL import Image
+# from PIL import Image
 
 import argparse
 import glob
@@ -25,7 +25,7 @@ from multiprocessing import Pool
 
 import numpy as np
 from scipy.ndimage import measurements
-from scipy.misc import imsave
+from scipy.misc import *
 from scipy.ndimage.filters import gaussian_filter,uniform_filter,maximum_filter
 
 import ocrolib
