@@ -3,15 +3,18 @@
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  padding: 0 30px;
+  margin: 0 auto;
+  max-width: 1080px;
 }
 
 .card {
   background-color: white;
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
   padding: 20px;
-  margin: 20px;
+  margin: 20px 0;
   transition: margin 0.3s;
-  width: 50%;
+  width: calc(70% - 40px);
   height: 450px;
 }
 
@@ -100,13 +103,22 @@
   background-color: #394263;
 }
 
-@media (max-width:1200px) {
+@media (max-width: 980px) {
   .container1 {
     display: block;
   }
+
   .card {
-    width: 80%;
-    margin-left: 5%;
-    margin-right: 15%;
+    width: calc(100% - 40px);
+  }
+}
+
+@media (max-width: 480px) {
+  .card:first-child {
+    height: 375px;
+  }
+
+  .card:last-child {
+    height: 400px;
   }
 }
