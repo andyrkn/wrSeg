@@ -8,7 +8,6 @@ class BadRequestException(Exception):
         super().__init__(message)
         self.response = response
 
-
 def json_from_path(image_path):
     url = "http://localhost:8082/upload-file"
     files = {'file': open(image_path, 'rb')}
@@ -44,25 +43,15 @@ def segment_images_from_folder_path(folder_path, on_success_listeners=None):
                 else:
                     print("empty folder")
             except BadRequestException as e:
-                print("bad request:\n{}".format(e.response))
+                print("bad request:\n{}".format(e.response.text))
             except Exception as e:
                 print("exception: {}".format(e))
     return folder_dict
 
-def create_segments_folder(folder_path, folder_name, segments_dict):
-    segments_folder_path = os.path.join(folder_path, folder_name)
-    if not os.path.exists(segments_folder_path):
-        os.makedirs(segments_folder_path)
-    image_tools.write_images_from_dict(segments_dict, segments_folder_path)
 
 if __name__ == "__main__":
     # image_path = './tests/images/m18.png'
     # folder_path = './tests/result'
     # segment_images = segment_images_from_path(image_path)
     # image_tools.write_images_from_dict(segment_images, folder_path)
-    
-    input_folder_path = './tests/images'
-    output_folder_path = './tests/output_folder'
-    folder_dict = segment_images_from_folder_path(input_folder_path,
-                                                  [lambda x, y: create_segments_folder(output_folder_path, x, y)])
-    
+    pass
