@@ -1,7 +1,12 @@
+"""
+User Guide
+
+Run collect-data from terminal , each square box will be drawn individually, then you need to press a key ,
+then write the corresponding label in the terminal , rinse and repeat
+"""
 import cv2 #pip3 install opencv-python
 import sys
 import os
-
 
 if __name__ == "__main__":
     user_labels = []
