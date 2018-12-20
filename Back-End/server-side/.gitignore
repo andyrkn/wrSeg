@@ -5,3 +5,5 @@ target
 logs
 ro-wrseg-logging
 dependency-reduced-pom.xml
+.vs
+.vscode

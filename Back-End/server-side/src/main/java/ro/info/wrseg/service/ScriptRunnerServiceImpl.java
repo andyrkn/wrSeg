@@ -1,60 +1,53 @@
 package ro.info.wrseg.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
-import ro.info.wrseg.exception.InvalidFileExtensionException;
+import ro.info.wrseg.controller.FileController;
+import ro.info.wrseg.model.FileParameters;
 import ro.info.wrseg.model.FileUpload;
-import ro.info.wrseg.repository.FileRepository;
 
-import java.util.Objects;
-
-import static java.util.UUID.randomUUID;
-
-import java.io.IOException;
 import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.nio.file.Paths;
-import java.nio.file.Path;
 import java.io.File;
+import java.io.InputStreamReader;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 @Service
 public class ScriptRunnerServiceImpl implements ScriptRunnerService {
-    public void run(String fileName) {
-        Path path = Paths.get("./../scripts");
-        String pathToScript = path.resolve("script.py").toString();
-        System.out.println("Attempting to run " + pathToScript + " " +  fileName);
+    private final String PATH_TO_SCRIPTS = "./../scripts";
+    private final String SCRIPT_NAME = "script.py";
+    private Logger logger = LoggerFactory.getLogger(FileController.class);
+
+    public void run(FileUpload fileUpload, FileParameters fileParameters) {
+        Path path = Paths.get(PATH_TO_SCRIPTS);
+        String pathToScript = path.resolve(SCRIPT_NAME).toString();
+        logger.debug("Attempting to run AI Layer (Python script) - pathToScript: " + pathToScript);
         try {
-            System.out.println("**************************");
-            System.out.println(pathToScript);
-            System.out.println(Paths.get(".").toAbsolutePath().normalize().toString());
-            System.out.println("**************************");
             String[] cmd = {
-                "python",
-                pathToScript,
-                fileName + ".jpg"
+                    "python",
+                    pathToScript,
+                    fileUpload.getName() + "." + fileUpload.getExtension(),
+                    String.valueOf(fileParameters.getThreshold()),
+                    String.valueOf(fileParameters.getNoise()),
+                    String.valueOf(fileParameters.getUseGauss()),
+                    String.valueOf(fileParameters.getMaxColumnSeparators()),
+                    String.valueOf(fileParameters.getMaxSeparators()),
+                    String.valueOf(fileParameters.getMinScale()),
+                    String.valueOf(fileParameters.getMaxLines())
             };
-            File f = new File("./../scripts");
-            Process p = Runtime.getRuntime().exec(cmd, null, f);
-            // System.out.println(p);
-            p.waitFor();
-            BufferedReader stdInput = new BufferedReader(new InputStreamReader(p.getInputStream()));
-            String s;
-            System.out.println("Here is the standard output of the command:\n");
-            StringBuilder content= new StringBuilder();
-            while ((s = stdInput.readLine()) != null) {
-                content.append(s);
+            File file = new File("./../scripts");
+            Process scriptPyProcess = Runtime.getRuntime().exec(cmd, null, file);
+            logger.debug("Running script process: " + scriptPyProcess + " ...");
+            scriptPyProcess.waitFor();
+            BufferedReader ScriptStandardOutput = new BufferedReader(new InputStreamReader(scriptPyProcess.getInputStream()));
+            StringBuilder content = new StringBuilder();
+            String line;
+            while ((line = ScriptStandardOutput.readLine()) != null) {
+                content.append(line);
             }
-            // if(content.toString()==fileName) {
-            System.out.println("fbewuyfuoioewbfyewufiuhoeijqfnbrewye");
-                System.out.println(content.toString());
-            // }
-            // else {
-                // throw exception to front
-            // }
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch(Exception e) {
+            logger.debug("[AI LAYER] The STANDARD OUTPUT of the Python script:\n\n" + content + "\n");
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
