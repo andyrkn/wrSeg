@@ -21,6 +21,7 @@ export class FileUploadComponent implements OnInit {
         private fileSharingService: FileSharingService) { }
 
     ngOnInit() {
+        this.fileSharingService.setImage(new File([], '123'));
     }
 
     public dropped(event: UploadEvent) {
@@ -38,6 +39,7 @@ export class FileUploadComponent implements OnInit {
                         return (e) => { elem.style.backgroundImage = 'url(' + e.target.result + ')'; };
                     })(element);
                     reader.readAsDataURL(file);
+                    this.fileSharingService.setImage(new File([], '123'));
 
                     this.fileService.upload(file)
                         .subscribe(data => { this.fileSharingService.setxyinfo(data); this.fileSharingService.setImage(file); },

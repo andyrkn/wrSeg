@@ -1,73 +1,74 @@
 .container {
-    align-items: center;
-    display: grid;
-    flex-direction: column;
-    margin: 0 30px;
-    grid-template-columns: 1fr 1fr 30px;
-    grid-template-rows: 60px 500px 100px;
+  align-items: center;
+  display: grid;
+  flex-direction: column;
+  margin: 0 30px;
+  grid-template-columns: 1fr 1fr 30px;
+  grid-template-rows: 60px 500px 100px;
 }
 
-.container--left{
-    grid-row:2/3;
-    grid-column:1/2;
-    border-style:solid;
-    width:36%; 
-    height:70%;
-    margin-left:300px;
-    margin-bottom:100px;
-    border-radius:5px;
-    
-}
-.container--rigth {
-    grid-column:2/3;
-    grid-row:2/3;
-    border-style:solid;
-    width:40%; 
-    height:70%;
-    margin-left:100px;
-    margin-bottom:100px;
-    border-radius:5px;
+.container-left {
+  grid-row: 2/3;
+  grid-column: 1/2;
+  border-style: solid;
+  width: 36%;
+  height: 70%;
+  margin-left: 300px;
+  margin-bottom: 100px;
+  border-radius: 5px;
 
 }
 
-.description--paragraph{
-    grid-column: 2 / 4;
-    grid-row: 3 / 4;
-    margin-right: -10%;
-    margin-bottom: 20%;
-    transform: translate(-50%, -50%);
+.container-rigth {
+  grid-column: 2/3;
+  grid-row: 2/3;
+  border-style: solid;
+  width: 40%;
+  height: 70%;
+  margin-left: 100px;
+  margin-bottom: 100px;
+  border-radius: 5px;
+
+}
+
+.description-paragraph {
+  grid-column: 2 / 4;
+  grid-row: 3 / 4;
+  margin-right: -10%;
+  margin-bottom: 20%;
+  transform: translate(-50%, -50%);
 }
 
 .buttons {
-    grid-row:3/4;
-    grid-column: 1/4;
-    display:  flex;
-    justify-content: center;
-    margin-top:250px;
+  grid-row: 3/4;
+  grid-column: 1/4;
+  display: flex;
+  justify-content: center;
+  margin-top: 250px;
 }
 
 .button {
-    cursor: pointer;
-    background-repeat: no-repeat;
-    background-size: cover;
-    height: 50px;
-    margin: 25px;
+  cursor: pointer;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 50px;
+  margin: 25px;
 }
 
-.segment--button{
-    border: none;
-    color: white;
-    text-decoration: none;
-    padding-left:700px;
-    padding-top:450px;
+.segment-button {
+  border: none;
+  color: white;
+  text-decoration: none;
+  padding-left: 700px;
+  padding-top: 450px;
 }
 
-.button--ios {
-    background-image: url('../../../assets/Images/ios-button-icon.svg');
-    width: 150px;
+.button-ios {
+  background-image: url('../../../assets/Images/ios-button-icon.svg');
+  width: 150px;
 }
 
-.button--android {
-    background-image: url('../../../assets/Images/android-button-icon.svg');
-    width: 170px;
+.button-android {
+  background-image: url('../../../assets/Images/android-button-icon.svg');
+  width: 170px;
 }
