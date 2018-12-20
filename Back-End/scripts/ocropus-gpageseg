@@ -13,7 +13,8 @@
 
 from __future__ import print_function
 
-# from PIL import Image
+from PIL import Image
+from PIL import ImageDraw
 
 import argparse
 import glob
@@ -26,10 +27,10 @@ from multiprocessing import Pool
 import numpy as np
 from scipy.ndimage import measurements
 from scipy.misc import *
-from scipy.ndimage.filters import gaussian_filter,uniform_filter,maximum_filter
+from scipy.ndimage.filters import gaussian_filter, uniform_filter, maximum_filter
 
 import ocrolib
-from ocrolib import psegutils,morph,sl
+from ocrolib import psegutils, morph, sl
 from ocrolib.exceptions import OcropusException
 from ocrolib.toplevel import *
 
@@ -37,98 +38,100 @@ parser = argparse.ArgumentParser(add_help=False)
 
 # error checking
 group_error_checking = parser.add_argument_group('error checking')
-group_error_checking.add_argument('-n','--nocheck',action="store_true",
-                    help="disable error checking on inputs")
+group_error_checking.add_argument('-n', '--nocheck', action="store_true",
+                                  help="disable error checking on inputs")
 # limits
-group_error_checking.add_argument('--minscale',type=float,default=12.0,
-                    help='minimum scale permitted, default: %(default)s')
-group_error_checking.add_argument('--maxlines',type=float,default=300,
-                    help='maximum # lines permitted, default: %(default)s')
+group_error_checking.add_argument('--minscale', type=float, default=12.0,
+                                  help='minimum scale permitted, default: %(default)s')
+group_error_checking.add_argument('--maxlines', type=float, default=300,
+                                  help='maximum # lines permitted, default: %(default)s')
 
 # scale parameters
 group_scale = parser.add_argument_group('scale parameters')
-group_scale.add_argument('--scale',type=float,default=0.0,
-                    help='the basic scale of the document (roughly, xheight) 0=automatic, default: %(default)s')
-group_scale.add_argument('--hscale',type=float,default=1.0,
-                    help='non-standard scaling of horizontal parameters, default: %(default)s')
-group_scale.add_argument('--vscale',type=float,default=1.0,
-                    help='non-standard scaling of vertical parameters, default: %(default)s')
+group_scale.add_argument('--scale', type=float, default=0.0,
+                         help='the basic scale of the document (roughly, xheight) 0=automatic, default: %(default)s')
+group_scale.add_argument('--hscale', type=float, default=1.0,
+                         help='non-standard scaling of horizontal parameters, default: %(default)s')
+group_scale.add_argument('--vscale', type=float, default=1.0,
+                         help='non-standard scaling of vertical parameters, default: %(default)s')
 
 # line parameters
 group_line = parser.add_argument_group('line parameters')
-group_line.add_argument('--threshold',type=float,default=0.2,
-                    help='baseline threshold, default: %(default)s')
-group_line.add_argument('--noise',type=int,default=8,
-                    help="noise threshold for removing small components from lines, default: %(default)s")
-group_line.add_argument('--usegauss',action='store_true',
-                    help='use gaussian instead of uniform, default: %(default)s')
+group_line.add_argument('--threshold', type=float, default=0.2,
+                        help='baseline threshold, default: %(default)s')
+group_line.add_argument('--noise', type=int, default=8,
+                        help="noise threshold for removing small components from lines, default: %(default)s")
+group_line.add_argument('--usegauss', action='store_true',
+                        help='use gaussian instead of uniform, default: %(default)s')
 
 # column parameters
 group_column = parser.add_argument_group('column parameters')
-group_column.add_argument('--maxseps',type=int,default=0,
-                    help='maximum black column separators, default: %(default)s')
-group_column.add_argument('--sepwiden',type=int,default=10,
-                    help='widen black separators (to account for warping), default: %(default)s')
+group_column.add_argument('--maxseps', type=int, default=0,
+                          help='maximum black column separators, default: %(default)s')
+group_column.add_argument('--sepwiden', type=int, default=10,
+                          help='widen black separators (to account for warping), default: %(default)s')
 # Obsolete parameter for 'also check for black column separators'
 # which can now be triggered simply by a positive maxseps value.
-group_column.add_argument('-b','--blackseps',action="store_true",
-                    help=argparse.SUPPRESS)
+group_column.add_argument('-b', '--blackseps', action="store_true",
+                          help=argparse.SUPPRESS)
 
 # whitespace column separators
-group_column.add_argument('--maxcolseps',type=int,default=3,
-                    help='maximum # whitespace column separators, default: %(default)s')
-group_column.add_argument('--csminheight',type=float,default=10,
-                    help='minimum column height (units=scale), default: %(default)s')
+group_column.add_argument('--maxcolseps', type=int, default=3,
+                          help='maximum # whitespace column separators, default: %(default)s')
+group_column.add_argument('--csminheight', type=float, default=10,
+                          help='minimum column height (units=scale), default: %(default)s')
 # Obsolete parameter for the 'minimum aspect ratio for column separators'
 # used in the obsolete function compute_colseps_morph
-group_column.add_argument('--csminaspect',type=float,default=1.1,
-                    help=argparse.SUPPRESS)
+group_column.add_argument('--csminaspect', type=float, default=1.1,
+                          help=argparse.SUPPRESS)
 
 # output parameters
 group_output = parser.add_argument_group('output parameters')
-group_output.add_argument('--gray',action='store_true',
-                    help='output grayscale lines as well, which are extracted from the grayscale version of the pages, default: %(default)s')
-group_output.add_argument('-p','--pad',type=int,default=3,
-                    help='padding for extracted lines, default: %(default)s')
-group_output.add_argument('-e','--expand',type=int,default=3,
-                    help='expand mask for grayscale extraction, default: %(default)s')
+group_output.add_argument('--gray', action='store_true',
+                          help='output grayscale lines as well, which are extracted from the grayscale version of the pages, default: %(default)s')
+group_output.add_argument('-p', '--pad', type=int, default=3,
+                          help='padding for extracted lines, default: %(default)s')
+group_output.add_argument('-e', '--expand', type=int, default=3,
+                          help='expand mask for grayscale extraction, default: %(default)s')
 
 # other parameters
 group_others = parser.add_argument_group('others')
-group_others.add_argument('-q','--quiet',action='store_true',
-                    help='be less verbose, default: %(default)s')
-group_others.add_argument('-Q','--parallel',type=int,default=0,
-                    help="number of CPUs to use")
-group_others.add_argument('-d','--debug',action="store_true")
+group_others.add_argument('-q', '--quiet', action='store_true',
+                          help='be less verbose, default: %(default)s')
+group_others.add_argument('-Q', '--parallel', type=int, default=0,
+                          help="number of CPUs to use")
+group_others.add_argument('-d', '--debug', action="store_true")
 group_others.add_argument("-h", "--help", action="help", help="show this help message and exit")
 
 # input files
-parser.add_argument('files',nargs='+')
+parser.add_argument('files', nargs='+')
 
 args = parser.parse_args()
 args.files = ocrolib.glob_all(args.files)
+
 
 def find(condition):
     "Return the indices where ravel(condition) is true"
     res, = np.nonzero(np.ravel(condition))
     return res
-    
+
+
 def norm_max(v):
-    return v/np.amax(v)
+    return v / np.amax(v)
 
 
 def check_page(image):
-    if len(image.shape)==3: return "input image is color image %s"%(image.shape,)
-    if np.mean(image)<np.median(image): return "image may be inverted"
-    h,w = image.shape
-    if h<600: return "image not tall enough for a page image %s"%(image.shape,)
-    if h>10000: return "image too tall for a page image %s"%(image.shape,)
-    if w<600: return "image too narrow for a page image %s"%(image.shape,)
-    if w>10000: return "line too wide for a page image %s"%(image.shape,)
-    slots = int(w*h*1.0/(30*30))
-    _,ncomps = measurements.label(image>np.mean(image))
-    if ncomps<10: return "too few connected components for a page image (got %d)"%(ncomps,)
-    if ncomps>slots: return "too many connnected components for a page image (%d > %d)"%(ncomps,slots)
+    if len(image.shape) == 3: return "input image is color image %s" % (image.shape,)
+    if np.mean(image) < np.median(image): return "image may be inverted"
+    h, w = image.shape
+    if h < 600: return "image not tall enough for a page image %s" % (image.shape,)
+    if h > 10000: return "image too tall for a page image %s" % (image.shape,)
+    if w < 600: return "image too narrow for a page image %s" % (image.shape,)
+    if w > 10000: return "line too wide for a page image %s" % (image.shape,)
+    slots = int(w * h * 1.0 / (30 * 30))
+    _, ncomps = measurements.label(image > np.mean(image))
+    if ncomps < 10: return "too few connected components for a page image (got %d)" % (ncomps,)
+    if ncomps > slots: return "too many connnected components for a page image (%d > %d)" % (ncomps, slots)
     return None
 
 
@@ -140,31 +143,31 @@ def print_error(*objs):
     print("ERROR: ", *objs, file=sys.stderr)
 
 
-if len(args.files)<1:
+if len(args.files) < 1:
     parser.print_help()
     sys.exit(0)
 
 print_info("")
-print_info("#"*10,(" ".join(sys.argv))[:60])
+print_info("#" * 10, (" ".join(sys.argv))[:60])
 print_info("")
 
-if args.parallel>1:
+if args.parallel > 1:
     args.quiet = 1
 
 
 def B(a):
-    if a.dtype==np.dtype('B'): return a
-    return np.array(a,'B')
+    if a.dtype == np.dtype('B'): return a
+    return np.array(a, 'B')
 
 
-def DSAVE(title,image):
+def DSAVE(title, image):
     if not args.debug: return
-    if type(image)==list:
-        assert len(image)==3
-        image = np.transpose(np.array(image),[1,2,0])
-    fname = "_"+title+".png"
+    if type(image) == list:
+        assert len(image) == 3
+        image = np.transpose(np.array(image), [1, 2, 0])
+    fname = "_" + title + ".png"
     print_info("debug " + fname)
-    imsave(fname,image.astype('float'))
+    imsave(fname, image.astype('float'))
 
 
 ################################################################
@@ -176,82 +179,82 @@ def DSAVE(title,image):
 ### documents, you need to tune the parameters or use a mask.
 ################################################################
 
-def compute_separators_morph(binary,scale):
+def compute_separators_morph(binary, scale):
     """Finds vertical black lines corresponding to column separators."""
-    d0 = int(max(5,scale/4))
-    d1 = int(max(5,scale))+args.sepwiden
-    thick = morph.r_dilation(binary,(d0,d1))
-    vert = morph.rb_opening(thick,(10*scale,1))
-    vert = morph.r_erosion(vert,(d0//2,args.sepwiden))
-    vert = morph.select_regions(vert,sl.dim1,min=3,nbest=2*args.maxseps)
-    vert = morph.select_regions(vert,sl.dim0,min=20*scale,nbest=args.maxseps)
+    d0 = int(max(5, scale / 4))
+    d1 = int(max(5, scale)) + args.sepwiden
+    thick = morph.r_dilation(binary, (d0, d1))
+    vert = morph.rb_opening(thick, (10 * scale, 1))
+    vert = morph.r_erosion(vert, (d0 // 2, args.sepwiden))
+    vert = morph.select_regions(vert, sl.dim1, min=3, nbest=2 * args.maxseps)
+    vert = morph.select_regions(vert, sl.dim0, min=20 * scale, nbest=args.maxseps)
     return vert
 
 
-def compute_colseps_morph(binary,scale,maxseps=3,minheight=20,maxwidth=5):
+def compute_colseps_morph(binary, scale, maxseps=3, minheight=20, maxwidth=5):
     """Finds extended vertical whitespace corresponding to column separators
     using morphological operations."""
-    boxmap = psegutils.compute_boxmap(binary,scale,dtype='B')
-    bounds = morph.rb_closing(B(boxmap),(int(5*scale),int(5*scale)))
-    bounds = np.maximum(B(1-bounds),B(boxmap))
-    cols = 1-morph.rb_closing(boxmap,(int(20*scale),int(scale)))
-    cols = morph.select_regions(cols,sl.aspect,min=args.csminaspect)
-    cols = morph.select_regions(cols,sl.dim0,min=args.csminheight*scale,nbest=args.maxcolseps)
-    cols = morph.r_erosion(cols,(int(0.5+scale),0))
-    cols = morph.r_dilation(cols,(int(0.5+scale),0),origin=(int(scale/2)-1,0))
+    boxmap = psegutils.compute_boxmap(binary, scale, dtype='B')
+    bounds = morph.rb_closing(B(boxmap), (int(5 * scale), int(5 * scale)))
+    bounds = np.maximum(B(1 - bounds), B(boxmap))
+    cols = 1 - morph.rb_closing(boxmap, (int(20 * scale), int(scale)))
+    cols = morph.select_regions(cols, sl.aspect, min=args.csminaspect)
+    cols = morph.select_regions(cols, sl.dim0, min=args.csminheight * scale, nbest=args.maxcolseps)
+    cols = morph.r_erosion(cols, (int(0.5 + scale), 0))
+    cols = morph.r_dilation(cols, (int(0.5 + scale), 0), origin=(int(scale / 2) - 1, 0))
     return cols
 
 
-def compute_colseps_mconv(binary,scale=1.0):
+def compute_colseps_mconv(binary, scale=1.0):
     """Find column separators using a combination of morphological
     operations and convolution."""
-    h,w = binary.shape
-    smoothed = gaussian_filter(1.0*binary,(scale,scale*0.5))
-    smoothed = uniform_filter(smoothed,(5.0*scale,1))
-    thresh = (smoothed<np.amax(smoothed)*0.1)
-    DSAVE("1thresh",thresh)
-    blocks = morph.rb_closing(binary,(int(4*scale),int(4*scale)))
-    DSAVE("2blocks",blocks)
-    seps = np.minimum(blocks,thresh)
-    seps = morph.select_regions(seps,sl.dim0,min=args.csminheight*scale,nbest=args.maxcolseps)
-    DSAVE("3seps",seps)
-    blocks = morph.r_dilation(blocks,(5,5))
-    DSAVE("4blocks",blocks)
-    seps = np.maximum(seps,1-blocks)
-    DSAVE("5combo",seps)
+    h, w = binary.shape
+    smoothed = gaussian_filter(1.0 * binary, (scale, scale * 0.5))
+    smoothed = uniform_filter(smoothed, (5.0 * scale, 1))
+    thresh = (smoothed < np.amax(smoothed) * 0.1)
+    DSAVE("1thresh", thresh)
+    blocks = morph.rb_closing(binary, (int(4 * scale), int(4 * scale)))
+    DSAVE("2blocks", blocks)
+    seps = np.minimum(blocks, thresh)
+    seps = morph.select_regions(seps, sl.dim0, min=args.csminheight * scale, nbest=args.maxcolseps)
+    DSAVE("3seps", seps)
+    blocks = morph.r_dilation(blocks, (5, 5))
+    DSAVE("4blocks", blocks)
+    seps = np.maximum(seps, 1 - blocks)
+    DSAVE("5combo", seps)
     return seps
 
 
-def compute_colseps_conv(binary,scale=1.0):
+def compute_colseps_conv(binary, scale=1.0):
     """Find column separators by convolution and
     thresholding."""
-    h,w = binary.shape
+    h, w = binary.shape
     # find vertical whitespace by thresholding
-    smoothed = gaussian_filter(1.0*binary,(scale,scale*0.5))
-    smoothed = uniform_filter(smoothed,(5.0*scale,1))
-    thresh = (smoothed<np.amax(smoothed)*0.1)
-    DSAVE("1thresh",thresh)
+    smoothed = gaussian_filter(1.0 * binary, (scale, scale * 0.5))
+    smoothed = uniform_filter(smoothed, (5.0 * scale, 1))
+    thresh = (smoothed < np.amax(smoothed) * 0.1)
+    DSAVE("1thresh", thresh)
     # find column edges by filtering
-    grad = gaussian_filter(1.0*binary,(scale,scale*0.5),order=(0,1))
-    grad = uniform_filter(grad,(10.0*scale,1))
+    grad = gaussian_filter(1.0 * binary, (scale, scale * 0.5), order=(0, 1))
+    grad = uniform_filter(grad, (10.0 * scale, 1))
     # grad = abs(grad) # use this for finding both edges
-    grad = (grad>0.5*np.amax(grad))
-    DSAVE("2grad",grad)
+    grad = (grad > 0.5 * np.amax(grad))
+    DSAVE("2grad", grad)
     # combine edges and whitespace
-    seps = np.minimum(thresh,maximum_filter(grad,(int(scale),int(5*scale))))
-    seps = maximum_filter(seps,(int(2*scale),1))
-    DSAVE("3seps",seps)
+    seps = np.minimum(thresh, maximum_filter(grad, (int(scale), int(5 * scale))))
+    seps = maximum_filter(seps, (int(2 * scale), 1))
+    DSAVE("3seps", seps)
     # select only the biggest column separators
-    seps = morph.select_regions(seps,sl.dim0,min=args.csminheight*scale,nbest=args.maxcolseps)
-    DSAVE("4seps",seps)
+    seps = morph.select_regions(seps, sl.dim0, min=args.csminheight * scale, nbest=args.maxcolseps)
+    DSAVE("4seps", seps)
     return seps
 
 
-def compute_colseps(binary,scale):
+def compute_colseps(binary, scale):
     """Computes column separators either from vertical black lines or whitespace."""
     print_info("considering at most %g whitespace column separators" % args.maxcolseps)
-    colseps = compute_colseps_conv(binary,scale)
-    DSAVE("colwsseps",0.7*colseps+0.3*binary)
+    colseps = compute_colseps_conv(binary, scale)
+    DSAVE("colwsseps", 0.7 * colseps + 0.3 * binary)
     if args.blackseps and args.maxseps == 0:
         # simulate old behaviour of blackseps when the default value
         # for maxseps was 2, but only when the maxseps-value is still zero
@@ -259,23 +262,24 @@ def compute_colseps(binary,scale):
         args.maxseps = 2
     if args.maxseps > 0:
         print_info("considering at most %g black column separators" % args.maxseps)
-        seps = compute_separators_morph(binary,scale)
-        DSAVE("colseps",0.7*seps+0.3*binary)
-        #colseps = compute_colseps_morph(binary,scale)
-        colseps = np.maximum(colseps,seps)
-        binary = np.minimum(binary,1-seps)
-    binary,colseps = apply_mask(binary,colseps)
-    return colseps,binary
+        seps = compute_separators_morph(binary, scale)
+        DSAVE("colseps", 0.7 * seps + 0.3 * binary)
+        # colseps = compute_colseps_morph(binary,scale)
+        colseps = np.maximum(colseps, seps)
+        binary = np.minimum(binary, 1 - seps)
+    binary, colseps = apply_mask(binary, colseps)
+    return colseps, binary
 
-def apply_mask(binary,colseps):
+
+def apply_mask(binary, colseps):
     try:
-        mask = ocrolib.read_image_binary(base+".mask.png")
+        mask = ocrolib.read_image_binary(base + ".mask.png")
     except IOError:
-        return binary,colseps
-    masked_seps = np.maximum(colseps,mask)
-    binary = np.minimum(binary,1-masked_seps)
+        return binary, colseps
+    masked_seps = np.maximum(colseps, mask)
+    binary = np.minimum(binary, 1 - masked_seps)
     DSAVE("masked_seps", masked_seps)
-    return binary,masked_seps
+    return binary, masked_seps
 
 
 ################################################################
@@ -286,51 +290,51 @@ def apply_mask(binary,colseps):
 ### Those components are then used as seeds for the text lines.
 ################################################################
 
-def compute_gradmaps(binary,scale):
+def compute_gradmaps(binary, scale):
     # use gradient filtering to find baselines
-    boxmap = psegutils.compute_boxmap(binary,scale)
-    cleaned = boxmap*binary
-    DSAVE("cleaned",cleaned)
+    boxmap = psegutils.compute_boxmap(binary, scale)
+    cleaned = boxmap * binary
+    DSAVE("cleaned", cleaned)
     if args.usegauss:
         # this uses Gaussians
-        grad = gaussian_filter(1.0*cleaned,(args.vscale*0.3*scale,
-                                            args.hscale*6*scale),order=(1,0))
+        grad = gaussian_filter(1.0 * cleaned, (args.vscale * 0.3 * scale,
+                                               args.hscale * 6 * scale), order=(1, 0))
     else:
         # this uses non-Gaussian oriented filters
-        grad = gaussian_filter(1.0*cleaned,(max(4,args.vscale*0.3*scale),
-                                            args.hscale*scale),order=(1,0))
-        grad = uniform_filter(grad,(args.vscale,args.hscale*6*scale))
-    bottom = ocrolib.norm_max((grad<0)*(-grad))
-    top = ocrolib.norm_max((grad>0)*grad)
-    return bottom,top,boxmap
+        grad = gaussian_filter(1.0 * cleaned, (max(4, args.vscale * 0.3 * scale),
+                                               args.hscale * scale), order=(1, 0))
+        grad = uniform_filter(grad, (args.vscale, args.hscale * 6 * scale))
+    bottom = ocrolib.norm_max((grad < 0) * (-grad))
+    top = ocrolib.norm_max((grad > 0) * grad)
+    return bottom, top, boxmap
 
 
-def compute_line_seeds(binary,bottom,top,colseps,scale):
+def compute_line_seeds(binary, bottom, top, colseps, scale):
     """Base on gradient maps, computes candidates for baselines
     and xheights.  Then, it marks the regions between the two
     as a line seed."""
     t = args.threshold
-    vrange = int(args.vscale*scale)
-    bmarked = maximum_filter(bottom==maximum_filter(bottom,(vrange,0)),(2,2))
-    bmarked = bmarked*(bottom>t*np.amax(bottom)*t)*(1-colseps)
-    tmarked = maximum_filter(top==maximum_filter(top,(vrange,0)),(2,2))
-    tmarked = tmarked*(top>t*np.amax(top)*t/2)*(1-colseps)
-    tmarked = maximum_filter(tmarked,(1,20))
-    seeds = np.zeros(binary.shape,'i')
-    delta = max(3,int(scale/2))
+    vrange = int(args.vscale * scale)
+    bmarked = maximum_filter(bottom == maximum_filter(bottom, (vrange, 0)), (2, 2))
+    bmarked = bmarked * (bottom > t * np.amax(bottom) * t) * (1 - colseps)
+    tmarked = maximum_filter(top == maximum_filter(top, (vrange, 0)), (2, 2))
+    tmarked = tmarked * (top > t * np.amax(top) * t / 2) * (1 - colseps)
+    tmarked = maximum_filter(tmarked, (1, 20))
+    seeds = np.zeros(binary.shape, 'i')
+    delta = max(3, int(scale / 2))
     for x in range(bmarked.shape[1]):
-        transitions = sorted([(y,1) for y in find(bmarked[:,x])]+[(y,0) for y in find(tmarked[:,x])])[::-1]
-        transitions += [(0,0)]
-        for l in range(len(transitions)-1):
-            y0,s0 = transitions[l]
-            if s0==0: continue
-            seeds[y0-delta:y0,x] = 1
-            y1,s1 = transitions[l+1]
-            if s1==0 and (y0-y1)<5*scale: seeds[y1:y0,x] = 1
-    seeds = maximum_filter(seeds,(1,int(1+scale)))
-    seeds = seeds*(1-colseps)
-    DSAVE("lineseeds",[seeds,0.3*tmarked+0.7*bmarked,binary])
-    seeds,_ = morph.label(seeds)
+        transitions = sorted([(y, 1) for y in find(bmarked[:, x])] + [(y, 0) for y in find(tmarked[:, x])])[::-1]
+        transitions += [(0, 0)]
+        for l in range(len(transitions) - 1):
+            y0, s0 = transitions[l]
+            if s0 == 0: continue
+            seeds[y0 - delta:y0, x] = 1
+            y1, s1 = transitions[l + 1]
+            if s1 == 0 and (y0 - y1) < 5 * scale: seeds[y1:y0, x] = 1
+    seeds = maximum_filter(seeds, (1, int(1 + scale)))
+    seeds = seeds * (1 - colseps)
+    DSAVE("lineseeds", [seeds, 0.3 * tmarked + 0.7 * bmarked, binary])
+    seeds, _ = morph.label(seeds)
     return seeds
 
 
@@ -338,22 +342,24 @@ def compute_line_seeds(binary,bottom,top,colseps,scale):
 ### The complete line segmentation process.
 ################################################################
 
-def remove_hlines(binary,scale,maxsize=10):
-    labels,_ = morph.label(binary)
+def remove_hlines(binary, scale, maxsize=10):
+    labels, _ = morph.label(binary)
     objects = morph.find_objects(labels)
-    for i,b in enumerate(objects):
-        if sl.width(b)>maxsize*scale:
-            labels[b][labels[b]==i+1] = 0
-    return np.array(labels!=0,'B')
+    for i, b in enumerate(objects):
+        if sl.width(b) > maxsize * scale:
+            labels[b][labels[b] == i + 1] = 0
+    return np.array(labels != 0, 'B')
 
-#mapping of: oY intervals AND a list of lines that belong in columns
+
+# mapping of: oY intervals AND a list of lines that belong in columns
 textboxes_col_y = {}
-#a list of coordonates for each line substracted by ocropy
+# a list of coordonates for each line substracted by ocropy
 line_coordonates = []
-#mapping of: oX intervals that represent columns AND a list of the lines in those columns
+# mapping of: oX intervals that represent columns AND a list of the lines in those columns
 columns_mapping = {}
 #
 length_threshold = 0.15
+
 
 def is_in_columns(x_interval):
     for column_interval in columns_mapping:
@@ -361,33 +367,34 @@ def is_in_columns(x_interval):
             return column_interval
     return False
 
+
 def sort_coordinates_by_ox():
     global textboxes_col_y
     for interval in textboxes_col_y:
-        textboxes_col_y[interval].sort(key = lambda x : x[0])
+        textboxes_col_y[interval].sort(key=lambda x: x[0])
 
-def compute_segmentation(binary,scale):
+
+def compute_segmentation(binary, scale):
     """Given a binary image, compute a complete segmentation into
     lines, computing both columns and text lines."""
-    binary = np.array(binary,'B')
+    binary = np.array(binary, 'B')
 
     # start by removing horizontal black lines, which only
     # interfere with the rest of the page segmentation
-    binary = remove_hlines(binary,scale)
+    binary = remove_hlines(binary, scale)
 
     # do the column finding
     if not args.quiet: print_info("computing column separators")
-    colseps,binary = compute_colseps(binary,scale)
+    colseps, binary = compute_colseps(binary, scale)
 
-
-    #computing textboxes that contain columns using callseps matrix
+    # computing textboxes that contain columns using callseps matrix
     non_zero_lines = np.unique(np.nonzero(colseps)[0])
 
     # print("nonzero")
     # print(non_zero_lines)
-    
+
     np.set_printoptions(threshold=np.nan)
-    
+
     f = open("colseps", "w")
     for i in colseps:
         for j in i:
@@ -400,31 +407,31 @@ def compute_segmentation(binary,scale):
     current = int(non_zero_lines[0])
     for line_index in range(1, len(non_zero_lines)):
         if non_zero_lines[line_index] - non_zero_lines[line_index - 1] > 1:
-            b = non_zero_lines[line_index-1]
-            textboxes_col_y[(a,b)] = []
+            b = non_zero_lines[line_index - 1]
+            textboxes_col_y[(a, b)] = []
             a = non_zero_lines[line_index]
     b = non_zero_lines[-1]
-    textboxes_col_y[(a,b)] = []
-
+    textboxes_col_y[(a, b)] = []
 
     # print("keys")
     # print(textboxes_col_y.keys())
 
     # now compute the text line seeds
     if not args.quiet: print_info("computing lines")
-    bottom,top,boxmap = compute_gradmaps(binary,scale)
-    seeds = compute_line_seeds(binary,bottom,top,colseps,scale)
-    DSAVE("seeds",[bottom,top,boxmap])
+    bottom, top, boxmap = compute_gradmaps(binary, scale)
+    seeds = compute_line_seeds(binary, bottom, top, colseps, scale)
+    DSAVE("seeds", [bottom, top, boxmap])
 
     # spread the text line seeds to all the remaining
     # components
     if not args.quiet: print_info("propagating labels")
-    llabels = morph.propagate_labels(boxmap,seeds,conflict=0)
+    llabels = morph.propagate_labels(boxmap, seeds, conflict=0)
     if not args.quiet: print_info("spreading labels")
-    spread = morph.spread_labels(seeds,maxdist=scale)
-    llabels = np.where(llabels>0,llabels,spread*binary)
-    segmentation = llabels*binary
+    spread = morph.spread_labels(seeds, maxdist=scale)
+    llabels = np.where(llabels > 0, llabels, spread * binary)
+    segmentation = llabels * binary
     return segmentation
+
 
 ################################################################
 ###Column segmentation
@@ -439,7 +446,7 @@ def columns_seg():
         for coordonates_of_line in coordinates_array:
             x_interval = (coordonates_of_line[0], coordonates_of_line[2])
             column_interval = is_in_columns(x_interval)
-            padding =  length_threshold * (coordonates_of_line[2] - coordonates_of_line[0])
+            padding = length_threshold * (coordonates_of_line[2] - coordonates_of_line[0])
             if column_interval == False:
                 x_interval = tuple((x_interval[0] - padding, x_interval[1] + padding))
                 columns_mapping[x_interval] = [coordonates_of_line]
@@ -453,6 +460,7 @@ def columns_seg():
     #     fd.write(str(x1_min) + ' ' + str(y1_min) + ' ' + str(x2_max) + ' ' + str(y2_max) + '\n')
     # fd.close()
 
+
 def view_image(coordinates):
     if not os.path.exists("{}/colum_separation".format(os.path.splitext(args.files[0])[0])):
         os.makedirs("{}/colum_separation".format(os.path.splitext(args.files[0])[0]))
@@ -461,8 +469,20 @@ def view_image(coordinates):
     for coordinate in coordinates:
         img2 = img.crop(coordinate)
         name = "{}/colum_separation/img".format(os.path.splitext(args.files[0])[0]) + str(index) + ".jpg"
-        index = index +1
+        index = index + 1
         img2.save(name)
+
+
+def draw_rectangles(coordinates):
+    source_img = Image.open("/home/oanabzz/Desktop/proiect/wrSeg/Back-End/assets/testpage6.jpg").convert("RGBA")
+    draw = ImageDraw.Draw(source_img)
+    index = 1
+    for coordinate in coordinates:
+        draw.rectangle(((coordinate[0], coordinate[1]), (coordinate[2], coordinate[3])), outline="red")
+        # img2 = img.crop(coordinate)
+    name = "rectangles.png"
+    source_img.save(name)
+
 
 def getBounds(group):
     xmin, xmax, ymin, ymax = 1e9, -1e9, 1e9, -1e9
@@ -473,74 +493,79 @@ def getBounds(group):
         ymax = max(ymax, img[3])
     return (xmin, ymin, xmax, ymax)
 
-def included(small, big):
 
-    if small[0] >= big[0] and small[1] >= big[1] and small[2] <= big[2] and small[3] <= big[3]:
-        return True
-    
-    x1 = max(small[0], big[0])
-    x2 = min(small[2], big[2])
-    y1 = max(small[1], big[1])
-    y2 = min(small[3], big[3])
-    if x1 > x2 or y1 > y2:
-        return False
-    
-    interArea = (x2 - x1) * (y2 - y1)
-    smallArea = (small[2] - small[0]) * (small[3] - small[1])
-    return 1.0 * interArea / smallArea > 0.85
+def included(small, big):
+    return False
+    # if small[0] >= big[0] and small[1] >= big[1] and small[2] <= big[2] and small[3] <= big[3]:
+    #     return True
+    #
+    # x1 = max(small[0], big[0])
+    # x2 = min(small[2], big[2])
+    # y1 = max(small[1], big[1])
+    # y2 = min(small[3], big[3])
+    # if x1 > x2 or y1 > y2:
+    #     return False
+    #
+    # interArea = (x2 - x1) * (y2 - y1)
+    # smallArea = (small[2] - small[0]) * (small[3] - small[1])
+    # return 1.0 * interArea / smallArea > 0.85
+
 
 def group_other_lines(other_lines):
     groups = []
-    
+
     height_threshold = 0.75
     distance_threshold = 1
     ox_threshold = 0.2
-    ox_threshold_with_padding = 0.2
-    
-    other_lines.sort(key = lambda x: x[1])
+    ox_threshold_with_padding = 0.5
+
+    other_lines.sort(key=lambda x: x[1])
     for line in other_lines:
         ok = True
         for group in groups:
             prev_line = group[-1]
             put_in_new_group = False
-            
             if prev_line[2] < line[0] or prev_line[0] > line[2]:
                 put_in_new_group = True
-            elif abs(1 - 1.0 * (prev_line[3] - prev_line[1]) / min(abs(line[3] - line[1]), abs(prev_line[3] - prev_line[1])) ) > height_threshold:
+            elif abs(1 - 1.0 * (prev_line[3] - prev_line[1]) / min(abs(line[3] - line[1]), abs(
+                    prev_line[3] - prev_line[1]))) > height_threshold:
                 put_in_new_group = True
             elif (1.0 * abs(prev_line[3] - line[1]) / (line[3] - line[1])) > distance_threshold:
                 put_in_new_group = True
-            elif (1.0 * abs(prev_line[0] - line[0]) / (prev_line[2] - prev_line[0])) > ox_threshold_with_padding or ((abs((prev_line[0] + prev_line[2]) - (line[0] + line[2]))/2) / (prev_line[2] - prev_line[0])) > ox_threshold:
+            elif (1.0 * abs(prev_line[0] - line[0]) /
+                  (prev_line[2] - prev_line[0])) > ox_threshold_with_padding or (
+                    (abs((prev_line[0] + prev_line[2]) - (line[0] + line[2])) / 2) / (
+                    prev_line[2] - prev_line[0])) > ox_threshold:
                 put_in_new_group = True
-            
+
             if not put_in_new_group:
                 group.append(line)
                 ok = False
                 break
-        
+
         if ok:
             groups.append([line])
-    
+
     bounds = []
     for group in groups:
         bounds.append(getBounds(group))
-    
+
     for i in range(len(bounds)):
         for j in range(len(bounds)):
-            if i!=j and included(bounds[i], bounds[j]) and len(groups[j]) > 0:
+            if i != j and included(bounds[i], bounds[j]) and len(groups[j]) > 0:
                 groups[i] = []
                 break
-    
+
     groups = list(filter(lambda x: len(x) > 0, groups))
-    
+
     # for group in groups:
     #     print(getBounds(group))
-    
+
     # for group in groups:
     #     for img in group:
     #         print(img)
     #     print("\n")
-    
+
     fd = open("column_indexes.txt", "w")
 
     # fd.write("\n\n")
@@ -553,27 +578,30 @@ def group_other_lines(other_lines):
             xmax = max(xmax, img[2])
             ymin = min(ymin, img[1])
             ymax = max(ymax, img[3])
-        
-        fd.write(str(xmin) +  ' ' + str(ymin) + ' ' + str(xmax) + ' ' + str(ymax) + '\n')
+
+        fd.write(str(xmin) + ' ' + str(ymin) + ' ' + str(xmax) + ' ' + str(ymax) + '\n')
         rects.append((xmin, ymin, xmax, ymax))
-    
+
     fd.close()
     # view_image(rects)
-    
+
+    # draw_rectangles(rects)
+
     return groups
+
 
 ################################################################
 ### Processing each file.
 ################################################################
 
 def process1(job):
-    fname,i = job
+    fname, i = job
     global base
-    base,_ = ocrolib.allsplitext(fname)
+    base, _ = ocrolib.allsplitext(fname)
     outputdir = base
 
     try:
-        binary = ocrolib.read_image_binary(base+".bin.png")
+        binary = ocrolib.read_image_binary(base + ".bin.png")
     except IOError:
         try:
             binary = ocrolib.read_image_binary(fname)
@@ -582,41 +610,42 @@ def process1(job):
             print_error("cannot open either %s.bin.png or %s" % (base, fname))
             return
 
-    checktype(binary,ABINARY2)
+    checktype(binary, ABINARY2)
 
     if not args.nocheck:
-        check = check_page(np.amax(binary)-binary)
+        check = check_page(np.amax(binary) - binary)
         if check is not None:
             print_error("%s SKIPPED %s (use -n to disable this check)" % (fname, check))
             return
 
     if args.gray:
-        if os.path.exists(base+".nrm.png"):
-            gray = ocrolib.read_image_gray(base+".nrm.png")
-            checktype(gray,GRAYSCALE)
+        if os.path.exists(base + ".nrm.png"):
+            gray = ocrolib.read_image_gray(base + ".nrm.png")
+            checktype(gray, GRAYSCALE)
         else:
-            print_error("Grayscale version %s.nrm.png not found. Use ocropus-nlbin for creating normalized grayscale version of the pages as well." % base)
+            print_error(
+                "Grayscale version %s.nrm.png not found. Use ocropus-nlbin for creating normalized grayscale version of the pages as well." % base)
             return
 
-    binary = 1-binary # invert
+    binary = 1 - binary  # invert
 
-    if args.scale==0:
+    if args.scale == 0:
         scale = psegutils.estimate_scale(binary)
     else:
         scale = args.scale
     print_info("scale %f" % (scale))
-    if np.isnan(scale) or scale>1000.0:
+    if np.isnan(scale) or scale > 1000.0:
         print_error("%s: bad scale (%g); skipping\n" % (fname, scale))
         return
-    if scale<args.minscale:
+    if scale < args.minscale:
         print_error("%s: scale (%g) less than --minscale; skipping\n" % (fname, scale))
         return
 
     # find columns and text lines
 
     if not args.quiet: print_info("computing segmentation")
-    segmentation = compute_segmentation(binary,scale)
-    if np.amax(segmentation)>args.maxlines:
+    segmentation = compute_segmentation(binary, scale)
+    if np.amax(segmentation) > args.maxlines:
         print_error("%s: too many lines %g" % (fname, np.amax(segmentation)))
         return
     if not args.quiet: print_info("number of lines %g" % np.amax(segmentation))
@@ -624,15 +653,15 @@ def process1(job):
     # compute the reading order
 
     if not args.quiet: print_info("finding reading order")
-    lines = psegutils.compute_lines(segmentation,scale)
+    lines = psegutils.compute_lines(segmentation, scale)
     order = psegutils.reading_order([l.bounds for l in lines])
     lsort = psegutils.topsort(order)
 
     # renumber the labels so that they conform to the specs
 
-    nlabels = np.amax(segmentation)+1
-    renumber = np.zeros(nlabels,'i')
-    for i,v in enumerate(lsort): renumber[lines[v].label] = 0x010000+(i+1)
+    nlabels = np.amax(segmentation) + 1
+    renumber = np.zeros(nlabels, 'i')
+    for i, v in enumerate(lsort): renumber[lines[v].label] = 0x010000 + (i + 1)
     segmentation = renumber[segmentation]
 
     # finally, output everything
@@ -641,76 +670,79 @@ def process1(job):
     if not os.path.exists(outputdir):
         os.mkdir(outputdir)
     lines = [lines[i] for i in lsort]
-    ocrolib.write_page_segmentation("%s.pseg.png"%outputdir,segmentation)
-    cleaned = ocrolib.remove_noise(binary,args.noise)
-    
+    ocrolib.write_page_segmentation("%s.pseg.png" % outputdir, segmentation)
+    cleaned = ocrolib.remove_noise(binary, args.noise)
+
     global line_coordonates, textboxes_col_y
     coordinates_file = open("test_data.txt", "w")
-    for i,l in enumerate(lines):
+    for i, l in enumerate(lines):
         ox, oy = l.__dict__['bounds']
         x1, x2 = ox.start, ox.stop
         y1, y2 = oy.start, oy.stop
         # print(x1, y1, x2, y2)
-        filename = os.path.abspath("%s/01%04d.bin.png"%(outputdir,i+1))
-        coordinates_file.write("%s "%(filename))
+        filename = os.path.abspath("%s/01%04d.bin.png" % (outputdir, i + 1))
+        coordinates_file.write("%s " % (filename))
         coordinates_file.write(str(x1 - args.pad) + " ")
         coordinates_file.write(str(y1 - args.pad) + " ")
         coordinates_file.write(str(x2 - x1 + 2 * args.pad) + " ")
         coordinates_file.write(str(y2 - y1 + 2 * args.pad) + "\n")
         line_coordonates.append((int(x1 - args.pad), int(y1 - args.pad), int(x2 + args.pad), int(y2 + args.pad)))
         # print(l.__dict__['bounds'], "%s/01%04x.bin.png"%(outputdir,i+1))
-        binline = psegutils.extract_masked(1-cleaned,l,pad=args.pad,expand=args.expand)
-        ocrolib.write_image_binary("%s/01%04d.bin.png"%(outputdir,i+1),binline) # save all found subimages
+        binline = psegutils.extract_masked(1 - cleaned, l, pad=args.pad, expand=args.expand)
+        ocrolib.write_image_binary("%s/01%04d.bin.png" % (outputdir, i + 1), binline)  # save all found subimages
 
         if args.gray:
-            grayline = psegutils.extract_masked(gray,l,pad=args.pad,expand=args.expand)
-            ocrolib.write_image_gray("%s/01%04d.nrm.png"%(outputdir,i+1),grayline)
-    
+            grayline = psegutils.extract_masked(gray, l, pad=args.pad, expand=args.expand)
+            ocrolib.write_image_gray("%s/01%04d.nrm.png" % (outputdir, i + 1), grayline)
+
     other_lines = []
     for data in line_coordonates:
         ok = True
         for interval in textboxes_col_y:
-            if  (interval[0] <= data[0] and interval[1] >= data[0] ) or  (interval[0] <= data[2] and interval[1] >= data[2] ):
-                textboxes_col_y[interval].append((data[1], data[0], data[3], data[2] ))
+            if (interval[0] <= data[0] and interval[1] >= data[0]) or (
+                    interval[0] <= data[2] and interval[1] >= data[2]):
+                textboxes_col_y[interval].append((data[1], data[0], data[3], data[2]))
                 ok = False
         if ok:
             other_lines.append((data[1], data[0], data[3], data[2]))
-    
+
     correct_line_coordinates = []
     for data in line_coordonates:
         correct_line_coordinates.append((data[1], data[0], data[3], data[2]))
-    
+
     # print(other_lines)
     columns_seg()
     print(group_other_lines(correct_line_coordinates))
-    print_info("%6d  %s %4.1f %d" % (i, fname,  scale,  len(lines)))
+    print_info("%6d  %s %4.1f %d" % (i, fname, scale, len(lines)))
 
-if len(args.files)==1 and os.path.isdir(args.files[0]):
-    files = glob.glob(args.files[0]+"/????.png")
+
+if len(args.files) == 1 and os.path.isdir(args.files[0]):
+    files = glob.glob(args.files[0] + "/????.png")
 else:
     files = args.files
 
 
 def safe_process1(job):
-    fname,i = job
+    fname, i = job
     try:
         process1(job)
     except OcropusException as e:
         if e.trace:
             traceback.print_exc()
         else:
-            print_info(fname+":"+e)
+            print_info(fname + ":" + e)
     except Exception as e:
         traceback.print_exc()
 
-if args.parallel<2:
+
+if args.parallel < 2:
     count = 0
-    for i,f in enumerate(files):
-        if args.parallel==0: print_info(f)
+    for i, f in enumerate(files):
+        if args.parallel == 0: print_info(f)
         count += 1
-        safe_process1((f,i+1))
+        safe_process1((f, i + 1))
 else:
     pool = Pool(processes=args.parallel)
     jobs = []
-    for i,f in enumerate(files): jobs += [(f,i+1)]
-    result = pool.map(process1,jobs)
+    for i, f in enumerate(files): jobs += [(f, i + 1)]
+    result = pool.map(process1, jobs)
