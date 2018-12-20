@@ -453,14 +453,16 @@ def columns_seg():
     #     fd.write(str(x1_min) + ' ' + str(y1_min) + ' ' + str(x2_max) + ' ' + str(y2_max) + '\n')
     # fd.close()
 
-# def view_image(coordinates):
-#     img = Image.open("/home/cristi/ocropy/tests/test-layout.png")
-#     index = 1
-#     for coordinate in coordinates:
-#         img2 = img.crop(coordinate)
-#         name = "img" + str(index) + ".jpg"
-#         index = index +1
-#         img2.save(name)
+def view_image(coordinates):
+    if not os.path.exists("{}/colum_separation".format(os.path.splitext(args.files[0])[0])):
+        os.makedirs("{}/colum_separation".format(os.path.splitext(args.files[0])[0]))
+    img = Image.open(args.files[0])
+    index = 1
+    for coordinate in coordinates:
+        img2 = img.crop(coordinate)
+        name = "{}/colum_separation/img".format(os.path.splitext(args.files[0])[0]) + str(index) + ".jpg"
+        index = index +1
+        img2.save(name)
 
 def getBounds(group):
     xmin, xmax, ymin, ymax = 1e9, -1e9, 1e9, -1e9
@@ -472,6 +474,7 @@ def getBounds(group):
     return (xmin, ymin, xmax, ymax)
 
 def included(small, big):
+
     if small[0] >= big[0] and small[1] >= big[1] and small[2] <= big[2] and small[3] <= big[3]:
         return True
     
@@ -484,7 +487,7 @@ def included(small, big):
     
     interArea = (x2 - x1) * (y2 - y1)
     smallArea = (small[2] - small[0]) * (small[3] - small[1])
-    return 1.0 * interArea / smallArea > 0.5
+    return 1.0 * interArea / smallArea > 0.85
 
 def group_other_lines(other_lines):
     groups = []
@@ -524,14 +527,14 @@ def group_other_lines(other_lines):
     
     for i in range(len(bounds)):
         for j in range(len(bounds)):
-            if i != j and included(bounds[i], bounds[j]):
+            if i!=j and included(bounds[i], bounds[j]) and len(groups[j]) > 0:
                 groups[i] = []
                 break
     
     groups = list(filter(lambda x: len(x) > 0, groups))
     
-    for group in groups:
-        print(getBounds(group))
+    # for group in groups:
+    #     print(getBounds(group))
     
     # for group in groups:
     #     for img in group:
