@@ -18,6 +18,6 @@ export class FileService {
 
     const data: FormData = new FormData();
     data.append('file', file);
-    return this.httpClient.post('http://localhost:8082/upload-file', data, httpOptions);
+    return this.httpClient.post('http://192.168.232.136:8082/upload-file', data, httpOptions);
   }
 }

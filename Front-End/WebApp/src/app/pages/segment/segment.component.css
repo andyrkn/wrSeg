@@ -13,7 +13,7 @@
   border: dashed 2px #000;
   border-image: url("../../../assets/Images/dashed-grayedout.png") 1 round;
   display: grid;
-  height:550px;
+  height: auto;
   grid-template-rows: 100%;
   grid-template-columns: 50% 50%;
 }
@@ -54,7 +54,7 @@
 }
 
 .wrapper-history-menu {
-  height:200px;
+  height: 200px;
   background-color: #eee;
   display: grid;
   grid-template-rows: 25% 75%;

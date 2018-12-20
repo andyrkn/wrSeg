@@ -39,7 +39,6 @@ export class FileUploadComponent implements OnInit {
                     })(element);
                     reader.readAsDataURL(file);
 
-
                     this.fileService.upload(file)
                         .subscribe(data => { this.fileSharingService.setxyinfo(data); this.fileSharingService.setImage(file); },
                             err => { console.log(err); });
