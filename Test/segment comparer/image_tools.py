@@ -3,6 +3,18 @@ import json
 import cv2
 import segment
 
+class InvalidSegment(Exception):
+    def __init__(self, message, bad_width=False, bad_height=False,
+                                bad_top=False, bad_bot=False,
+                                bad_left=False, bad_right = False):
+        super().__init__(message)
+        self.bad_width = bad_width
+        self.bad_height = bad_height
+        self.bad_top = bad_top
+        self.bad_bot = bad_bot
+        self.bad_left = bad_left
+        self.bad_right = bad_right
+
 def segment_image_from_2_points_coords(original_image, top_left, bot_right):
     """Create an image from segment coordinates and the original image
 
@@ -39,6 +51,20 @@ def images_dict_from_coords_dict(coords_dict, original_image_path):
         for segment_coords in coords_dict[label]:
             top_left = (segment_coords[0], segment_coords[1])
             bot_right = (segment_coords[2], segment_coords[3])
+            
+            invalid_segment = InvalidSegment("bad coords")
+            bad_width = True if top_left[0] >= bot_right[0] else False
+            bad_height = True if top_left[1] >= bot_right[1] else False
+            bad_left = True if top_left[0] < 0 else False
+            bad_top = True if top_left[1] < 0 else False
+            bad_right = True if bot_right[0] > original_image.shape[1] else False
+            bad_bot = True if bot_right[1] > original_image.shape[0] else False
+            if bad_width or bad_height or bad_left or bad_top or bad_right or bad_bot:
+                raise InvalidSegment("Invalid segment coordinates {}".format(segment_coords),
+                                    bad_width=bad_width, bad_height=bad_height,
+                                    bad_top=bad_top, bad_bot=bad_bot,
+                                    bad_left=bad_left, bad_right=bad_right)
+            
             segment_image = segment_image_from_2_points_coords(original_image, top_left, bot_right)
             images_dict[label] += [segment_image]
     
