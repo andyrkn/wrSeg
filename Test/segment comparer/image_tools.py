@@ -60,13 +60,14 @@ def images_dict_from_coords_dict(coords_dict, original_image_path):
             bad_right = True if bot_right[0] > original_image.shape[1] else False
             bad_bot = True if bot_right[1] > original_image.shape[0] else False
             if bad_width or bad_height or bad_left or bad_top or bad_right or bad_bot:
-                raise InvalidSegment("Invalid segment coordinates {}".format(segment_coords),
-                                    bad_width=bad_width, bad_height=bad_height,
-                                    bad_top=bad_top, bad_bot=bad_bot,
-                                    bad_left=bad_left, bad_right=bad_right)
-            
-            segment_image = segment_image_from_2_points_coords(original_image, top_left, bot_right)
-            images_dict[label] += [segment_image]
+                # raise InvalidSegment("Invalid segment coordinates {}".format(segment_coords),
+                #                     bad_width=bad_width, bad_height=bad_height,
+                #                     bad_top=bad_top, bad_bot=bad_bot,
+                #                     bad_left=bad_left, bad_right=bad_right)
+                pass
+            else:
+                segment_image = segment_image_from_2_points_coords(original_image, top_left, bot_right)
+                images_dict[label] += [segment_image]
     
     return images_dict
 
