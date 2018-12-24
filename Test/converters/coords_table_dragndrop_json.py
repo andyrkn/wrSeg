@@ -1,9 +1,9 @@
 import sys
 import os
-import adapters
+import coords_table
 
 def create_from_file(file_path):
-    content = adapters.CoordsTable.from_json_path(file_path)
+    content = coords_table.from_json_path(file_path)
     output_file_name = os.path.splitext(os.path.basename(file_path))[0] + ".txt"
     with open(output_file_name, "w") as fd:
         fd.write(content)
@@ -16,7 +16,7 @@ def create_from_folder(folder_path):
     for file_name in os.listdir(folder_path):
         file_path = os.path.join(folder_path, file_name)
         if os.path.isfile(file_path):
-            content = adapters.CoordsTable.from_json_path(file_path)
+            content = coords_table.from_json_path(file_path)
             output_file_name = os.path.splitext(os.path.basename(file_path))[0] + ".txt"
             
             with open(os.path.join(output_folder_name, output_file_name), "w") as fd:
