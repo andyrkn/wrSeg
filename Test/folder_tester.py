@@ -33,8 +33,8 @@ def create_json_folder(input_folder_path, output_folder_path):
     
 
 if __name__ == "__main__":
-    input_folder_path = './images'
+    input_folder_path = './images/1'
     output_folder_path = './tests/output_folder'
-    # on_success_listeners = [lambda x, y: create_segments_folder(output_folder_path, x, y)]
-    # folder_dict = server_request.segment_images_from_folder_path(input_folder_path, on_success_listeners)
+    #on_success_listeners = [lambda x, y: create_segments_folder(output_folder_path, x, y)]
+    #folder_dict = server_request.segment_images_from_folder_path(input_folder_path, on_success_listeners)
     create_json_folder(input_folder_path, output_folder_path)
