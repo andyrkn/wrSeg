@@ -52,6 +52,7 @@
 }
 
 .wrapper-history-menu {
+  margin-top:30px; 
   height: 200px;
   background-color: #eee;
   display: grid;
@@ -94,4 +95,46 @@
     border-right: none;
     border-bottom: dashed 1px #000;
   }
+}
+.legend{
+  width:400px;
+  display:flex;
+  justify-content: space-around;
+  padding:15px 0; 
+  left:50%;
+  position: absolute;
+  transform: translate(-50%, 0%);
+}
+.legend div:not([class^="legend-title"]){
+  padding: 5px;
+  color:white;
+}
+.legend-title{
+  color:black;
+  padding-top: 5px;
+}
+.blue{
+  display: inline-block;
+  background-color:rgba(66, 244, 241, 0.3);
+  
+}
+.purple{
+  display: inline-block;
+  background-color:rgba(212, 0, 255, 0.3);
+  
+}
+.green{
+  background-color: rgba(0, 130, 14, 0.5);
+  
+  display: inline-block;
+}
+.dark-blue{
+  background-color: rgba(32, 1, 255, 0.4);
+  
+  display: inline-block;
+}
+.red{
+  background-color: rgba(250, 50, 50, 0.4);
+  
+  display: inline-block;
 }
