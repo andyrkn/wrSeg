@@ -1,6 +1,5 @@
 .wrapper-segmentation {
   padding: 35px 0;
-  background-color: #eee;
 }
 
 .container {
@@ -10,7 +9,7 @@
 }
 
 .wrapper-io {
-  border: dashed 2px #000;
+  border: dashed 2px white;
   border-image: url("../../../assets/Images/dashed-grayedout.png") 1 round;
   display: grid;
   height: auto;
@@ -29,8 +28,8 @@
 }
 
 .segmentation-input {
+  
   position: relative;
-  background-color: #eee;
   border-right: dashed 1px #000;
   border-image: url("../../../assets/Images/dashed-grayedout.png") 1 round;
 }
@@ -50,7 +49,6 @@
 }
 
 .segmentation-output {
-  background-color: #eee;
 }
 
 .wrapper-history-menu {
