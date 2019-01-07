@@ -1,4 +1,43 @@
+.hero-section {
+  background-color: #000;
+  background-image: url("../../../assets/Images/hero-background.jpg");
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center center;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+
 .container {
+  padding: 0 30px;
+  max-width: 1080px;
+  margin: 0 auto;
+}
+
+.hero {
+  text-align: center;
+  padding: 100px 0;
+}
+
+.hero h1,
+.hero p {
+  display: inline-block;
+  color: #fff;
+  padding: 10px 30px;
+  margin: 0;
+}
+
+.hero h1 {
+  font-size: 50px;
+  margin-bottom: 30px;
+  background-color: rgba(0, 130, 14, 0.5);
+}
+
+.hero p {
+  font-size: 20px;
+  background-color: rgba(66, 244, 241, 0.3);
+}
+
+/* .container {
   align-items: center;
   display: grid;
   flex-direction: column;
@@ -71,4 +110,4 @@
 .button-android {
   background-image: url('../../../assets/Images/android-button-icon.svg');
   width: 170px;
-}
+} */
