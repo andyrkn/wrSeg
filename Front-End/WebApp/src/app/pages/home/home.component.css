@@ -19,9 +19,9 @@
 }
 
 .hero h1,
-.hero p {
+.hero h3 {
   display: inline-block;
-  color: #fff;
+  color: #eee;
   padding: 10px 30px;
   margin: 0;
 }
@@ -32,9 +32,109 @@
   background-color: rgba(0, 130, 14, 0.5);
 }
 
-.hero p {
+.hero h3 {
   font-size: 20px;
   background-color: rgba(66, 244, 241, 0.3);
+}
+
+.home-segment {
+  overflow: hidden;
+  text-align: center;
+  padding-bottom: 40px;
+  margin-top: -25px;
+}
+
+.home-segment h2 {
+  position: relative;
+  display: inline-block;
+  background-color: #d20606;
+  color: #eee;
+  text-transform: uppercase;
+  padding: 20px 100px;
+  margin: 0 0 50px;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+
+.home-segment h2::before,
+.home-segment h2::after {
+  content: '';
+  position: absolute;
+  background: #d20606;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+
+.home-segment h2::before {
+  top: calc(100% + 10px);
+  left: 15%;
+  height: 5px;
+  width: 70%;
+}
+
+.home-segment h2::after {
+  top: calc(100% + 25px);
+  left: 25%;
+  height: 5px;
+  width: 50%;
+}
+
+.home-segment-btn a {
+  display: inline-block;
+  background-color: #313854;
+  color: #fff;
+  font-size: 20px;
+  text-decoration: none;
+  padding: 11.5px 50px;
+  border-radius: 25px;
+}
+
+.home-segment-btn a:hover {
+  background-color: #394263;
+}
+
+.home-segment-btn a:focus {
+  outline: none;
+}
+
+.mobile-apps-section h2 {
+  background-color: #313854;
+  color: #eee;
+  text-align: center;
+  text-transform: uppercase;
+  padding: 30px 0;
+  margin: 0;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+
+.mobile-apps {
+  text-align: center;
+  padding: 30px 0;
+}
+
+.mobile-apps a {
+  display: inline-block;
+  background-color: rgb(238, 238, 238);
+  max-width: 200px;
+  padding: 20px;
+  border-radius: 20px;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+
+.mobile-apps a:hover {
+  background-color: #fff;
+}
+
+.mobile-apps a:first-child {
+  margin-right: 50px;
+}
+
+.mobile-apps img {
+  display: block;
+  margin: 0 auto;
+  max-width: 100%;
+}
+
+.mobile-apps img:first-child {
+  padding-bottom: 20px;
 }
 
 /* .container {
