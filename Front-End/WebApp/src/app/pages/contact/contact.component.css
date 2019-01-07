@@ -111,6 +111,12 @@
   }
 }
 
+@media (max-width: 767px) {
+  .cos-form-row {
+    width: 100%;
+  }
+}
+
 @media (max-width: 480px) {
   .card:first-child {
     height: 375px;
