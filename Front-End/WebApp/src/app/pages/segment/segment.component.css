@@ -28,7 +28,7 @@
 }
 
 .segmentation-input {
-  
+
   position: relative;
   border-right: dashed 1px #000;
   border-image: url("../../../assets/Images/dashed-grayedout.png") 1 round;
@@ -48,11 +48,49 @@
   margin-top: 150px;
 }
 
-.segmentation-output {
+.legend {
+  max-width: 400px;
+  display:flex;
+  align-items: center;
+  justify-content: space-around;
+  padding-top: 15px;
+  margin: 0 auto;
+}
+
+.legend p {
+  margin: 0;
+}
+
+.legend div:not([class^="legend-title"]) p {
+  padding: 5px;
+  color: white;
+}
+
+.legend-title p {
+  color: black;
+}
+
+.blue {
+  background-color: rgba(66, 244, 241, 0.3);
+}
+
+.purple {
+  background-color: rgba(212, 0, 255, 0.3);
+}
+
+.green {
+  background-color: rgba(0, 130, 14, 0.5);
+}
+
+.dark-blue {
+  background-color: rgba(32, 1, 255, 0.4);
+}
+
+.red {
+  background-color: rgba(250, 50, 50, 0.4);
 }
 
 .wrapper-history-menu {
-  margin-top:30px; 
   height: 200px;
   background-color: #eee;
   display: grid;
@@ -85,7 +123,7 @@
   height: 100%
 }
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 767px) {
   .wrapper-io {
     grid-template-rows: 50% 50%;
     grid-template-columns: 100%;
@@ -96,45 +134,17 @@
     border-bottom: dashed 1px #000;
   }
 }
-.legend{
-  width:400px;
-  display:flex;
-  justify-content: space-around;
-  padding:15px 0; 
-  left:50%;
-  position: absolute;
-  transform: translate(-50%, 0%);
-}
-.legend div:not([class^="legend-title"]){
-  padding: 5px;
-  color:white;
-}
-.legend-title{
-  color:black;
-  padding-top: 5px;
-}
-.blue{
-  display: inline-block;
-  background-color:rgba(66, 244, 241, 0.3);
-  
-}
-.purple{
-  display: inline-block;
-  background-color:rgba(212, 0, 255, 0.3);
-  
-}
-.green{
-  background-color: rgba(0, 130, 14, 0.5);
-  
-  display: inline-block;
-}
-.dark-blue{
-  background-color: rgba(32, 1, 255, 0.4);
-  
-  display: inline-block;
-}
-.red{
-  background-color: rgba(250, 50, 50, 0.4);
-  
-  display: inline-block;
+
+@media screen and (max-width: 480px) {
+  .legend {
+    display: block;
+  }
+
+  .legend div {
+    text-align: center;
+  }
+
+  .legend div:first-child {
+    padding-bottom: 10px;
+  }
 }
