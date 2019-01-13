@@ -13,15 +13,39 @@ CONTENT = "Content"
 FOOTER = "Footer"
 PAGE_NR = "PageNumber"
 
+THRESHOLD = "0.2"
+# USEGAUSS = "false"
+NOISE = "8"
+MAXCOLSEPS = "100"
+MINSCALE = "0"
+MAXLINES = "1000"
+MAXSEPS = "100"
+
 filename = sys.argv[1].split('.')[-2]
 extension = sys.argv[1].split('.')[-1]
+
 # print(sys.argv[1].split('.'))
 # f = open('./../processed-images/' + filename + '.json', 'w')
 # f.write("{}\n")
 # f.close()
 
+if sys.argv[2] != "null":
+    THRESHOLD = sys.argv[2]
+if sys.argv[4] != "null":
+    NOISE = sys.argv[4]
+if sys.argv[5] != "null":
+    MAXCOLSEPS = sys.argv[5]
+if sys.argv[6] != "null":
+    MINSCALE = sys.argv[6]
+if sys.argv[7] != "null":
+    MAXLINES = sys.argv[7]
+if sys.argv[8] != "null":
+    MAXSEPS = sys.argv[8]
+
 try:
-    res = subprocess.call('./bash-script ./../assets/' + filename + '.' + extension, shell=True)  # + ' -o' + ' temp')
+    res = subprocess.call(
+        './bash-script ' + filename + " " + "./../assets/" + filename + '.' + extension + " " + THRESHOLD + " " + NOISE + " " + MAXCOLSEPS +
+        " " + MINSCALE + " " + MAXLINES + " " + MAXSEPS, shell=True)  # + ' -o' + ' temp')
     print("\n\n\nHELLLLLLLLLLLO\n\n\n")
 except Exception as e:
     print(e)

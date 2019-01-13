@@ -473,15 +473,15 @@ def view_image(coordinates):
         img2.save(name)
 
 
-def draw_rectangles(coordinates):
-    source_img = Image.open("/home/oanabzz/Desktop/proiect/wrSeg/Back-End/assets/testpage6.jpg").convert("RGBA")
-    draw = ImageDraw.Draw(source_img)
-    index = 1
-    for coordinate in coordinates:
-        draw.rectangle(((coordinate[0], coordinate[1]), (coordinate[2], coordinate[3])), outline="red")
-        # img2 = img.crop(coordinate)
-    name = "rectangles.png"
-    source_img.save(name)
+# def draw_rectangles(coordinates):
+#     source_img = Image.open("/home/oanabzz/Desktop/proiect/wrSeg/Back-End/assets/testpage6.jpg").convert("RGBA")
+#     draw = ImageDraw.Draw(source_img)
+#     index = 1
+#     for coordinate in coordinates:
+#         draw.rectangle(((coordinate[0], coordinate[1]), (coordinate[2], coordinate[3])), outline="red")
+#         # img2 = img.crop(coordinate)
+#     name = "rectangles.png"
+#     source_img.save(name)
 
 
 def getBounds(group):
