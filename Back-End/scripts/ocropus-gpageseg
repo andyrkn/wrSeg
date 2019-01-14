@@ -533,7 +533,7 @@ def group_other_lines(other_lines):
             elif (1.0 * abs(prev_line[3] - line[1]) / (line[3] - line[1])) > distance_threshold:
                 put_in_new_group = True
             elif (1.0 * abs(prev_line[0] - line[0]) /
-                  (prev_line[2] - prev_line[0])) > ox_threshold_with_padding and 1.0 * (
+                  (prev_line[2] - prev_line[0])) > ox_threshold_with_padding or (
                     (abs((prev_line[0] + prev_line[2]) - (line[0] + line[2])) / 2) / (
                     prev_line[2] - prev_line[0])) > ox_threshold:
                 put_in_new_group = True
