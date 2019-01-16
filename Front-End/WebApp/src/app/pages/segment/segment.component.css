@@ -8,6 +8,13 @@
   margin: 0 auto;
 }
 
+.card {
+  padding: 20px;
+  margin: 0 auto;
+  transition: margin 0.3s;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+
 .wrapper-io {
   border: dashed 2px white;
   border-image: url("../../../assets/Images/dashed-grayedout.png") 1 round;
