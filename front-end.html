@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -143,6 +143,132 @@
 						</div>
 					</div>
 				</div>
+
+
+				<div class="row">
+					<div class="about_content">
+						<div class="section_title_container">
+							<div class="section_title"><span>Mobile Application</span></div>
+							<div class="section_subtitle">UI Prototype</div>
+						</div>
+						<div class="about_text">
+							<p>
+								First we started by creating an visual prototype for our application. For this
+								we had to debate what we need to keep from the web-application and how to display
+								web functionalities on a smaller screen and to be at the same time closer to the
+								mobile environment. 
+							</p>
+							<p>
+								We chose to make a multi page application with the following pages: <code>Upload</code> , 
+								<code>Result</code> and <code>History</code>.
+							</p>
+						</div>
+
+						<div class="section_title_container">
+							<div class="section_subtitle">Upload page</div>
+						</div>
+							<p>
+								For the <code>Upload</code> page we chose to make use of phone versatility and to use it's camera
+								application to upload images with manuscripts or any other type of texts. Also on this 
+								page, the user has the ability to improve the results by setting some parameters like:
+								treshold, noise, use Gauss for normal users, and for advanced ones the advanced setting:
+								maximum column separators, maximum number of separtors, minimum scale and the maximum
+								number of lines, to improve the speed of our solution. Also, the user can upload the photo
+								without setting any parameters, and the result will be calculated with the default ones.
+							</p>
+							<p>
+								After the user upload it's manuscript and visualise it on a preview space on the upload page,
+								and after he end setting the parameters (if he chose to), he can press the submit button from 
+								down of the page and an loading pop-up will appear and will disappear after we got his results.
+								When the loading pop-up disappear the <code>Result</code> button from the top-right corner of
+								the page will be activated and the user can navigate to the <code>Result</code> page.
+							</p>
+						</div>
+
+						<div class="section_title_container">
+							<div class="section_subtitle">Result page</div>
+						</div>
+						<div class="about_text">
+							<p>
+								In the <code>Result page</code>  the user can visualise the results after processing the image
+								provided by him in the <code>Upload page</code>. In the image, user can see how our algorithms
+								recognised where the titles, columns, adnotation and other special paragraphs are placed in the 
+								image, by being framed by rectangles of various colors that denote the type of paragraph.
+							</p>
+							<p>
+								Also here we display the used parameters for the displayed result, so that the user to understand
+								by comparison with later results that the parameters can provide him better results.
+								On the top of the page the user can set a title for the result and after the title was typed, the 
+								<code>Save</code> button form the top right corner of the page will be activated and will let user to save the 
+								result and will send him to the <code>History page</code>.
+							</p>
+						</div>
+						
+						<div class="section_title_container">
+							<div class="section_subtitle">History page</div>
+						</div>
+						<div class="about_text">
+							<p>
+								On this page we have a list of results, saved from the <code>Result page</code>
+								with the photo of the manuscript in the left of the row and in the right side the 
+								title chosen by the user at save time.
+							</p>
+							<p>
+								At any time the user can tap over any of the saved results and review the result
+								in the <code>Result page</code>. These saved results are saved localy on the device
+								without using our service, so if the application is uninstalled all the saves will
+								be lost. Also the user has the ability to delete any of the saved results by tapping 
+								on the <code>Delete</code> button from the top-right corner of the page and select 
+								which result have to be deleted and then to tap on <code>Done</code> when he end his 
+								job.
+							</p>
+						</div>
+
+						<div class="section_title_container">
+							<div class="section_subtitle">iOS Implementation</div>
+						</div>
+						<div class="about_text">
+							<p>
+								To implement the iOS Mobile Application we used the MacOS platform, because it's the 
+								most stable way to implement iOS applications. We made use of the Xcode IDE especially
+								made for Apple Environment Development. We chose to implement the application in the
+								<code>Swift</code> because it's the latest programming language to be used for iOS 
+								development and because it's much more closer to the <code>Python</code> language learned
+								this year at <code>FII</code>. 
+							</p>
+							<p>
+								We started by learning the basics of the <code>Swift</code> programming language from 
+								<code><a href="https://swift.org/documentation/">swift.org</a></code> and after we established 
+								our basis, we started with an application tutorial provided by Apple ( <a href="https://developer.apple.com/library/archive/referencelibrary/GettingStarted/DevelopiOSAppsSwift/">Start Developing iOS Apps</a>)
+								which was an Food Traker app that took as through all Apple concepts about creating an iOS app:
+								building an UI and connecting it to our code (UI Prototype), working with view controllers 
+								(Upload and Result pages), creating our data models (for class representation the results), 
+								creating table views (History page), implementing navigations between pages and making 
+								persistent data (saving data on the device).
+							</p>
+						</div>
+
+						<div class="section_title_container">
+							<div class="section_subtitle">Android Implementation</div>
+						</div>
+						<div class="about_text">
+							<p>
+								On this page we have a list of results, saved from the <code>Result page</code>
+								with the photo of the manuscript in the left of the row and in the right side the 
+								title chosen by the user at save time.
+							</p>
+							<p>
+								At any time the user can tap over any of the saved results and review the result
+								in the <code>Result page</code>. These saved results are saved localy on the device
+								without using our service, so if the application is uninstalled all the saves will
+								be lost. Also the user has the ability to delete any of the saved results by tapping 
+								on the <code>Delete</code> button from the top-right corner of the page and select 
+								which result have to be deleted and then to tap on <code>Done</code> when he end his 
+								job.
+							</p>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 
@@ -166,6 +292,10 @@
 									<div>
 										<p class="footer-contributor">Contributors</p>
 										<p class="footer-contributor">Marian Alexandru Daniel</p>
+										<p class="footer-contributor">Cosulianu Cristi-Mihail</p>
+										<p class="footer-contributor">Velesca Florin</p>
+										<p class="footer-contributor">Virga Cosmin-Paul</p>
+
 										<p class="footer-contributor">Mihaila Andrei</p>
 									</div>
 								</div>
