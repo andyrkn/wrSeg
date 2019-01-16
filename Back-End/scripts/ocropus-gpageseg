@@ -525,13 +525,21 @@ def group_other_lines(other_lines):
         for group in groups:
             prev_line = group[-1]
             put_in_new_group = False
+            
+            # they dont intersect on OX
             if prev_line[2] < line[0] or prev_line[0] > line[2]:
                 put_in_new_group = True
+            
+            # height difference is too big
             elif abs(1 - 1.0 * (prev_line[3] - prev_line[1]) / min(abs(line[3] - line[1]), abs(
                     prev_line[3] - prev_line[1]))) > height_threshold:
                 put_in_new_group = True
+            
+            # distance between the images is too high
             elif (1.0 * abs(prev_line[3] - line[1]) / (line[3] - line[1])) > distance_threshold:
                 put_in_new_group = True
+            
+            # images are not aligned
             elif (1.0 * abs(prev_line[0] - line[0]) /
                   (prev_line[2] - prev_line[0])) > ox_threshold_with_padding or (
                     (abs((prev_line[0] + prev_line[2]) - (line[0] + line[2])) / 2) / (
