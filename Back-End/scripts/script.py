@@ -46,11 +46,12 @@ try:
     res = subprocess.call(
         './bash-script ' + filename + " " + "./../assets/" + filename + '.' + extension + " " + THRESHOLD + " " + NOISE + " " + MAXCOLSEPS +
         " " + MINSCALE + " " + MAXLINES + " " + MAXSEPS, shell=True)  # + ' -o' + ' temp')
-    print("\n\n\nHELLLLLLLLLLLO\n\n\n")
 except Exception as e:
     print(e)
 
-coordinates_file = open('column_indexes.txt', 'r')
+column_indexes_file = "../out/" + filename + ".txt"
+
+coordinates_file = open(column_indexes_file, 'r')
 coordinates_line = coordinates_file.readlines()
 coordinates_file.close()
 data = dict()
@@ -81,7 +82,6 @@ for coordinates in coordinates_line:
 
 json_data = json.dumps(data)
 
-print("*****" + filename + "\n")
 
 try:
     file_name = filename

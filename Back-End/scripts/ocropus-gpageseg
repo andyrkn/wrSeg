@@ -566,7 +566,9 @@ def group_other_lines(other_lines):
     #         print(img)
     #     print("\n")
 
-    fd = open("column_indexes.txt", "w")
+    filename = "../out/" + str(args.files[0].split("/")[0]) + ".txt"
+
+    fd = open(filename, "w")
 
     # fd.write("\n\n")
     rects = []
@@ -688,12 +690,12 @@ def process1(job):
         coordinates_file.write(str(y2 - y1 + 2 * args.pad) + "\n")
         line_coordonates.append((int(x1 - args.pad), int(y1 - args.pad), int(x2 + args.pad), int(y2 + args.pad)))
         # print(l.__dict__['bounds'], "%s/01%04x.bin.png"%(outputdir,i+1))
-        binline = psegutils.extract_masked(1 - cleaned, l, pad=args.pad, expand=args.expand)
-        ocrolib.write_image_binary("%s/01%04d.bin.png" % (outputdir, i + 1), binline)  # save all found subimages
+        # binline = psegutils.extract_masked(1 - cleaned, l, pad=args.pad, expand=args.expand)
+        # ocrolib.write_image_binary("%s/01%04d.bin.png" % (outputdir, i + 1), binline)  # save all found subimages
 
-        if args.gray:
-            grayline = psegutils.extract_masked(gray, l, pad=args.pad, expand=args.expand)
-            ocrolib.write_image_gray("%s/01%04d.nrm.png" % (outputdir, i + 1), grayline)
+        # if args.gray:
+        #     grayline = psegutils.extract_masked(gray, l, pad=args.pad, expand=args.expand)
+        #     ocrolib.write_image_gray("%s/01%04d.nrm.png" % (outputdir, i + 1), grayline)
 
     other_lines = []
     for data in line_coordonates:
@@ -712,7 +714,7 @@ def process1(job):
 
     # print(other_lines)
     columns_seg()
-    print(group_other_lines(correct_line_coordinates))
+    group_other_lines(correct_line_coordinates)
     print_info("%6d  %s %4.1f %d" % (i, fname, scale, len(lines)))
 
 
