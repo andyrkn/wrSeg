@@ -11,301 +11,492 @@
 
     <link rel="stylesheet" type="text/css" href="styles/about.css">
     <link rel="stylesheet" type="text/css" href="styles/about_responsive.css">
+    <style>
+        .about_text, .about_text > * {
+            font-size: 1.05rem;
+        }
+
+        .sprint {
+            font-size: 1.2rem;
+        }
+
+        .file-code-font {
+            color: white;
+            background: #3f3f3f;
+            font-size: 1.2rem;
+            font-family: monospace;
+            font-weight: bold;
+            margin-bottom: 0;
+            margin-left: 20px;
+        }
+
+        .code-font-span {
+            font-size: 1.2rem;
+            font-family: monospace;
+        }
+
+        .code-font {
+            color: white;
+            background: #3f3f3f;
+            font-size: 1.2rem;
+            font-family: monospace;
+            margin-left: 20px;
+        }
+        .about {
+            padding-bottom: 0;
+        }
+    </style>
 </head>
 
 <body>
 
-    <div class="super_container">
+<div class="super_container">
 
-        <!-- Header -->
+    <!-- Header -->
 
-        <header class="header">
+    <header class="header">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div class="header_content d-flex flex-row align-items-center justify-content-start trans_400">
+                        <a href="index.html">
+                            <div class="logo d-flex flex-row align-items-center justify-content-start">
+                                <img src="images/button-book.png" alt="">
+                                <div>wr<span>Seg</span></div>
+                            </div>
+                        </a>
+                        <nav class="main_nav">
+                            <ul class="d-flex flex-row align-items-center justify-content-start">
+                                <li><a href="index.html">Home</a></li>
+                                <li><a href="front-end.html">Front-End Docs</a></li>
+                                <li><a href="back-end.html">Back-End Docs</a></li>
+                                <li><a href="textseg.html">Text Segmentation</a></li>
+                                <li><a href="qa.html">QA Docs</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hamburger -->
+
+    <div class="hamburger_bar trans_400 d-flex flex-row align-items-center justify-content-start">
+        <div class="hamburger">
+            <div class="menu_toggle d-flex flex-row align-items-center justify-content-start">
+                <span>menu</span>
+                <div class="hamburger_container">
+                    <div class="menu_hamburger">
+                        <div class="line_1 hamburger_lines" style="transform: matrix(1, 0, 0, 1, 0, 0);"></div>
+                        <div class="line_2 hamburger_lines" style="visibility: inherit; opacity: 1;"></div>
+                        <div class="line_3 hamburger_lines" style="transform: matrix(1, 0, 0, 1, 0, 0);"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Menu -->
+
+    <div class="menu trans_800">
+        <div class="menu_content d-flex flex-column align-items-center justify-content-center text-center">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="front-end.html">Front-End Docs</a></li>
+                <li><a href="back-end.html">Back-End Docs</a></li>
+                <li><a href="textseg.html">Text Segmentation</a></li>
+                <li><a href="qa.html">QA Docs</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Home -->
+
+    <div class="home">
+        <div class="background_image" style="background-color: rgb(63,63,63);"></div>
+        <div class="overlay"></div>
+        <div class="home_container">
             <div class="container">
                 <div class="row">
                     <div class="col">
-                        <div class="header_content d-flex flex-row align-items-center justify-content-start trans_400">
-                            <a href="index.html">
-                                <div class="logo d-flex flex-row align-items-center justify-content-start">
+                        <div class="home_content">
+                            <div class="home_title">Back-End Server</div>
+                            <div class="home_subtitle">Java, Spring</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- tech -->
+
+    <div class="about">
+        <div class="container about_container">
+
+            <div class="row">
+                <div class="about_content">
+                    <div class="section_title_container">
+                        <div class="section_title"><span>Java platform</span></div>
+                        <div class="section_subtitle">Advantages</div>
+                    </div>
+                    <div class="about_text">
+                        <p> - we are familiar with the language, since we created applications last year within the
+                            “Advanced programming” subject;</p>
+                    </div>
+                    <div class="about_text">
+                        <p style="display: inline;"> - cross-platform</p> - one of the most significant advantages
+                        of Java is its ability to move easily from one computer system to another. The ability to
+                        run the same program on many different systems is crucial to World Wide
+                        Web software, and Java succeeds at this by being platform-independent at both the source
+                        and binary levels. <b>Therefore we were able to build the Application on every system,
+                        regardless in which environment the "Text Segmentation" team chose to work.</b>
+                    </div>
+                    <div class="about_text">
+                        <p style="display: inline;"> - easy to use for developing server-side apps</p> - <b>Python would
+                        be an obvious choice</b> for data science, <b>AI</b>, and machine learning tasks. On the other
+                        hand, when we need to write applications for end users, especially embedded and cross-platform
+                        apps, Java is likely going to be at the top of most developers. <b>Java is also an outstanding
+                        choice for creating server-side code</b>.
+                    </div>
+                    <div class="section_title_container">
+                        <div class="section_subtitle">Disadvantages</div>
+                    </div>
+                    <div class="about_text">
+                        <p> - the <b><i>Artificial Intelligence layer</i></b> will be developed using <i>Python</i>
+                            language and thus we will not be able to run the code purely on our platform and we
+                            will execute it using <span
+                                    style="font-size: 1.2rem; font-family: monospace;"><b>Runtime</b></span> object;</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="about_content">
+                    <div class="section_title_container">
+                        <div class="section_title"><span>Spring Framework</span></div>
+                    </div>
+                    <div class="text_highlight">The Spring Framework is an application framework and inversion of
+                        control container for the Java platform.
+                    </div>
+                    <div class="about_text">
+                        <p>Some advantages, offered by this framework, are represented by:</p>
+                    </div>
+                    <div class="about_text">
+                        <p> - the "<b>Dependency Injection</b>" system, through which is imposed an approach which
+                            facilitates writing of tests;</p>
+                    </div>
+                    <div class="about_text">
+                        <p> - the fact in the latest versions of Spring, we can configure the application by using
+                            annotations instead of XML files</p>
+                        Spring can be used without XML (or very little).<br> If you dive in with Spring 3.0.5.GA or
+                        higher then you can use the dependency injection support from JDK6+. This means that you
+                        can wire up dependencies using the @Component
+                        and @Resourceannotations;
+                    </div>
+                    <div class="about_text">
+                        <p> - Spring <b>MVC</b> web application and <b>RESTful</b> web service framework - <b>the main
+                            reason for choosing this platform for the server-side tasks</b>, besides the Dependency
+                            Injection system which is very productive for using in the development process;
+                        </p>
+                    </div>
+                    <div class="about_text">
+                        <p> - It also provides a good way to structure your application into layers. It
+                            saved us a lot of time in the development process because of the way we organized the code.
+                            Therefore our application has five layers:<span style="font-size: 1.2rem; font-family:
+                            monospace;"><b> controller, service, exception, repository</b></span> and <b><span
+                                    style="font-size: 1.2rem; font-family: monospace;">model</span></b>.</p>
+                    </div>
+                    <div class="text_highlight">Spring was used in the application to create a back-end server that
+                        expands REST services.
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="about_content">
+                        <div class="section_title_container">
+                            <div class="section_title"><span>Development phases</span></div>
+                        </div>
+                        <div class="about_text">
+                            <p>This section describes each step (sprints) from the development process.</p>
+                        </div>
+
+                        <div class="about_text">
+                            <p class="sprint"><b>Sprint #1</b></p>
+                            <p>Ability to POST an image (the image that is uploaded on a specific end-point -
+                                /upload-file - is being placed in a folder and from there, the file which was uploaded
+                                will be used by the Artificial Intelligence layer).</p>
+                            <p class="file-code-font">controller/FileController.java</p>
+                            <pre class="code-font">    @PostMapping()
+    public ResponseEntity < Resource > uploadFile(@RequestParam("file") MultipartFile file) {
+        byte[] content = fileService.save(file);
+        return ResponseEntity.ok()
+                .contentType(MediaType.parseMediaType(MediaType.IMAGE_JPEG_VALUE))
+                .header(HttpHeaders.CONTENT_DISPOSITION,
+                        "attachment; filename=\"" + "file1" + "\"")
+                .body(new ByteArrayResource(content));
+    }</pre>
+                            <p>At PORT 8082, you can upload a file using the following end-point: 8082/upload-file</p>
+                            <p class="file-code-font">resources/application.properties</p>
+                            <p class="code-font">server.port=8082</p>
+                            <p>An exception is thrown when the file doesn't have an extension.</p>
+                            <p class="file-code-font">exception/UploadException.java</p>
+                            <pre class="code-font">    @ResponseStatus(value = HttpStatus.BAD_REQUEST, reason = "Error in uploading image")
+    public class UploadException extends RuntimeException {
+        public UploadException() {
+            this("Error in uploading image");
+        }
+
+        public UploadException(String fileName) {
+            super("Could not upload file with name " + fileName);
+        }
+    }</pre>
+
+                            A file is uploaded using the end-point indicated above
+                            The file is uploaded in the Back-End\assets directory (the assets directory must exist)
+                            The same end-point returns the file that has just been uploaded
+                            </p>
+                        </div>
+
+                        <div class="about_text">
+                            <p class="sprint"><b>Sprint #2</b></p>
+                            <p>Ability to run AI layer: a Python script is executed when the uploaded file is saved
+                                in the assets directory.</p>
+                            <p> Ability to print the STANDARD OUTPUT of the execution of the Python Script (AI
+                                Layer).</p>
+                            <p class="file-code-font">service/ScriptRunnerServiceImpl.java</p>
+                            <pre class="code-font">    public void run(FileUpload fileUpload, FileParameters fileParameters) {
+        Path path = Paths.get(PATH_TO_SCRIPTS);
+        String pathToScript = path.resolve(SCRIPT_NAME).toString();
+        try {
+            String[] cmd = {
+                    "python",
+                    pathToScript,
+                    fileUpload.getName() + "." + fileUpload.getExtension()
+            };
+            File file = new File("./../scripts");
+            Process scriptPyProcess = Runtime.getRuntime().exec(cmd, null, file);
+            scriptPyProcess.waitFor();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }</pre>
+                        </div>
+
+                        <div class="about_text">
+                            <p class="spring"><b>Sprint #3</b></p>
+                            <p>- created GitHub page for documentation</p>
+                            <p>- how the development process went so far</p>
+                            <p>- reasons for choosing Spring platform for the server-side.</p>
+                        </div>
+
+                        <div class="about_text">
+                            <p class="spring"><b>Sprint #4</b></p>
+                            <p>Data processing in order to expose the result of the "Text Segmentation" algorithm
+                                to the Front-End layer. The response to request, that is being made by the Front-End, is
+                                created by
+                                using the JSON file which is created when the execution of the Python script has ended.
+                                The JSON is read and parsed accordingly and the request to the API is fulfilled.</p>
+                            <p class="file-code-font">controller/FileController.java</p>
+                            <pre class="code-font">    return processedImagesReader.getContent(fileUpload.getName());</pre>
+                            <p class="file-code-font">service/ProcessedImagesReaderImpl.java</p>
+                            <pre class="code-font">    @Service
+    public class ProcessedImagesReaderImpl implements ProcessedImagesReader {
+        public String getContent(String fileName) {
+            try {
+                Path path = Paths.get("./../processed-images/" + fileName + ".json");
+                byte[] encoded = Files.readAllBytes(path);
+                return new String(encoded, StandardCharsets.UTF_8);
+            } catch (IOException e) {
+                throw new ProcessingException(fileName);
+            }
+        }
+    }</pre>
+                        </div>
+
+                        <div class="about_text">
+                            <p class="spring"><b>Sprint #5</b></p>
+                            <p>- refactoring the code for <span class="code-font-span">ProcessedImagesReaderImpl</span>,
+                                <span class="code-font-span">ProcessingException</span> and <span
+                                        class="code-font-span">ScriptRunnerServiceImpl</span>;</p>
+                            <p>- the API throws exceptions according to unusual situation like
+                                <span class="code-font-span">ProcessedImagesReader</span>, <span
+                                        class="code-font-span">ProcessingException etc</span>.</p>
+                            <p>- server logging: ability to log the execution of the Application. The logger logs
+                                info about the execution of the application by days (files that begin with
+                                ro-wrseg-logging from
+                                the server-side directory). All three layers (CONTROLLER, SERVICE, REPOSITORY) of the
+                                server-side make use
+                                of the logging technology.</p>
+                            <p class="file-code-font">resources/application.properties</p>
+                            <pre class="code-font">##########################################################
+#                   Logger configuration                 #
+##########################################################
+logging.level.root=INFO
+#log level of all spring framework classes
+logging.level.org.springframework.web=DEBUG
+#log level of classes under package ro.info.wrseg
+logging.level.ro.info.wrseg=DEBUG
+logging.path=logs
+logging.file=ro-wrseg-logging</pre>
+                            <p class="file-code-font">{classname}.java</p>
+                            <pre class="code-font">private Logger logger = LoggerFactory.getLogger({classname}.class);</pre>
+                        </div>
+
+                        <div class="about_text">
+                            <p class="sprint"><b>Sprint #6</b></p>
+                            <p>- configuring the end-point to accept more parameters that are being used in the AI
+                                Layer in order to process the image.</p>
+                            <p class="file-code-font">model/FileParameters.java</p>
+                            <pre class="code-font">    public class FileParameters {
+        private Float threshold;
+        private Integer noise;
+        private Boolean useGauss;
+        private Integer maxColumnSeparators;
+        private Integer maxSeparators;
+        private Float minScale;
+        private Integer maxLines;
+        // ...
+    }</pre>
+                            <p class="file-code-font">controller/FileController.java</p>
+                            <pre class="code-font">    @PostMapping()
+    public String uploadFile(
+                   @RequestParam("file") MultipartFile multipartFile,
+                   @RequestParam(value = "threshold", required = false) Float threshold,
+                   @RequestParam(value = "noise", required = false) Integer noise,
+                   @RequestParam(value = "usegauss", required = false) Boolean useGauss,
+                   @RequestParam(value = "maxcolseps", required = false) Integer maxColumnSeparators,
+                   @RequestParam(value = "maxseps", required = false) Integer maxSeparators,
+                   @RequestParam(value = "minscale", required = false) Float minScale,
+                   @RequestParam(value = "maxlines", required = false) Integer maxLines)</pre>
+                            <p class="file-code-font">service/ScriptRunnerServiceImpl.java</p>
+                            <pre class="code-font">    String[] cmd = {
+                    "python",
+                    pathToScript,
+                    fileUpload.getName() + "." + fileUpload.getExtension(),
+                    String.valueOf(fileParameters.getThreshold()),
+                    String.valueOf(fileParameters.getNoise()),
+                    String.valueOf(fileParameters.getUseGauss()),
+                    String.valueOf(fileParameters.getMaxColumnSeparators()),
+                    String.valueOf(fileParameters.getMaxSeparators()),
+                    String.valueOf(fileParameters.getMinScale()),
+                    String.valueOf(fileParameters.getMaxLines())
+            };</pre>
+                            <p> - added GitHub README in order to build the application (requirements for
+                                server-side and ai-layer; build and run; API Documentation)</p>
+                        </div>
+
+                        <div class="about_text">
+                            <p class="spring"><b>Sprint #7</b></p>
+                            <p>- update GitHub page documentation by reviewing the history of the pull requests</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="about_content">
+                    <div class="section_title_container">
+                        <div class="section_title"><span>Flow of the server-side:</span></div>
+                    </div>
+                    <div class="about_text">
+                        <p>At PORT 8082, you can upload a file using the following end-point: 8082/upload-file</p>
+                    </div>
+                    <div class="about_text">
+                        <p>A request is made by sending the following data:</p>
+                        <pre>
+- file - this parameter is REQUIRED
+- threshold (float)
+- noise (int)
+- usegauss (boolean) - supported values: true, false, 0, 1
+- maxcolseps (int)
+- maxseps (int)
+- minscale (float)
+- maxlines (int)
+                        </pre>
+                        <p>Then <span class="code-font-span">FileStorageServiceImpl</span> saves the file in the file
+                            system of the server and a <span class="code-font-span">FileUpload</span> instance is
+                            being created in order to be used when the Python Script will be run.</p>
+                        <p>An instance of <span class="code-font-span">FileParameters</span> is created and then the
+                            <span class="code-font-span">ScriptRunnerService</span> executes the Python Script.
+                        </p>
+                        <p>When the Python Script finishes its execution, <span class="code-font-span">ProcessedImagesReader</span>
+                            gets the result in order to return it to the Front-End Layer.</p>
+                    </div>
+                    <div class="about_text">
+                        <p><b>Exceptions</b> that could occur during the request:</p>
+                        <pre>
+- InvalidFileExtensionException (throwed when file doesn't have an extension):
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"status": 400,
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"error": "Bad Request",
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"message": "Invalid file extension"
+- UploadException (throwed when the file cannot be saved on the file system):
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"status": 400,
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"error": "Bad Request",
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"message": "Error in uploading image"
+- ProcessingException (throwed when the algorithm doesn't provide a response):
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"status": 400,
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"error": "Bad Request",
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"message": "Processing error"
+                    </pre>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- Footer -->
+
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 offset-lg-2">
+                <div class="footer_container">
+                    <div class="footer_content">
+                        <div class="footer_logo">
+                            <a href="#">
+                                <div class="logo d-flex flex-row align-items-center justify-content-center">
                                     <img src="images/button-book.png" alt="">
                                     <div>wr<span>Seg</span></div>
                                 </div>
                             </a>
-                            <nav class="main_nav">
-                                <ul class="d-flex flex-row align-items-center justify-content-start">
-                                    <li><a href="index.html">Home</a></li>
-                                    <li><a href="front-end.html">Front-End Docs</a></li>
-                                    <li><a href="back-end.html">Back-End Docs</a></li>
-                                    <li><a href="textseg.html">Text Segmentation</a></li>
-                                    <li><a href="qa.html">QA Docs</a></li>
-                                </ul>
-                            </nav>
                         </div>
-                    </div>
-                </div>
-            </div>
-        </header>
-
-        <!-- Hamburger -->
-
-        <div class="hamburger_bar trans_400 d-flex flex-row align-items-center justify-content-start">
-            <div class="hamburger">
-                <div class="menu_toggle d-flex flex-row align-items-center justify-content-start">
-                    <span>menu</span>
-                    <div class="hamburger_container">
-                        <div class="menu_hamburger">
-                            <div class="line_1 hamburger_lines" style="transform: matrix(1, 0, 0, 1, 0, 0);"></div>
-                            <div class="line_2 hamburger_lines" style="visibility: inherit; opacity: 1;"></div>
-                            <div class="line_3 hamburger_lines" style="transform: matrix(1, 0, 0, 1, 0, 0);"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Menu -->
-
-        <div class="menu trans_800">
-            <div class="menu_content d-flex flex-column align-items-center justify-content-center text-center">
-                <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="front-end.html">Front-End Docs</a></li>
-                    <li><a href="back-end.html">Back-End Docs</a></li>
-                    <li><a href="textseg.html">Text Segmentation</a></li>
-                    <li><a href="qa.html">QA Docs</a></li>
-                </ul>
-            </div>
-        </div>
-
-        <!-- Home -->
-
-        <div class="home">
-            <div class="background_image" style="background-color: rgb(63,63,63);"></div>
-            <div class="overlay"></div>
-            <div class="home_container">
-                <div class="container">
-                    <div class="row">
-                        <div class="col">
-                            <div class="home_content">
-                                <div class="home_title">Back-End</div>
-                                <div class="home_subtitle">Java, Spring</div>
+                        <div class="copyright d-flex flex-row align-items-start justify-content-sm-end justify-content-center">
+                            <div>
+                                <p class="footer-contributor">Contributors</p>
+                                <p class="footer-contributor">Diaconu Narcis</p>
+                                <p class="footer-contributor">Mihăeș Alexandru</p>
                             </div>
+                        </div>
+                        <div class="copyright d-flex flex-row align-items-start justify-content-sm-end justify-content-center">
+                            Project developed during the Artificial Intelligence course @Faculty of
+                            Computer Science, CUZA University of Iasi.
+                        </div>
+                        <div class="copyright d-flex flex-row align-items-start justify-content-sm-end justify-content-center">
+                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                            Copyright &copy;
+                            <script>
+                                document.write(new Date().getFullYear());
+                            </script>
+                            All rights reserved | This template is made with <i class="fa fa-heart-o"
+                                                                                aria-hidden="true"></i> by <a
+                                href="https://colorlib.com" target="_blank">Colorlib</a>
+                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
-        <!-- tech -->
-
-        <div class="about">
-            <div class="container about_container">
-
-                <div class="row">
-                    <div class="about_content">
-                        <div class="section_title_container">
-                            <div class="section_title"><span>Java platform</span></div>
-                            <div class="section_subtitle">Advantages</div>
-                        </div>
-                        <div class="about_text">
-                            <p> - we are familiar with the language, since we created applications last year within the
-                                “Advanced programming” subject;</p>
-                        </div>
-                        <div class="about_text">
-                            <p style="display: inline;"> - cross-platform</p> - one of the most significant advantages
-                            of Java is its ability to move easily from one computer system to another. The ability to
-                            run the same program on many different systems is crucial to World Wide
-                            Web software, and Java succeeds at this by being platform-independent at both the source
-                            and binary levels;
-                        </div>
-                        <div class="about_text">
-                            <p style="display: inline;"> - object-oriented </p>- allows us to create modular programs
-                            and reusable code.
-                        </div>
-                        <div class="section_title_container">
-                            <div class="section_subtitle">Disadvantages</div>
-                        </div>
-                        <div class="about_text">
-                            <p> - the <b><i>Artificial Intelligence layer</i></b> will be developed using <i>Python</i>
-                                language and thus we will not be able to run the code purely on our platform and we
-                                will execute it “remotely”, using <b>Runtime</b> object;</p>
-                        </div>
-                        <div class="about_text">
-                            <p style="display: inline;"> - slow-performance:</p> significantly slower and more
-                            memory-consuming than natively compiled languages such as C or C++;
-                        </div>
-                        <div class="about_text">
-                            <p> - memory management, with Java, is a little expensive, since the Garbage Collector
-                                needs to work in the background.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="about_content">
-                        <div class="section_title_container">
-                            <div class="section_title"><span>Spring</span></div>
-                        </div>
-                        <div class="text_highlight">The Spring Framework is an application framework and inversion of
-                            control container for the Java platform.
-                        </div>
-                        <div class="about_text">
-                            <p>Some advantages, offered by this framework, are represented by:</p>
-                        </div>
-                        <div class="about_text">
-                            <p> - the “Dependency Injection” system, through which is imposed an approach which
-                                facilitates writing of tests;</p>
-                        </div>
-                        <div class="about_text">
-                            <p> - the fact in the latest versions of Spring, we can configure the application by using
-                                annotations instead of XML files</p>
-                            Spring can be used without XML (or very little).<br> If you dive in with Spring 3.0.5.GA or
-                            higher then you can use the dependency injection support from JDK6+. This means that you
-                            can wire up dependencies using the @Component
-                            and @Resourceannotations;
-                        </div>
-                        <div class="about_text">
-                            <p> - Spring MVC web application and RESTful web service framework;
-                            </p>
-                        </div>
-                        <div class="about_text">
-                            <p> - It also provides a good way to structure your application into layers. Use it, it
-                                will save you a lot of time in the long run.</p>
-                        </div>
-                        <div class="text_highlight">Spring was used in the application to create a back-end server that
-                            expands REST services.
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="about_content">
-                            <div class="text_highlight">Flow of the server-side:
-                            </div>
-                            <div class="about_text">
-                                <p>At PORT 8082, you can upload a file using the following end-point: 8082/upload-file</p>
-                            </div>
-                            <div class="about_text">
-                                <p>An exception is thrown when the file doesn't have an extension.</p>
-                            </div>
-                            <div class="about_text">
-                                <p>• JPEG;</p>
-                            </div>
-                            <div class="about_text">
-                                <p>• PNG;</p>
-                            </div>
-                            <div class="about_text">
-                                <p>• SVG;</p>
-                            </div>
-                            <div class="about_text">
-                                <p>• PDF;</p>
-                            </div>
-                            <div class="about_text">
-                                <p>and other extensions that describe an image...</p>
-                            </div>
-                            <div class="text_highlight" style="font-size: 1.1em"">Flow:
-                            </div>
-                            <div class="
-                                about_text">
-                                <p>⟶ a file is uploaded using the end-point indicated above;</p>
-                            </div>
-                            <div class="about_text">
-                                <p>⟶ the file is uploaded in the Back-End\assets directory (the assets directory must
-                                    exist);</p>
-                            </div>
-                            <div class="about_text">
-                                <p>⟶ the AI layer goes into execution</p>
-                            </div>
-                            <div class="about_text">
-                                <p>⟶ the same end-point returns a JSON corresponding to the processing of the AI layer</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="about_content">
-                            <div class="section_title_container">
-                                <div class="section_title"><span>Development phases</span></div>
-                            </div>
-                            <div class="about_text">
-                                <p><b>I.</b> Ability to POST an image (the image that is uploaded on a specific
-                                    end-point -
-                                    /files - is being placed in a folder and
-                                    from there, that file will be used by the Artificial Intelligence layer);</p>
-                            </div>
-                            <div class="about_text">
-                                <p><b>II.</b> Ability to upload files of different extensions;</p>
-                            </div>
-                            <div class="about_text">
-                                <p><b>III.</b> Refactoring of the code and ability to throw an exception if the image
-                                    is not valid;</p>
-                            </div>
-                            <div class="about_text">
-                                <p><b>IV.</b> Checking if the file extension is not a valid one and throwing an
-                                    exception accordingly;</p>
-                            </div>
-                            <div class="about_text">
-                                <p><b>V.</b> Ability to execute the Python script (AI layer) when the file is uploaded.</p>
-                            </div>
-                            <div class="about_text">
-                                <p><b>VI.</b> The API throws exceptions according to unusual situation like ProcessedImagesReader, ProcessingException etc.</p>
-                                <p><b>VII.</b> Ability to log the execution of the Application. The logger logs info about the execution of the application by days (files that begin with ro-wrseg-logging from the server-side directory).</p>
-                                <p><b>VIII.</b> Reestablished the communication with AI Layer and refactored the code in ScriptRunner service. Ability to print the STANDARD OUTPUT of the execution of the Python Script (AI Layer).</p>
-                                <p><b>IX.</b> All three layers (CONTROLLER, SERVICE, REPOSITORY) of the server-side make use of the logging technology.</p>
-                                <p><b>X.</b> The response to request, that is being made by the Front-End, is created by using the JSON file which is created when the execution of the Python script has ended. The JSON is read and parsed accordingly and the request to the API is fulfilled.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-
-        <!-- Footer -->
-
-        <footer class="footer">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-8 offset-lg-2">
-                        <div class="footer_container">
-                            <div class="footer_content">
-                                <div class="footer_logo">
-                                    <a href="#">
-                                        <div class="logo d-flex flex-row align-items-center justify-content-center">
-                                            <img src="images/button-book.png" alt="">
-                                            <div>wr<span>Seg</span></div>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="copyright d-flex flex-row align-items-start justify-content-sm-end justify-content-center">
-                                    <div>
-                                        <p class="footer-contributor">Contributors</p>
-                                        <p class="footer-contributor">Diaconu Narcis</p>
-                                        <p class="footer-contributor">Mihăeș Alexandru</p>
-                                    </div>
-                                </div>
-                                <div class="copyright d-flex flex-row align-items-start justify-content-sm-end justify-content-center">
-                                    Project developed during the Artificial Intelligence course @Faculty of
-                                    Computer Science, CUZA University of Iasi.
-                                </div>
-                                <div class="copyright d-flex flex-row align-items-start justify-content-sm-end justify-content-center">
-                                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                                    Copyright &copy;
-                                    <script>
-                                        document.write(new Date().getFullYear());
-                                    </script> All rights reserved | This template is made with <i class="fa fa-heart-o"
-                                        aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-                                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </footer>
     </div>
+</footer>
+</div>
 
-    <script src="js/jquery-3.2.1.min.js"></script>
-    <script src="plugins/scrollmagic/ScrollMagic.min.js"></script>
-    <script src="js/about.js"></script>
+<script src="js/jquery-3.2.1.min.js"></script>
+<script src="plugins/scrollmagic/ScrollMagic.min.js"></script>
+<script src="js/about.js"></script>
 </body>
 
 </html>
