@@ -1,6 +1,5 @@
 .wrapper-segmentation {
   padding: 35px 0;
-  background-color: #eee;
 }
 
 .container {
@@ -9,8 +8,15 @@
   margin: 0 auto;
 }
 
+.card {
+  padding: 20px;
+  margin: 0 auto;
+  transition: margin 0.3s;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+
 .wrapper-io {
-  border: dashed 2px #000;
+  border: dashed 2px white;
   border-image: url("../../../assets/Images/dashed-grayedout.png") 1 round;
   display: grid;
   height: auto;
@@ -29,8 +35,8 @@
 }
 
 .segmentation-input {
+
   position: relative;
-  background-color: #eee;
   border-right: dashed 1px #000;
   border-image: url("../../../assets/Images/dashed-grayedout.png") 1 round;
 }
@@ -49,8 +55,46 @@
   margin-top: 150px;
 }
 
-.segmentation-output {
-  background-color: #eee;
+.legend {
+  max-width: 400px;
+  display:flex;
+  align-items: center;
+  justify-content: space-around;
+  padding-top: 15px;
+  margin: 0 auto;
+}
+
+.legend p {
+  margin: 0;
+}
+
+.legend div:not([class^="legend-title"]) p {
+  padding: 5px;
+  color: white;
+}
+
+.legend-title p {
+  color: black;
+}
+
+.blue {
+  background-color: rgba(66, 244, 241, 0.3);
+}
+
+.purple {
+  background-color: rgba(212, 0, 255, 0.3);
+}
+
+.green {
+  background-color: rgba(0, 130, 14, 0.5);
+}
+
+.dark-blue {
+  background-color: rgba(32, 1, 255, 0.4);
+}
+
+.red {
+  background-color: rgba(250, 50, 50, 0.4);
 }
 
 .wrapper-history-menu {
@@ -86,7 +130,7 @@
   height: 100%
 }
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 767px) {
   .wrapper-io {
     grid-template-rows: 50% 50%;
     grid-template-columns: 100%;
@@ -95,5 +139,19 @@
   .segmentation-input {
     border-right: none;
     border-bottom: dashed 1px #000;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .legend {
+    display: block;
+  }
+
+  .legend div {
+    text-align: center;
+  }
+
+  .legend div:first-child {
+    padding-bottom: 10px;
   }
 }

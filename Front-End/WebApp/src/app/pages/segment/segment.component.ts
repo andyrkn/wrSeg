@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+declare function setStyle():any;
 
 @Component({
   selector: 'app-segment',
@@ -10,6 +11,8 @@ export class SegmentComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+  setStyle();
   }
+
 
 }

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <title>WrSeg</title>
     <base href="/">
@@ -8,11 +9,58 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="icon" type="image/x-icon" href="assets/Images/WrSegLogo.ico">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300" rel="stylesheet">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz"
+        crossorigin="anonymous">
 </head>
+
 <body>
     <app-root></app-root>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCH7weUXxtqb9S6W-5IQsFsuN-LQxaaDDc&callback=contactMap"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCH7weUXxtqb9S6W-5IQsFsuN-LQxaaDDc&callback=contactMap"></script>
 
+    <script>
+        var darkTheme = localStorage.getItem("isDark");
+        function toggleTheme() {
+            if (localStorage.getItem("isDark") == "true")
+                localStorage.setItem("isDark", "false");
+            else
+                localStorage.setItem("isDark", "true");
+            setStyle();
+        }
+        function setStyle() {
+            if (localStorage.getItem("isDark") == "true") {
+                document.getElementById("inner-circle").style.backgroundColor = 'white';
+                document.getElementById("toggle-btn").style.backgroundColor = 'gray';
+                document.getElementById("inner-circle").style.marginLeft = '0px';
+                document.getElementsByTagName("body")[0].style.backgroundColor = '#495172';
+                var cards = document.getElementsByClassName("card");
+                for (var i = 0; i < cards.length; i++) {
+                    cards[i].style.backgroundColor = "#313854";
+                    cards[i].style.color = "white";
+                }
+
+                var element = document.getElementById("toggle-icon");
+                element.classList.remove("fa-moon");
+                element.classList.add("fa-sun");
+                element.style.color = "gray";
+            }
+            else {
+                document.getElementById("inner-circle").style.backgroundColor = 'gray';
+                document.getElementById("toggle-btn").style.backgroundColor = 'white';
+                document.getElementById("inner-circle").style.marginLeft = '30px';
+                document.getElementsByTagName("body")[0].style.backgroundColor = '#eee';
+                var cards = document.getElementsByClassName("card");
+                for (var i = 0; i < cards.length; i++) {
+                    cards[i].style.backgroundColor = "#eee";
+                    cards[i].style.color = "black";
+                }
+
+                var element = document.getElementById("toggle-icon");
+                element.classList.remove("fa-sun");
+                element.classList.add("fa-moon");
+                element.style.color = "white";
+            }
+        }
+    </script>
 </body>
+
 </html>
