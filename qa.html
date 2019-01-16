@@ -274,10 +274,41 @@
 											<li type="circle"> Noise </li>
 											<li type="circle"> Pixelation </li>
 										</ul>
-									</div>
-									
+									</div>	
 								</p>
 							</div>
+
+							<div class="section_title_container">
+								<div class="section_title"><span> Observations </span></div>
+							</div>
+							
+							<div class="section_title_container">
+								<div class="section_subtitle">Processed images</div>
+							</div>
+							<div class="about_text">
+								<p> <b> Color inversion </b> will cause the image to be split in many small segments. </p>
+								<p> <b> Pixelation </b> will have almost no effect on high or medium resolution images,
+									 but small files will have an increase on the number of segments. </p>
+								<p> <b> Noise </b> has the biggest effect on parchment photos, many segments of the background 
+									will be considered annotations and large content segments will be split in smaller ones. </p>
+								<p> <b> Gaussian blur </b> on low resolution images will cause segments to merge or sometimes disappear. </p>
+							</div>
+
+							<div class="section_title_container">
+								<div class="section_subtitle">Nonprocessed images</div>
+							</div>
+							<div class="about_text">
+								<p> <b> Pros: </b></p>
+								<p> Big content segments labeling has a high accuracy. </p>
+								<p> Labeling annotations placed on the sides of the page has a high accuracy. </p>
+								<p> The algorithm can operate on a variety of backgrounds, such as: simple white, parchment, gray paper. </p>
+								<p> The application can process multiple extensions, such as: png, jpg, tiff. </p>
+								<p> <b> Cons: </b></p>
+								<p> The algorithm has a hard time correctly labeling page numbers placed in unusual places, for example the top-center of the page. </p>
+								<p> Out of multiple titles, only one will usually be marked accurately. </p>
+								<p> Big fonts will cause each letter to be segmented. </p>
+							</div>
+
 						</div>
 					</div>
 				</div>
