@@ -327,6 +327,15 @@ section {
 	line-height: 0.75;
 }
 
+.section_subtitle2 {
+	font-size: 12px;
+	font-weight: 600;
+	text-transform: uppercase;
+	color: #ff9711;
+	line-height: 0.75;
+	/* padding-left: 10% */
+}
+
 .section_title {
 	font-size: 72px;
 	font-weight: 400;

@@ -108,9 +108,9 @@
 						<div class="text_highlight">
 						</div>
 						<div class="about_text">
-							<p>Implement a module that is going to be responsible for the segmentation of a page. Should return information
-								about the data contained in the given document, such as the title, columns, rows, annotations, page number etc.
-								Should also compute statistics about certain attributes.
+							<p>Implement a module that is responsible for the segmentation of a page. Should return information about the
+								data contained in the given document, such as the title, columns, rows, annotations, page number and their
+								position in the page. This module should be the core of the application.
 
 							</p>
 						</div>
@@ -136,54 +136,278 @@
 								tool is better used on web pages, rather than handwritten pages.
 
 								We also found some articles about page segmentation that looked thoroughly researched, but we couldn’t find an
-								open-source project linked to them. (TODO: maybe add links here)
+								open-source project linked to them.
+								With all things considered, we chose to use ocropy as the main library in our project.
+
 							</p>
 						</div>
 						<div class="section_title_container">
 							<div class="section_subtitle">Ocropy</div>
 						</div>
 						<div class="about_text">
-							<p>Ocropy is an open source project written in Python 2.7 that intends to create a page segmentation for any text page no matter if it’s hand written or digital. 
-							Ocropy needs the text page to be a .png file; if it’s a different format, we will need to convert it.
-							The program assumes that images have 300dpi (dots per inch), otherwise they need to be scaled up or down.
-							Before the process of segmentation starts, Ocropy is also doing an operation for noise removal. At the end of the process, all the lines of all the columns, including title, author, page index etc. are stored in an output folder as .png  files. These will be the files we will recombine in order to send meaningful data back to the client.</p>
+							<p>Ocropy is an open source project using Python 2.7 that intends to create a page segmentation for any text
+								page, regardless if it’s handwritten or digital. The program is optimized to work on 300dpi book pages, for
+								other kinds of input some parameter adjustment may be needed. Before the process of segmentation starts, Ocropy
+								is also doing an operation for noise removal. At the end of the process, all the lines of all the columns,
+								including title, author, page index etc. are stored in an output folder as .png files.
 						</div>
+						<div class="section_title_container">
+							<div class="section_subtitle2">Usage</div>
+						</div>
+						<div class="about_text2">
+							<p>
+								We only use 2 script files from Ocropy: ocropus-nlbin and ocropus-gpageseg.<br />
+								Ocropus-nlbin takes care of the following tasks: noise and border removal, page rotation correction, grayscale
+								normalization, binarization.
+								Ocropy provides a standard toolbox of binary and grayscale image processing and mathematical morphology
+								routines, all easily invocable from the scripting interface.
+								<br />
+								Ocropus-pageseg:
+								Ocropy contains a text-image segmentation system.It operates by first dividing the input image into candidate
+								regions. Then, features are extracted for each candidate region. Finally, each region is classified using
+								logistic regression into text, grayscale image, line drawing, ruling, and other kinds of regions.
+								The algorithm begins with computing the column separators (either white spaces or black horizontal lines) using
+								convolution, thresholding and morphological operations. Having the separators, it later computes the line
+								seeds, based on gradient maps (which map the characters from the file).
+								In the first step, the column finder uses a maximal whitespace rectangle algorithm to find vertical whitespace
+								rectangles with a high aspect ratio. Among those, the system selects those rectangles that are adjacent to
+								character-sized components on the left and the right side. These whitespace rectangles represent column
+								boundaries with very high probability. In a post-processing step, it eliminates geometrically implausible
+								column boundaries.
+								Text-line finding matches a geometrically precise text line model against the bounding boxes of the source
+								document; each text line is constrained not to cross any column boundary. Each text line is found independent
+								of every other text line, so the orientations of individual text lines can vary across the page (it is,
+								however, possible to constrain text lines to all share the same orientation). The method is specific to Latin
+								script, but the approach generalizes to other scripts.
+								The output of column finding and constrained text line matching is a collection of text line segments; it
+								remains putting them in reading order. Reading order is determined by considering pairs of text lines. For
+								certain pairs of text lines, reading order can be determined unambiguously. These pairwise reading order
+								constraints are then extended to a total order by topological sorting.
+
+							</p>
+						</div>
+
+						<div class="section_title_container">
+							<div class="section_subtitle2">Limitations</div>
+						</div>
+						<div class="about_text2">
+							<p>
+								Ocropus’ segmentation algorithm has some limitation that end up influencing the overall performance. First of
+								all, the algorithm has a bad image/text segmentation such as pages with complex figures will result in a lot of
+								noise. Also, the column finding performance is variable depending on the input document and, for files which
+								have very large fonts, the horizontal segmentation could terribly fail.
+
+							</p>
+						</div>
+
+
+
 					</div>
 				</div>
 
 				<div class="row">
 					<div class="about_content">
 						<div class="section_title_container">
-							<div class="section_title"><span>Implementation Details</span></div>
-							<div class="section_subtitle">General idea</div>
+							<div class="section_title"><span>Segmentation Algorithm</span></div>
+							<div class="section_subtitle"></div>
 						</div>
+
 						<div class="about_text">
-							<p>Given the input image, we will validate it and, if viable, we will feed it to Ocropy. We will later combine
-								the results in a desired format, and send it back to the main server program.
-								We will either need to change the source code of the project, or find a way to combine the Ocropy’s results
-								into the desired format.
+							<p>
+								We modified an ocropy script, ocropus-gpageseg.py (which initially outputted a set of images representing lines
+								that were found in the document), so that it computes a set of coordinates which represent chunks of text (such
+								as title, columns, adnotations). We later feed the said coordinates into a pre-trained neural network which
+								labels every instance. The data is combined in a json format and sent back.
 							</p>
 						</div>
+
 						<div class="section_title_container">
 							<div class="section_subtitle">Input</div>
 						</div>
 						<div class="about_text">
 							<p>
-								The input consists of an image, representing a page. The resolution should be… . If the client given input is
-								not an image or it does not have the required resolution, additional modification to the input should be done
-								before sending it to our module. If the input provided to the module is not a valid one, an error message will
-								be sent.
+								The input consists of an image, representing a page. The resolution should be 300dpi. A series of user-chosen
+								parameters can be used. These parameters (e.g. threshold, noise, maxcolseps) give ocropy some indication on how
+								the segmentation should be made.
+
 							</p>
 						</div>
 						<div class="section_title_container">
 							<div class="section_subtitle">Output</div>
 						</div>
 						<div class="about_text">
-							<p>For each input image Ocropy is going to create a new folder with the same base name as the image and inside this folder the images of all detected lines are saved. 
-							From this moment we will have choice of reconstructing the columns from these images or stop Ocropy just after it detected the columns and other annotations.</p>
+							<p>
+								This module outputs a json file. It represents an array of labels and their corresponding (coordinates of)
+								pieces of text detected.
+								Json Schema (link to schema)
+
+							</p>
 						</div>
+						<div class="section_title_container">
+							<div class="section_subtitle">Column Segmentation</div>
+						</div>
+						<div class="about_text">
+							<p>
+								We take the images generated by ocropy and combine them to generate the columns. For each image, we only need
+								its bounds (position in page). We process them from top to bottom and for each image we check if it fits in a
+								previous generate column.
+								We maintain a list of already generated columns. At each step, we have the boundaries of an image and we check
+								if it belongs to any of the columns from the list. If such a column is found, we append the current image to
+								it, otherwise we create a new column with only this image and it to the column list.
+								To check if an image belongs to a specific column, we take the current image and the last image (the bottom
+								most one) from the column and return true if all the following conditions hold:
+								<ul>
+									<li>The projections of the boundaries on the OX intersect</li>
+									<li>The heights are almost the same (they do not differ by more than 25%)</li>
+									<li>The distance on OY is not too big (it should not be bigger than the height of the current image)</li>
+									<li>The 2 images should be aligned, either they start on the same OX coordinate, or they are both centered.</li>
+								</ul>
+							</p>
+						</div>
+						<div class="about_text">
+							<p>
+								Now we have a list of rectangles, each representing the coordinates of a column. Then we tried to remove the
+								columns which were almost completely included in another column, but this did not work because some annotations
+								would be lost, so we gave up on this idea.
+
+
+							</p>
+						</div>
+
+
 					</div>
 				</div>
+
+
+
+				<div class="row">
+					<div class="about_content">
+						<div class="section_title_container">
+							<div class="section_title"><span>Artificial Intelligence</span></div>
+							<div class="section_subtitle"></div>
+						</div>
+
+						<div class="about_text">
+							<p>
+								Considering that we wanted to label the columns generated by our column generation algorithm, we used a Neural
+								Network library , specifically Keras with TensorFlow backend , in order to achieve a fast and somewhat precise
+								labeling. We choose this approach because of the high accuracy promised by deep learning models , since
+								accuracy in this case is all that matters even
+								though gathering the training data took a long time. </br>
+								We also considered a RBP (Rule-Based Programming) approach but we had to figure the rules by ourselves and
+								instead of doing that we decided to let a Neural Network figure them out.
+
+							</p>
+						</div>
+
+						<div class="section_title_container">
+							<div class="section_subtitle">Training Data
+							</div>
+						</div>
+						<div class="about_text">
+							<p>
+								Our BackEnd-AI team searched the internet for complex old documents with annotations and mixed cultural
+								writings in order to obtain a better and more complete set of training data , pursuing a model that can
+								generalize any type of document.We managed to gather around 1200 instances varying from titles , annotations to
+								page numbers.In order to confirm we do not overfit the NN model we also stripped 200 instances from the
+								training data in order to be used in the validation process.This was necessary since we have a small size of
+								data thus the model could overfit easily without a metric to tell us the actual accuracy.
+
+							</p>
+						</div>
+						<div class="section_title_container">
+							<div class="section_subtitle">Gathering Data & Training</div>
+						</div>
+						<div class="about_text">
+							<p>
+								Since all our backend module is written in Python and Bash we made some scripts in order to speed up the data
+								gathering process and labeling.Then our team processed the images , normalized the input data and stored them
+								in a file which was used later for training the NN model. </br>
+								Training the model was a trial and error process because of the small input data (1000 instances for training ,
+								200 for validation) resulting in a 70% validation accuracy.This is also caused by the plethora of inconsistent
+								labels caused by multiple formats of the found documents. As an example some documents might have the page
+								number at the top right while others might have an annotation in the same exact spot thus the training data is
+								inconsistent.No matter what we did there is no workaround , if we wanted a model that can generalize well we
+								had to include those documents. </br>
+								Because of the limited amount of training instances the model took a negligible amount of time in order to
+								achieve the current best accuracy of 70%.
+
+
+							</p>
+						</div>
+						<div class="section_title_container">
+							<div class="section_subtitle">Implementation Details
+							</div>
+						</div>
+						<div class="about_text">
+							<p>
+								Since all we wanted was to label the input based on 4 attributes we decided to go with a deep neural network
+								with a 50-100-50 structure which receives ,as mentioned before , 4 input attributes (position on X axis ,
+								position on Y axis , width , height) and gives us one of the following labels (title , content , annotation ,
+								footer and page number).The labels are categorical and so a input can not be labeled 2 things at the same time.
+								</br>
+								Regarding the optimizer we used an in-house one , provided by the Keras library specifically Adam (A Method for
+								Stochastic Optimization). </br>
+								We also used a dropout of 50% on the second hidden layer in order to prevent overfitting of the neural network
+								since we had such a small set of training data.
+
+							</p>
+						</div>
+
+						<div class="section_title_container">
+							<div class="section_subtitle">Testing
+							</div>
+						</div>
+						<div class="about_text">
+							<p>
+								In order to see how the model performs in real world scenario we made a batch with test images on which we ran
+								the the full back-end module , segmentation and labeling, manually checking the accuracy of the given label and
+								how good/bad the segmentation was performed. </br>
+								After a certain size of input data we noticed that the accuracy did not increase thus we stopped adding new
+								training data. </br>
+								A better solution would be a separate neural network for each type of document format but that implies an even
+								more complex data gathering and document sorting.
+
+
+							</p>
+						</div>
+						<div class="section_title_container">
+							<div class="section_subtitle">Integration with the BackEnd
+
+							</div>
+						</div>
+						<div class="about_text">
+							<p>
+								The only thing we did to incorporate the model in the backend module was modifying the bash script in order to
+								push the generated output of Ocropy after normalization of course through the NN model.This was possible with
+								such ease because of the underlying operating system which is GNU/Linux.
+
+
+
+							</p>
+						</div>
+
+						<div class="section_title_container">
+							<div class="section_subtitle">Further Development
+
+							</div>
+						</div>
+						<div class="about_text">
+							<p>
+								Our first problem is the accuracy of the model so a better approach would be to separate the models for each
+								type of document thus minimizing the inconsistencies in the training data. </br>
+								For an all-purpose model, the current one might suffice, but for a more specific document or labeling scenario,
+								a better model and new training data would be advised.
+
+
+							</p>
+						</div>
+
+
+					</div>
+				</div>
+
+
 			</div>
 		</div>
 
