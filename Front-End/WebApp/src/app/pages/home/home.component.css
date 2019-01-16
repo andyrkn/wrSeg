@@ -28,12 +28,12 @@
 .hero h1 {
   font-size: 50px;
   margin-bottom: 30px;
-  background-color: rgba(0, 130, 14, 0.5);
+  background-color: rgb(0, 130, 14);
 }
 
 .hero h3 {
   font-size: 20px;
-  background-color: rgba(66, 244, 241, 0.3);
+  background-color: rgb(42, 158, 156);
 }
 
 .home-segment {
@@ -104,19 +104,61 @@
 }
 
 .mobile-apps {
-  text-align: center;
   padding: 30px 0;
 }
 
-.mobile-apps a {
-  display: inline-block;
-  background-color: rgb(238, 238, 238);
-  max-width: 200px;
+.card {
+  overflow: hidden;
+  width: calc(70% - 40px);
   padding: 20px;
-  border-radius: 20px;
+  margin: 0 auto;
+  transition: margin 0.3s;
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 }
 
+.mobile-app {
+  height: 100%;
+  width: calc(50% - 1px);
+  float: left;
+}
+
+.mobile-app:first-child {
+  border-right: 1px solid #000;
+}
+
+.mobile-app:last-child {
+  border-left: 1px solid #000;
+}
+
+.mobile-app img {
+  display: block;
+  margin: 0 auto;
+}
+
+.mobile-app img.mobile-app-logo {
+  height: 125px;
+  margin-bottom: 10px;
+}
+
+.mobile-app img.mobile-app-scan {
+  width: 200px;
+  margin-bottom: 20px;
+}
+
+.mobile-app-link {
+  text-align: center;
+}
+
+.mobile-app-link a {
+  display: inline-block;
+  margin: 0 auto;
+  /* background-color: rgb(238, 238, 238);
+  max-width: 200px;
+  padding: 20px;
+  border-radius: 20px;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24); */
+}
+/*
 .mobile-apps a:hover {
   background-color: #ccc;
 }
@@ -133,6 +175,12 @@
 
 .mobile-apps img:first-child {
   padding-bottom: 20px;
+} */
+
+@media (max-width: 980px) {
+  .card {
+    width: calc(100% - 40px);
+  }
 }
 
 @media (max-width: 767px) {
@@ -142,13 +190,13 @@
 }
 
 @media (max-width: 767px) and (min-width: 481px) {
-  .mobile-apps a {
+  /* .mobile-apps a {
     max-width: 150px;
   }
 
   .mobile-apps a:first-child {
     margin-right: 20px;
-  }
+  } */
 }
 
 @media (max-width: 480px) {
@@ -169,7 +217,7 @@
     padding: 20px 60px;
   }
 
-  .mobile-apps a {
+  /* .mobile-apps a {
     display: block;
     margin: 0 auto;
   }
@@ -177,5 +225,5 @@
   .mobile-apps a:first-child {
     margin-right: auto;
     margin-bottom: 30px;
-  }
+  } */
 }
