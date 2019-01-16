@@ -253,18 +253,24 @@
 						</div>
 						<div class="about_text">
 							<p>
-								On this page we have a list of results, saved from the <code>Result page</code>
-								with the photo of the manuscript in the left of the row and in the right side the 
-								title chosen by the user at save time.
+								The implementation of Android Mobile App was made in WindowsOS. As an editor it
+							   was used Android Studio IDE and written in Android Language(JAVA) and use AndroidSDK
+							   environment.
+								 The project use standard android library used for implementing UI interface and in activities
+							   for retrieve the photo from the galery , save it and send it to the back-end for processing
+							   and get it the procesed file back, for that we use library like okhttp3 and retrofit2 with helped us 
+							   with Rest services.	 	 	 	
 							</p>
 							<p>
-								At any time the user can tap over any of the saved results and review the result
-								in the <code>Result page</code>. These saved results are saved localy on the device
-								without using our service, so if the application is uninstalled all the saves will
-								be lost. Also the user has the ability to delete any of the saved results by tapping 
-								on the <code>Delete</code> button from the top-right corner of the page and select 
-								which result have to be deleted and then to tap on <code>Done</code> when he end his 
-								job.
+								  The app is separeted by two activities: The <code>Main Activity</code> which get the photo selected from the user
+								and show it on the screen by pressing the  <code>Upload Image </code> button, the <code>SEND PHOTO</code> button 
+								will send to the second activity <code>Text Activity</code>) the chosen photo.
+								  <code>Text Activity</code> will show the seleced image from the first screen and option for controling parameters like
+								<code>Thresold</code> or  <code>Noice</code>, for each one of them we used an FloatSeekBar for adjust the value.
+								The upper two corners contain two buttons <code>History</code> for showing the last proccessed images and <code>Result</code>
+								for  result of the proces.
+								The <code>SUBMIT</code> will give the back-end server the photo and get the proccessed one.
+								
 							</p>
 						</div>
 					</div>
