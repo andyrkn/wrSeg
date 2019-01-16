@@ -153,34 +153,11 @@
 .mobile-app-link a {
   display: inline-block;
   margin: 0 auto;
-  /* background-color: rgb(238, 238, 238);
-  max-width: 200px;
-  padding: 20px;
-  border-radius: 20px;
-  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24); */
 }
 
 .mobile-app-link img {
   height: 40px;
 }
-/*
-.mobile-apps a:hover {
-  background-color: #ccc;
-}
-
-.mobile-apps a:first-child {
-  margin-right: 50px;
-}
-
-.mobile-apps img {
-  display: block;
-  margin: 0 auto;
-  max-width: 100%;
-}
-
-.mobile-apps img:first-child {
-  padding-bottom: 20px;
-} */
 
 @media (max-width: 980px) {
   .card {
@@ -218,16 +195,6 @@
   }
 }
 
-@media (max-width: 767px) and (min-width: 481px) {
-  /* .mobile-apps a {
-    max-width: 150px;
-  }
-
-  .mobile-apps a:first-child {
-    margin-right: 20px;
-  } */
-}
-
 @media (max-width: 480px) {
   .hero {
     padding: 75px 0;
@@ -245,14 +212,4 @@
   .home-segment h2 {
     padding: 20px 60px;
   }
-
-  /* .mobile-apps a {
-    display: block;
-    margin: 0 auto;
-  }
-
-  .mobile-apps a:first-child {
-    margin-right: auto;
-    margin-bottom: 30px;
-  } */
 }
