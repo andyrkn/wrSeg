@@ -31,16 +31,16 @@ extension = sys.argv[1].split('.')[-1]
 
 if sys.argv[2] != "null":
     THRESHOLD = sys.argv[2]
-if sys.argv[4] != "null":
-    NOISE = sys.argv[4]
+if sys.argv[3] != "null":
+    NOISE = sys.argv[3]
 if sys.argv[5] != "null":
     MAXCOLSEPS = sys.argv[5]
-if sys.argv[6] != "null":
-    MINSCALE = sys.argv[6]
 if sys.argv[7] != "null":
-    MAXLINES = sys.argv[7]
+    MINSCALE = sys.argv[7]
 if sys.argv[8] != "null":
-    MAXSEPS = sys.argv[8]
+    MAXLINES = sys.argv[8]
+if sys.argv[6] != "null":
+    MAXSEPS = sys.argv[6]
 
 try:
     res = subprocess.call(

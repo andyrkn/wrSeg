@@ -36,12 +36,10 @@ export class FileService {
         const data: FormData = new FormData();
         data.append('file', file);
         data.append('threshold', this.threshHold.toString());
-        /*
         data.append('maxcolseps', this.maxcolseps.toString());
         data.append('maxseps', this.maxseps.toString());
         data.append('minscale', this.minscale.toString());
         data.append('maxlines', this.maxlines.toString());
-        */
-        return this.httpClient.post('http://192.168.202.130:8082/upload-file', data, httpOptions);
+        return this.httpClient.post('http://192.168.202.131:8082/upload-file', data, httpOptions);
     }
 }

@@ -26,22 +26,22 @@ export class SegmentComponent implements OnInit {
     }
 
     updateColSeps(event: any) {
-        this.maxcolseps = event.target.value;
+        this.maxcolseps = event.value;
         this.fileSharingService.setMaxColSeps(this.maxcolseps);
     }
 
     updateScale(event: any) {
-        this.minscale = event.target.value;
+        this.minscale = event.value;
         this.fileSharingService.setMinScale(this.minscale);
     }
 
     updateLines(event: any) {
-        this.maxlines = event.target.value;
+        this.maxlines = event.value;
         this.fileSharingService.setMaxLines(this.maxlines);
     }
 
     updateSeps(event: any) {
-        this.maxseps = event.target.value;
+        this.maxseps = event.value;
         this.fileSharingService.setMaxSeps(this.maxseps);
     }
 }
