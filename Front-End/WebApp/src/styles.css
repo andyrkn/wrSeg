@@ -16,3 +16,5 @@ app-segment {
   width: 100%;
   transition: 0.5s;
 }
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

@@ -1,16 +1,22 @@
 <app-header></app-header>
 
 <div class="wrapper-segmentation">
-  <div class="container">
-    <div class="wrapper-io">
-        <div class="segmentation-input">
+    <div class="container">
+        <div class="wrapper-io">
+            <div class="segmentation-input">
                 <app-file-upload></app-file-upload>
-        </div>
-        <div class="segmentation-output">
+            </div>
+            <div class="segmentation-output">
                 <app-file-resolved></app-file-resolved>
+            </div>
+        </div>
+        <div class="paremeters-wrapper">
+            <div>
+                <label>Threshold : {{thresholdValue}}</label>
+                <mat-slider (input)="pitch($event)" min="0" max="1" step="0.1" value="0.2" tickInterval="0.1"></mat-slider>
+            </div>
         </div>
     </div>
-  </div>
 </div>
 
 <div class="wrapper-history-menu">

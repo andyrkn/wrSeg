@@ -97,3 +97,9 @@
     border-bottom: dashed 1px #000;
   }
 }
+
+.paremeters-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

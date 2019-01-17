@@ -17,6 +17,8 @@ import { AgmCoreModule } from '@agm/core';
 import { FileUploadComponent } from './pages/file-upload/file-upload.component';
 import { FileResolvedComponent } from './pages/file-resolved/file-resolved.component';
 import { FooterComponent } from './pages/footer/footer.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatSliderModule } from '@angular/material';
 
 
 @NgModule({
@@ -39,7 +41,9 @@ import { FooterComponent } from './pages/footer/footer.component';
       FileDropModule,
       AgmCoreModule.forRoot({
          apiKey: 'AIzaSyCRFb9Oetbz8bo3enqv7Dnxskop_cYyrNQ '
-       })
+       }),
+      BrowserAnimationsModule,
+      MatSliderModule
    ],
    providers: [],
    bootstrap: [
