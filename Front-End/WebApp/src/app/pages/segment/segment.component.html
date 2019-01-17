@@ -11,9 +11,25 @@
             </div>
         </div>
         <div class="paremeters-wrapper">
-            <div>
+            <div class="sub-parameter">
                 <label>Threshold : {{thresholdValue}}</label>
                 <mat-slider (input)="pitch($event)" min="0" max="1" step="0.1" value="0.2" tickInterval="0.1"></mat-slider>
+            </div>
+            <div class="sub-parameter">
+                <label>MAXCOLSEPS</label>
+                <input [value]="maxcolseps" (change)="updateColSeps($event)" type="number" class="par-input">
+            </div>
+            <div class="sub-parameter">
+                <label>MINSCALE</label>
+                <input [value]="minscale" (change)="updateScale($event)" type="number" class="par-input">
+            </div>
+            <div class="sub-parameter">
+                <label>MAXLINES</label>
+                <input [value]="maxlines" (change)="updateLines($event)" type="number" class="par-input">
+            </div>
+            <div class="sub-parameter">
+                <label>MAXSEPS</label>
+                <input [value]="maxseps" (change)="updateSeps($event)" type="number" class="par-input">
             </div>
         </div>
     </div>

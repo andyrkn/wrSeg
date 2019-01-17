@@ -142,7 +142,21 @@
 }
 
 .paremeters-wrapper {
+  margin-top: 20px;
   display: flex;
+  flex-direction: row;
   align-items: center;
   justify-content: center;
+}
+
+.sub-parameter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.par-input {
+  margin: 12px;
+  width: 75px;
 }
