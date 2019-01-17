@@ -1,0 +1,7 @@
+#/bin/bash
+
+rm img*
+rm -r temp/*
+rm column_indexes.txt
+rm test_data.txt
+./ocropus-nlbin $1 -n -o temp && ./ocropus-gpageseg -n --minscale 0 --maxcolseps 100 --maxseps 100 --maxlines 1000 temp/0001.bin.png && python3 ./write_data.py $1 column_indexes.txt && python3 view_bounds.py $1 column_indexes.txt

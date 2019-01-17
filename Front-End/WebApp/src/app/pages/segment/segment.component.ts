@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
 import { FileSharingService } from 'src/app/common/services/file.sharing.service';
 
 @Component({

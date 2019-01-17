@@ -4,7 +4,6 @@
   background-color: #313854;
   padding: 10px 0 15px;
 }
-
 .container {
   padding: 0 30px;
   margin: 0 auto;
@@ -20,7 +19,7 @@ header {
   display: grid;
   grid-template-columns: 9fr 1fr 1fr 1fr;
   grid-template-rows: 50px;
-  grid-template-areas: "title home segment contact";
+  grid-template-areas: "title segment contact toggle";
 }
 
 .header-title {
@@ -54,6 +53,7 @@ a {
   position: relative;
   transition: 0.3s;
   padding: 10px;
+  margin-right: 10px;
 }
 
 .btn::before {
@@ -92,13 +92,46 @@ a {
   grid-area: contact;
 }
 
+.toggle{
+  grid-area:toggle;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+}
+
+.toggle-btn{
+  width: 60px;
+  height: 30px;
+  background-color: gray;
+  border-radius: 30px;
+  padding: 5px;
+  transition: all 300ms ease-in-out;
+  cursor: pointer;
+}
+
+.inner-circle{
+  width: 30px;
+  height:30px ;
+  background-color: white;
+  border-radius: 50%;
+  transition: all 300ms ease-in-out;
+}
+
+i {
+  font-size: 20px;
+  position: absolute;
+  color:gray;
+  margin-left:5px;
+  margin-top:3px;
+}
+
 @media (max-width: 480px) {
   header {
     grid-template-columns: 4fr 4fr 4fr;
-    grid-template-rows: 60px 50px;
+    grid-template-rows: 65px 50px;
     grid-template-areas:
       "title title title"
-      "home segment contact";
+      "segment contact toggle";
   }
 
   .header-title {
@@ -107,6 +140,6 @@ a {
 
   .btn {
     font-size: 15px;
-    padding-top: 15px;
+    margin: auto;
   }
 }
