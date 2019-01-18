@@ -8,6 +8,8 @@ import { FileSharingService } from 'src/app/common/services/file.sharing.service
 })
 export class SegmentComponent implements OnInit {
 
+    public jsonContent = "{\"employee\":{ \"name\":\"John\", \"age\":30, \"city\":\"New York\" }}";
+
     private thresholdValue = 0.2;
     public maxcolseps = 100;
     public minscale = 0;

@@ -17,14 +17,23 @@
 <body>
     <app-root></app-root>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCH7weUXxtqb9S6W-5IQsFsuN-LQxaaDDc&callback=contactMap"></script>
-
+    <script>
+        function downloadInnerHtml(filename = 'json.txt', elId = 'json-content', mimeType = 'text/html') {
+            var link = document.createElement('a');
+            mimeType = mimeType || 'text/plain';
+            var elHtml = document.getElementById(elId).innerHTML;
+            link.setAttribute('download', filename);
+            link.setAttribute('href', 'data:' + mimeType + ';charset=utf-8,' + encodeURIComponent(elHtml));
+            link.click(); 
+        }
+    </script>
     <script>
         var darkTheme = localStorage.getItem("isDark");
         function toggleTheme() {
             if (localStorage.getItem("isDark") == "true")
-                localStorage.setItem("isDark", "false");
+            localStorage.setItem("isDark", "false");
             else
-                localStorage.setItem("isDark", "true");
+            localStorage.setItem("isDark", "true");
             setStyle();
         }
         function setStyle() {
@@ -38,7 +47,7 @@
                     cards[i].style.backgroundColor = "#313854";
                     cards[i].style.color = "white";
                 }
-
+                
                 var element = document.getElementById("toggle-icon");
                 element.classList.remove("fa-moon");
                 element.classList.add("fa-sun");
@@ -54,14 +63,14 @@
                     cards[i].style.backgroundColor = "#eee";
                     cards[i].style.color = "black";
                 }
-
+                
                 var element = document.getElementById("toggle-icon");
                 element.classList.remove("fa-sun");
                 element.classList.add("fa-moon");
                 element.style.color = "white";
             }
         }
-    </script>
+        </script>
 </body>
 
 </html>

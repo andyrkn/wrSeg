@@ -160,3 +160,28 @@
   margin: 12px;
   width: 75px;
 }
+
+#flex-container{
+  display: flex;
+  justify-content: center;
+}
+
+#flex-container button{
+  margin-top: 15px;
+  border: 0px;
+  background-color: #313854;
+  color: white;
+  font-size: 20px;
+  padding: 5px 10px;
+  transition: all 0.2s ease; 
+  outline: none;
+  box-sizing: border-box;
+  height: 40px;
+}
+
+#flex-container button:active{
+  background-color: #2a2f47;
+  border-radius: 10px;
+  font-size: 22px;
+  color: #bbb;
+}
